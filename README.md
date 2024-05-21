@@ -13,6 +13,7 @@ You have your assignment and your team. What should you do first? This will vary
 > **The important thing is to NOT just jump in and start coding!**
 
 A good brainstorming session is **STRONGLY** recommended! Plan out together :
+
 - What it will look like.
 - How it will behave.
 - What features you want to have.
@@ -26,9 +27,10 @@ There probably shouldn't be any coding until a skeleton has been planned out.
 ## Meet your Product Manager!
 
 Each team has been assigned a product manager!
+
 - This person is in charge of answering questions, guiding you and basically preventing everything from falling apart!
 - This person will be directing a team stand-up every day.
-    - A stand-up is a meeting that lasts around 10 to 15 minutes where each member of the team updates the PM (and other members) about their progress or problems they're facing.
+  - A stand-up is a meeting that lasts around 10 to 15 minutes where each member of the team updates the PM (and other members) about their progress or problems they're facing.
 
 ---
 
@@ -45,10 +47,10 @@ Users should be able to:
 - View all items in the database.
 - Purchase items that are in stock.
 - View their cart containing the items they intend to purchase.
-    - The cart **CANNOT** use `sessionStorage` or `localStorage`, and must be persistent.
-    - **HINT**: use the database. Yes it will be slow, but use it anyways.
+  - The cart **CANNOT** use `sessionStorage` or `localStorage`, and must be persistent.
+  - **HINT**: use the database. Yes it will be slow, but use it anyways.
 - Edit the cart before completing the purchase.
-    - **HINT**: use a reducer.
+  - **HINT**: use a reducer.
 
 ## Backend Requirements
 
@@ -60,14 +62,14 @@ The Node server should
 
 ## Code Requirements
 
-That's right! We're dropping code requirements on you! 
+That's right! We're dropping code requirements on you!
 
 - No console logs! _Unless they are part of a catch (logging an error)._
-- Comments! Comments everywhere! 
-    - Every function should have a comment above it that briefly explains what it does.
-        - Remember: a component is a function!
-    - Any large / complex block of code should have comments above it that briefly explain what it's doing.
-    - Variables should have comments explaing what they're for. **_Especially if there are many with similar names or the name isn't very clear._**
+- Comments! Comments everywhere!
+  - Every function should have a comment above it that briefly explains what it does.
+    - Remember: a component is a function!
+  - Any large / complex block of code should have comments above it that briefly explain what it's doing.
+  - Variables should have comments explaing what they're for. **_Especially if there are many with similar names or the name isn't very clear._**
 - Organization! No file should be several hundred lines long! Split your code up into different files.
 - No bugs! (In a perfect world this would be possible. For now, try to minimize them).
 
@@ -85,7 +87,7 @@ Yeup!
 
 > For this project, stretch goals are highly recommended (though not necessary)!
 
-The MVP for this project is small; in fact it's tiny. We strongly encourage you to flex your skills and build something cool and functional! 
+The MVP for this project is small; in fact it's tiny. We strongly encourage you to flex your skills and build something cool and functional!
 
 Make use of any and all libraries (except styling libraries) you can get your hands on if you think it will make the user's experience on your website better!
 
