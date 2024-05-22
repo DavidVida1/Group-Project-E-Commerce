@@ -41,7 +41,7 @@ const Home = () => {
       <Banner />
       <Quote>
         Everyone looks at your watch and it represents who you are, your values
-        and your personal style. - Kobe Bryant.
+        and your personal style. - Kobe Bryant..
       </Quote>
       <Explore>Discover</Explore>
       <Wrapper>
