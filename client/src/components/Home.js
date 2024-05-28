@@ -69,7 +69,7 @@ const Banner = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  box-shadow: 10px 0px 50px 5px rgb(47, 48, 50);
+  box-shadow: 10px 0px 50px 4px rgb(47, 48, 50);
 `;
 
 const Quote = styled.div`
