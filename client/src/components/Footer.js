@@ -6,12 +6,6 @@ import { AiFillGithub } from "react-icons/ai";
 const Footer = () => {
   return (
     <Wrapper>
-      <div>
-        <Approved>
-          <Approve>Approved by</Approve>
-          <Name>Andrew Diles</Name>
-        </Approved>
-      </div>
       <BlackBanner>
         <AnchorTitle href="/">AllStar</AnchorTitle>
         <UList>
@@ -70,15 +64,6 @@ const AnchorTitle = styled.a`
   }
 `;
 
-const Approved = styled.div`
-  display: flex;
-  background-color: var(--color-background);
-  flex-direction: column;
-  align-items: center;
-  box-shadow: rgba(245, 245, 245, 10) 0px -5px, rgba(1, 2, 3, 0.2) 0px -10px,
-    rgba(0, 0, 0, 0.45) 0px -25px 20px -20px;
-  padding: 45px;
-`;
 const UList = styled.div`
   display: flex;
   flex-direction: column;
@@ -115,18 +100,6 @@ const Git = styled.li`
   font-weight: bold;
   padding: 20px 20px;
   color: white;
-`;
-
-const Approve = styled.div`
-  background-color: var(--color-background);
-  font-size: 25px;
-  font-family: var(--font-text);
-`;
-
-const Name = styled.div`
-  font-family: var(--Font-heading-title);
-  font-size: 45px;
-  letter-spacing: 0.4rem;
 `;
 
 const Terms = styled.div`

@@ -143,12 +143,11 @@ input {
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure, 
   footer, header, hgroup, menu, nav, section {
-  display: block;
+  display:block;
 }
 
 body {
   line-height: 1;
-  overflow-x: hidden; /*Some probleme with the card animation*/
   font-family: var(--Font-heading-title);
 }
 
@@ -159,6 +158,7 @@ ol, ul {
     
 a {        
       text-decoration: none;
+      color: inherit;
   }
     
 blockquote, q {
@@ -189,7 +189,13 @@ padding-right: 0.5rem;
 /*3xl*/
 @media (max-width: 1920px) {
   .container {
-    max-width: 1920px;
+    max-width: 1800px;
+  }
+}
+
+@media (max-width: 1800px) {
+  .container {
+    max-width: 1536px;
   }
 }
 

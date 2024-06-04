@@ -4,6 +4,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiOutlineUser } from "react-icons/ai";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import banner from "../assets/watchBanner.png";
 
 const Home = () => {
   const [itemsArr, setItemsArr] = useState([]);
@@ -38,11 +39,10 @@ const Home = () => {
 
   return (
     <div>
-      <Banner />
-      <Quote>
-        Everyone looks at your watch and it represents who you are, your values
-        and your personal style. - Kobe Bryant..
-      </Quote>
+      <Banner>
+        <div className="bannerBg"></div>
+      </Banner>
+
       <Explore>Discover</Explore>
       <Wrapper>
         {itemsArr &&
@@ -62,30 +62,25 @@ const Home = () => {
   );
 };
 
-const Banner = styled.div`
-  width: 100%;
-  height: 650px;
-  background: url("assets/watchBanner.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  box-shadow: 10px 0px 50px 5px rgb(47, 48, 50);
-`;
-
-const Quote = styled.div`
+const Banner = styled.section`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-family: var(--font-text);
-  font-style: italic;
-  font-weight: bold;
-  font-size: 25px;
-  padding: 25px;
-  color: var(--color-blackfont-titles);
-  box-shadow: rgba(245, 245, 245, 10) 0px 5px, rgba(1, 2, 3, 0.2) 0px 10px,
-    rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  width: 100%;
+
+  .bannerBg {
+    border-radius: 5px;
+    width: 100%;
+    height: 650px;
+
+    background: url(${banner});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
 `;
+
 const Explore = styled.div`
   display: flex;
   flex-direction: row;

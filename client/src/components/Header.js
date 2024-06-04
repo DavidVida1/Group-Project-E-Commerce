@@ -31,7 +31,7 @@ const Header = ({ setBodyLocation }) => {
 
   return (
     <HeaderContainer className="container">
-      <a className="logo" to={"/"}>
+      <a className="logo" href={"/"}>
         AllStar
       </a>
 
@@ -63,9 +63,11 @@ const Header = ({ setBodyLocation }) => {
       </div>
 
       <div className="userOptions">
-        <NavLink to={"/user"}>
-          <AiOutlineUser />
-        </NavLink>
+        {/*
+          <NavLink to={"/user"}>
+            <AiOutlineUser />
+          </NavLink>
+          */}
 
         <NavLink to={"/cart"}>
           <AiOutlineShoppingCart />
@@ -76,55 +78,66 @@ const Header = ({ setBodyLocation }) => {
 };
 
 const HeaderContainer = styled.section`
-  display: flex;
-  flex-direction: row;
-  height: 75px;
-  justify-content: space-between;
-  padding: 0 20px 0 20px;
-  align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
-  background: var(--color-background);
-  font-size: 2rem;
+  position: absolute;
+  width: 100%;
+  top: 50px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
 
-  .logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  color: var(--color-white);
+  font-size: 2.3rem;
+
+  &:hover {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border-radius: 15px 15px 5px 5px;
+  }
+
+  & .logo {
     font-family: var(--font-heading-title);
     font-style: italic;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 30px;
+
     &:hover {
-      box-shadow: rgba(0, 102, 255, 0.4) 0px 5px;
+      color: rgb(71, 63, 244, 1);
+      filter: drop-shadow(0 0 10px var(--color-white));
+      text-shadow: 0 0 5px white;
     }
   }
 
-  .nav {
+  & .nav {
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    gap: 15px;
     & :hover {
-      box-shadow: rgba(0, 102, 255, 0.4) 0px 5px;
+      box-shadow: rgba(71, 63, 244, 1) 0px 5px;
+      text-shadow: 0 0 5px white;
     }
 
-    .dropdown {
-      .dropbtn {
+    & .dropdown {
+      & .dropbtn {
         border: none;
         cursor: pointer;
-        &:hover {
-          box-shadow: rgba(0, 102, 255, 0.4) 0px 5px;
-        }
       }
 
-      .dropdown-content {
+      & .dropdown-content {
         display: none;
         position: absolute;
         left: 0;
         background-color: #f1f1f1;
-        width: 100dvw;
-        top: 75px;
+        width: 100%;
+        top: 72px;
 
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         z-index: 1;
 
-        a,
+        & a,
         div {
           padding: 12px 16px;
           text-decoration: none;
@@ -144,10 +157,18 @@ const HeaderContainer = styled.section`
     }
   }
 
-  .userOptions {
+  & .userOptions {
     display: flex;
     flex-direction: row;
-    gap: 20px;
+
+    & svg {
+      padding: 5px 25px;
+      border-radius: 15px;
+      background-color: rgb(71, 63, 244, 1);
+      &:hover {
+        background-color: rgb(51, 43, 224, 1);
+      }
+    }
   }
 `;
 
