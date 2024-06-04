@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiOutlineUser } from "react-icons/ai";
 
 const Header = ({ setBodyLocation }) => {
   const [itemsCategory, setItemsCategory] = useState(null);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     fetch(`/api/get-categories`)
@@ -24,120 +25,129 @@ const Header = ({ setBodyLocation }) => {
       });
   }, []);
 
+  const handleDropdownClick = () => {
+    dropdownRef.current.classList.toggle("show");
+  };
+
   return (
-    <div>
-      <Wrapper>
-        <UList>
-          <Nav>
-            <AnchorTitle to={"/"}>AllStar</AnchorTitle>
-          </Nav>
-        </UList>
-        <DivCategories>
-          {itemsCategory ?
-            itemsCategory.map((category) => {
-              return (
-                <Nav key={category}>
-                  <Anchor
+    <HeaderContainer className="container">
+      <a className="logo" to={"/"}>
+        AllStar
+      </a>
+
+      <div className="nav">
+        <div>Home</div>
+        <div className="dropdown" onClick={handleDropdownClick}>
+          <div className="dropbtn">Collections</div>
+          <div className="dropdown-content" ref={dropdownRef}>
+            <div>Watches</div>
+            {itemsCategory ? (
+              itemsCategory.map((category) => {
+                return (
+                  <NavLink
+                    key={category}
                     activeClassName="active"
                     to={`/category/${category}`}
-                    // need to lift the state to make Category refresh items when header has been clicked
                     onClick={() => setBodyLocation(null)}
                   >
                     {category}
-                  </Anchor>
-                </Nav>
-              );
-            })
-            : <h1>Loading categories...</h1>
-            }
-        </DivCategories>
+                  </NavLink>
+                );
+              })
+            ) : (
+              <h1>Loading categories...</h1>
+            )}
+          </div>
+        </div>
+        <div>About</div>
+      </div>
 
-        <UserList>
-          <Nav>
-            <Anchor to={"/user"}>
-              <AiOutlineUser />
-            </Anchor>
-          </Nav>
-          <Nav>
-            <Anchor to={"/cart"}>
-              <AiOutlineShoppingCart />
-            </Anchor>
-          </Nav>
-        </UserList>
-      </Wrapper>
-    </div>
+      <div className="userOptions">
+        <NavLink to={"/user"}>
+          <AiOutlineUser />
+        </NavLink>
+
+        <NavLink to={"/cart"}>
+          <AiOutlineShoppingCart />
+        </NavLink>
+      </div>
+    </HeaderContainer>
   );
 };
-const Wrapper = styled.div`
+
+const HeaderContainer = styled.section`
   display: flex;
   flex-direction: row;
+  height: 75px;
+  justify-content: space-between;
+  padding: 0 20px 0 20px;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
-`;
-const UList = styled.div`
-  width: 100%;
-  padding: 25px;
-  font-family: var(--font-text);
-  font-weight: bold;
-  font-size: 17px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  background-color: var(--color-background);
-`;
-const DivCategories = styled(UList)`
-  word-wrap: break-word;
-  flex-direction: row;
-  font-size: 20px;
-  justify-content: center;
-  & nav a {
-    width: max-content;
+  background: var(--color-background);
+  font-size: 2rem;
+
+  .logo {
+    font-family: var(--font-heading-title);
+    font-style: italic;
+    font-weight: bold;
+    font-size: 20px;
+    &:hover {
+      box-shadow: rgba(0, 102, 255, 0.4) 0px 5px;
+    }
   }
-`;
-const UserList = styled.ul`
-  display: flex;
-  width: 100%;
-  padding: 26px 25px;
-  font-family: var(--font-text);
-  font-weight: bold;
-  font-size: 32px;
-  align-items: center;
-  justify-content: flex-end;
-  background-color: var(--color-background);
-`;
-const Nav = styled.nav`
-  display: flex;
-  line-height: 35px;
-  align-items: center;
-  padding: 10px 15px;
-  list-style-type: none;
-  & {
-    width: max-content;
+
+  .nav {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    & :hover {
+      box-shadow: rgba(0, 102, 255, 0.4) 0px 5px;
+    }
+
+    .dropdown {
+      .dropbtn {
+        border: none;
+        cursor: pointer;
+        &:hover {
+          box-shadow: rgba(0, 102, 255, 0.4) 0px 5px;
+        }
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        left: 0;
+        background-color: #f1f1f1;
+        width: 100dvw;
+        top: 75px;
+
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+
+        a,
+        div {
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          &:hover:not(div) {
+            background-color: green;
+            box-shadow: none;
+          }
+          &:hover {
+            box-shadow: none;
+          }
+        }
+        &.show {
+          display: block;
+        }
+      }
+    }
   }
-`;
-const Anchor = styled(NavLink)`
-  display: flex;
-  text-decoration: none;
-  color: white;
-  width: max-content;
-  color: var(--color-blackfont-text);
-  &:hover {
-    color: rgb(71, 103, 161);
-    box-shadow: rgba(245, 245, 245, 10) 0px 5px, rgba(245, 245, 245, 1) 0px 10px,
-      rgba(245, 245, 245, 1) 0px 15px, rgba(245, 245, 245, 1) 0px 20px,
-      rgba(245, 245, 245, 1) 0px 25px, rgba(0, 102, 255, 0.4) 0px 30px;
-  }
-`;
-const AnchorTitle = styled(Link)`
-  text-decoration: none;
-  font-size: 35px;
-  font-family: var(--Font-heading-title);
-  font-style: italic;
-  color: white;
-  color: var(--color-blackfont-text);
-  letter-spacing: 0.5rem;
-  &:hover {
-    color: rgb(71, 103, 161);
+
+  .userOptions {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
   }
 `;
 
