@@ -7,6 +7,7 @@ import { AiOutlineUser } from "react-icons/ai";
 const Header = ({ setBodyLocation }) => {
   const [itemsCategory, setItemsCategory] = useState(null);
   const dropdownRef = useRef(null);
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
     fetch(`/api/get-categories`)
@@ -25,8 +26,17 @@ const Header = ({ setBodyLocation }) => {
       });
   }, []);
 
-  const handleDropdownClick = () => {
-    dropdownRef.current.classList.toggle("show");
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    dropdownRef.current.classList.add("show");
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      dropdownRef.current.classList.remove("show");
+    }, 500);
   };
 
   return (
@@ -37,16 +47,19 @@ const Header = ({ setBodyLocation }) => {
 
       <div className="nav">
         <div>Home</div>
-        <div className="dropdown" onClick={handleDropdownClick}>
+        <div
+          className="dropdown"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <div className="dropbtn">Collections</div>
           <div className="dropdown-content" ref={dropdownRef}>
-            <div>Watches</div>
+            <div className="categoryTitle">Watches</div>
             {itemsCategory ? (
               itemsCategory.map((category) => {
                 return (
                   <NavLink
                     key={category}
-                    activeClassName="active"
                     to={`/category/${category}`}
                     onClick={() => setBodyLocation(null)}
                   >
@@ -63,11 +76,9 @@ const Header = ({ setBodyLocation }) => {
       </div>
 
       <div className="userOptions">
-        {/*
-          <NavLink to={"/user"}>
-            <AiOutlineUser />
-          </NavLink>
-          */}
+        {/*<NavLink to={"/user"}>
+          <AiOutlineUser />
+          </NavLink>*/}
 
         <NavLink to={"/cart"}>
           <AiOutlineShoppingCart />
@@ -84,7 +95,6 @@ const HeaderContainer = styled.section`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -92,10 +102,13 @@ const HeaderContainer = styled.section`
   color: var(--color-white);
   font-size: 2.3rem;
 
+  transition-property: background-color;
+  transition-duration: 0.6s;
+  border-radius: 15px 15px 0px 0px;
+
   &:hover {
     background-color: var(--color-white);
     color: var(--color-black);
-    border-radius: 15px 15px 5px 5px;
   }
 
   & .logo {
@@ -128,21 +141,31 @@ const HeaderContainer = styled.section`
 
       & .dropdown-content {
         display: none;
+        opacity: 0;
         position: absolute;
         left: 0;
         background-color: #f1f1f1;
         width: 100%;
         top: 72px;
-
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         z-index: 1;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
 
-        & a,
-        div {
+        & .categoryTitle {
+          padding: 0px 16px;
+          font-size: 2rem;
+          font-family: var(--font-heading-title);
+          color: rgb(51, 43, 224, 1);
+          box-shadow: none;
+        }
+
+        & a {
           padding: 12px 16px;
           text-decoration: none;
           display: block;
-          &:hover:not(div) {
+          color: var(--color-black);
+
+          &:hover {
             background-color: green;
             box-shadow: none;
           }
@@ -150,8 +173,11 @@ const HeaderContainer = styled.section`
             box-shadow: none;
           }
         }
+
         &.show {
           display: block;
+          opacity: 1;
+          visibility: visible;
         }
       }
     }

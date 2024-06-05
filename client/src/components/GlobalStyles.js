@@ -101,8 +101,9 @@ video {
 --color-blackfont-text:#000000;
 --color-background:#F5F5F5;
 
---Font-heading-title:"Teko","sans-serif";
---font-text:"Cormorant Garamond", "sans-serif";
+--font-heading-title:"Teko","sans-serif";
+--font-text:"DM Sans", "sans-serif";
+
 
 
 font-size:62.5%;
@@ -148,7 +149,8 @@ input {
 
 body {
   line-height: 1;
-  font-family: var(--Font-heading-title);
+  font-family: var(--font-text);
+  font-weight: 300;
 }
 
 ol, ul {
