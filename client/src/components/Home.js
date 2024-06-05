@@ -1,10 +1,9 @@
 import { NavLink, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { AiOutlineUser } from "react-icons/ai";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import banner from "../assets/watchBanner.png";
+import HeroVideo from "../assets/watchBanner2.mp4";
 
 const Home = () => {
   const [itemsArr, setItemsArr] = useState([]);
@@ -16,7 +15,7 @@ const Home = () => {
       .then((data) => {
         if (data.status === 200) {
           let randomIndexArray = [];
-          while (randomIndexArray.length < 6) {
+          while (randomIndexArray.length < 5) {
             const randomIndex = Math.floor(Math.random() * data.data.length);
             if (!randomIndexArray.includes(randomIndex)) {
               randomIndexArray.push(randomIndex);
@@ -38,13 +37,18 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <Banner>
-        <div className="bannerBg"></div>
-      </Banner>
+    <HomeContainer>
+      <video
+        className="bannerHero"
+        src={HeroVideo}
+        autoPlay
+        loop
+        muted
+        alt="hero-video"
+      />
 
-      <Explore>Discover</Explore>
-      <Wrapper>
+      <h2 className="discover">Discover</h2>
+      <div className="randomItems">
         {itemsArr &&
           itemsArr.map((randomItem) => {
             return (
@@ -57,48 +61,41 @@ const Home = () => {
               </DiscoverItem>
             );
           })}
-      </Wrapper>
-    </div>
+      </div>
+    </HomeContainer>
   );
 };
 
-const Banner = styled.section`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+const HomeContainer = styled.section`
+  position: relative;
+  width: 100vw;
 
-  .bannerBg {
-    border-radius: 5px;
+  & video {
     width: 100%;
-    height: 650px;
+    height: 750px;
+    object-fit: cover;
+  }
 
-    background: url(${banner});
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+  & .discover {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 50px;
+    color: var(--color-blackfont-titles);
+    font-size: 40px;
+    font-family: var(--Font-heading-title);
+  }
+
+  & .randomItems {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    padding: 50px 0px;
   }
 `;
 
-const Explore = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  padding-top: 50px;
-  color: var(--color-blackfont-titles);
-  font-size: 40px;
-  font-family: var(--Font-heading-title);
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-  padding: 30px 50px 60px 50px;
-`;
 const DiscoverItem = styled(Link)`
   display: grid;
   position: relative;

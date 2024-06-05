@@ -151,6 +151,7 @@ body {
   line-height: 1;
   font-family: var(--font-text);
   font-weight: 300;
+  overflow-x: hidden; /*Some probleme with the card animation*/
 }
 
 ol, ul {

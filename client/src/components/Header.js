@@ -150,9 +150,10 @@ const HeaderContainer = styled.section`
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         z-index: 1;
         transition: opacity 0.5s ease, visibility 0.5s ease;
+        border-radius: 0px 0px 15px 15px;
 
         & .categoryTitle {
-          padding: 0px 16px;
+          padding: 10px 0px 0px 16px;
           font-size: 2rem;
           font-family: var(--font-heading-title);
           color: rgb(51, 43, 224, 1);
