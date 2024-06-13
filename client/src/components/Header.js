@@ -7,6 +7,7 @@ import { AiOutlineUser } from "react-icons/ai";
 const Header = ({ setBodyLocation }) => {
   const [itemsCategory, setItemsCategory] = useState(null);
   const dropdownRef = useRef(null);
+  const bgRef = useRef(null);
   const timeoutRef = useRef(null);
 
   useEffect(() => {
@@ -31,29 +32,34 @@ const Header = ({ setBodyLocation }) => {
       clearTimeout(timeoutRef.current);
     }
     dropdownRef.current.classList.add("show");
+    bgRef.current.classList.add("showBg");
   };
 
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       dropdownRef.current.classList.remove("show");
-    }, 500);
+    }, 300);
+
+    timeoutRef.current = setTimeout(() => {
+      bgRef.current.classList.remove("showBg");
+    }, 400);
   };
 
   return (
-    <HeaderContainer className="container">
+    <HeaderContainer className="container" ref={bgRef}>
       <a className="logo" href={"/"}>
         AllStar
       </a>
 
       <div className="nav">
         <div>Home</div>
-        <div
-          className="dropdown"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
+        <div className="dropdown" onMouseEnter={handleMouseEnter}>
           <div className="dropbtn">Collections</div>
-          <div className="dropdown-content" ref={dropdownRef}>
+          <div
+            className="dropdown-content"
+            ref={dropdownRef}
+            onMouseLeave={handleMouseLeave}
+          >
             <div className="categoryTitle">Watches</div>
             {itemsCategory ? (
               itemsCategory.map((category) => {
@@ -103,10 +109,10 @@ const HeaderContainer = styled.section`
   font-size: 2.3rem;
 
   transition-property: background-color;
-  transition-duration: 0.6s;
+  transition-duration: 0.3s;
   border-radius: 15px 15px 0px 0px;
 
-  &:hover {
+  &.showBg {
     background-color: var(--color-white);
     color: var(--color-black);
   }
@@ -128,28 +134,31 @@ const HeaderContainer = styled.section`
     display: flex;
     flex-direction: row;
     gap: 15px;
-    & :hover {
-      box-shadow: rgba(71, 63, 244, 1) 0px 5px;
-      text-shadow: 0 0 5px white;
-    }
 
     & .dropdown {
+      &:hover {
+        background-color: var(--color-white);
+        color: var(--color-black);
+      }
+
       & .dropbtn {
         border: none;
         cursor: pointer;
       }
 
       & .dropdown-content {
-        display: none;
-        opacity: 0;
         position: absolute;
         left: 0;
         background-color: #f1f1f1;
         width: 100%;
+        height: 0%;
         top: 72px;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         z-index: 1;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
+
+        -webkit-transition: height 0.3s ease-in-out;
+        transition: height 0.3s ease-in-out;
+        overflow: hidden;
         border-radius: 0px 0px 15px 15px;
 
         & .categoryTitle {
@@ -176,9 +185,7 @@ const HeaderContainer = styled.section`
         }
 
         &.show {
-          display: block;
-          opacity: 1;
-          visibility: visible;
+          height: 400px;
         }
       }
     }
