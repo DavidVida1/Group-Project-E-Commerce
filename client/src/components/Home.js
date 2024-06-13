@@ -72,7 +72,7 @@ const HomeContainer = styled.section`
 
   & video {
     width: 100%;
-    height: 750px;
+    height: 100vh;
     object-fit: cover;
   }
 

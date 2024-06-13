@@ -27,39 +27,53 @@ const Header = ({ setBodyLocation }) => {
       });
   }, []);
 
-  const handleMouseEnter = () => {
+  const handleMouseEnterNav = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    bgRef.current.classList.add("showBg");
+  };
+
+  const handleMouseLeaveNav = () => {
+    timeoutRef.current = setTimeout(() => {
+      bgRef.current.classList.remove("showBg");
+    }, 500);
+  };
+
+  const handleMouseEnterCollections = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
     dropdownRef.current.classList.add("show");
-    bgRef.current.classList.add("showBg");
   };
 
-  const handleMouseLeave = () => {
+  const handleMouseLeaveCollections = () => {
     timeoutRef.current = setTimeout(() => {
       dropdownRef.current.classList.remove("show");
     }, 300);
-
-    timeoutRef.current = setTimeout(() => {
-      bgRef.current.classList.remove("showBg");
-    }, 400);
   };
 
   return (
-    <HeaderContainer className="container" ref={bgRef}>
+    <HeaderContainer
+      className="container"
+      ref={bgRef}
+      onMouseEnter={handleMouseEnterNav}
+      onMouseLeave={handleMouseLeaveNav}
+    >
       <a className="logo" href={"/"}>
         AllStar
       </a>
 
       <div className="nav">
         <div>Home</div>
-        <div className="dropdown" onMouseEnter={handleMouseEnter}>
+        <div
+          className="dropdown"
+          onMouseEnter={handleMouseEnterCollections}
+          onMouseLeave={handleMouseLeaveCollections}
+        >
           <div className="dropbtn">Collections</div>
-          <div
-            className="dropdown-content"
-            ref={dropdownRef}
-            onMouseLeave={handleMouseLeave}
-          >
+          <div className="dropdown-content" ref={dropdownRef}>
             <div className="categoryTitle">Watches</div>
             {itemsCategory ? (
               itemsCategory.map((category) => {
@@ -82,10 +96,6 @@ const Header = ({ setBodyLocation }) => {
       </div>
 
       <div className="userOptions">
-        {/*<NavLink to={"/user"}>
-          <AiOutlineUser />
-          </NavLink>*/}
-
         <NavLink to={"/cart"}>
           <AiOutlineShoppingCart />
         </NavLink>
@@ -135,6 +145,10 @@ const HeaderContainer = styled.section`
     flex-direction: row;
     gap: 15px;
 
+    & :hover {
+      text-shadow: 0 0 5px var(--color-black);
+    }
+
     & .dropdown {
       &:hover {
         background-color: var(--color-white);
@@ -177,9 +191,6 @@ const HeaderContainer = styled.section`
 
           &:hover {
             background-color: green;
-            box-shadow: none;
-          }
-          &:hover {
             box-shadow: none;
           }
         }

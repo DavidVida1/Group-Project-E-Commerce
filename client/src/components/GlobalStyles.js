@@ -97,6 +97,7 @@ video {
 :root {
 --color-white: rgba(255,255,255,1);
 --color-black: rgba(0,0,0,1);
+--color-footer: rgba(31,31,31,1);
 --color-blackfont-titles: #5f6b6e;
 --color-blackfont-text:#000000;
 --color-background:#F5F5F5;
