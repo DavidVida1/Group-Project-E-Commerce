@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
+import SearchBar from "./SearchBar";
 import { NavLink } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiOutlineUser } from "react-icons/ai";
@@ -96,6 +97,7 @@ const Header = ({ setBodyLocation }) => {
       </div>
 
       <div className="userOptions">
+        <SearchBar />
         <NavLink to={"/cart"}>
           <AiOutlineShoppingCart />
         </NavLink>
@@ -125,6 +127,13 @@ const HeaderContainer = styled.section`
   &.showBg {
     background-color: var(--color-white);
     color: var(--color-black);
+    & section input {
+      color: red;
+      background-color: #ebebeb;
+      &::placeholder {
+        color: var(--color-black);
+      }
+    }
   }
 
   & .logo {
@@ -205,6 +214,8 @@ const HeaderContainer = styled.section`
   & .userOptions {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: 30px;
 
     & svg {
       padding: 5px 25px;
