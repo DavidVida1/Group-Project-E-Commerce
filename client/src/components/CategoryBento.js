@@ -50,12 +50,12 @@ const CategoryBento = () => {
 export default CategoryBento;
 
 const CategoryBentoContainer = styled.section`
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   height: 100dvh;
+
   & .subHeader {
     margin: 20px 0px;
     text-align: center;
