@@ -14,6 +14,7 @@ import Confirmation from "./Confirmation";
 import Category from "./Category";
 import HomeRandomItem from "./HomeRandomItem";
 import ItemDisplay from "./ItemDisplay";
+import CategoryBento from "./CategoryBento";
 
 function App() {
   const userId = "JimmyBuyMore@realcustomer.ca";
@@ -53,6 +54,7 @@ function App() {
             element={
               <>
                 <Home /> <ItemDisplay />
+                <CategoryBento />
                 <HomeRandomItem />
               </>
             }

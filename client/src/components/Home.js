@@ -7,7 +7,7 @@ const Home = () => {
     <HomeContainer>
       <aside className="heroText">
         <div className="logo">AllStar</div>
-        <div className="heroSubText">Stay Active, Stay Timed</div>
+        <h1 className="heroSubText">Stay Active, Stay Timed</h1>
         <a href="*" className="heroButton">
           Discover
         </a>
@@ -26,6 +26,12 @@ const Home = () => {
 
 const HomeContainer = styled.section`
   position: relative;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 32%,
+    rgba(0, 0, 0, 1) 48%
+  );
+
   width: 100vw;
 
   & video {

@@ -36,7 +36,7 @@ const HomeRandomItem = () => {
 
   return (
     <HomeRandomItemContainer>
-      <div className="discover">Discover</div>
+      <h2 className="discover">Discover</h2>
       <div className="randomItems">
         {itemsArr &&
           itemsArr.map((randomItem) => {
@@ -63,7 +63,7 @@ const HomeRandomItemContainer = styled.section`
     justify-content: space-around;
     align-items: center;
     padding-top: 50px;
-    color: var(--color-blackfont-titles);
+    color: var(--grey-subHeader);
     font-size: 40px;
     font-family: var(--Font-heading-title);
   }

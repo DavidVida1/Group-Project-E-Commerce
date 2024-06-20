@@ -97,8 +97,9 @@ video {
 :root {
 --color-white: rgba(255,255,255,1);
 --color-black: rgba(0,0,0,1);
---color-footer: rgba(31,31,31,1);
---color-blackfont-titles: #5f6b6e;
+--footer-bg: rgba(31,31,31,1);
+
+--grey-subHeader: #5f6b6e;
 --color-blackfont-text:#000000;
 --color-background:#F5F5F5;
 --color-bgSearch: #f1f1f14d;
@@ -155,7 +156,7 @@ body {
   line-height: 1;
   font-family: var(--font-text);
   font-weight: 300;
-  background-color: rgba(0,0,0,0.88);
+  background-color: var(--color-white);
   overflow-x: hidden; /*Some probleme with the card animation*/
 }
 
@@ -182,6 +183,13 @@ q:before, q:after {
 table {
     border-collapse: collapse;
     border-spacing: 0;
+}
+
+h2 {        
+  font-size: clamp(3rem, 4.2vw, 4rem);
+  font-weight: 800;
+  text-shadow: 0 0 2px var(--color-black);
+
 }
 
 

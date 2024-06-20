@@ -46,13 +46,12 @@ const FooterContainer = styled.footer`
   position: relative;
   bottom: 0;
   width: 100%;
-  background-color: var(--color-footer);
+  background-color: var(--footer-bg);
 
   & .wrapper {
     position: relative;
     display: flex;
     gap: 40px;
-    background-color: rgba(31, 31, 31);
     color: white;
     padding: 30px 65px;
     box-shadow: rgba(0, 0, 0, 0.45) 0px -25px 20px -20px;
