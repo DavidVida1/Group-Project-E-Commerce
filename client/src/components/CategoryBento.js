@@ -70,7 +70,7 @@ const CategoryBentoContainer = styled.section`
     gap: 10px;
     grid-auto-rows: minmax(202px, auto);
 
-    & a {
+    a {
       display: flex;
       align-items: flex-end;
       border-radius: 15px;
@@ -78,6 +78,15 @@ const CategoryBentoContainer = styled.section`
       background-position: center;
       background-size: cover;
       box-shadow: 0 0 5px var(--color-black);
+      -webkit-filter: grayscale(30%);
+      filter: grayscale(30%);
+      transition: all 0.5s ease;
+
+      &:hover {
+        -webkit-filter: grayscale(0%);
+        filter: grayscale(0%);
+        filter: saturate(2);
+      }
 
       & p {
         color: var(--color-white);
