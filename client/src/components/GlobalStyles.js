@@ -101,6 +101,9 @@ video {
 --color-blackfont-titles: #5f6b6e;
 --color-blackfont-text:#000000;
 --color-background:#F5F5F5;
+--color-bgSearch: #f1f1f14d;
+--color-purple: rgba(71,63,244,1);
+--color-purple-hover: rgba(51,43,224,1);
 
 --font-heading-title:"Teko","sans-serif";
 --font-text:"DM Sans", "sans-serif";
@@ -152,6 +155,7 @@ body {
   line-height: 1;
   font-family: var(--font-text);
   font-weight: 300;
+  background-color: rgba(0,0,0,0.88);
   overflow-x: hidden; /*Some probleme with the card animation*/
 }
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SmallItem from "./SmallItem";
 import styled from "styled-components";
-
+/*when you click on an item*/
 const Profile = () => {
   const { companyId } = useParams();
   const [companyData, setCompanyData] = useState(null);

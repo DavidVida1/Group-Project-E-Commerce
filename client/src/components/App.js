@@ -12,6 +12,8 @@ import Profile from "./Profile";
 import Cart from "./Cart";
 import Confirmation from "./Confirmation";
 import Category from "./Category";
+import HomeRandomItem from "./HomeRandomItem";
+import ItemDisplay from "./ItemDisplay";
 
 function App() {
   const userId = "JimmyBuyMore@realcustomer.ca";
@@ -28,9 +30,7 @@ function App() {
       .then((data) => {
         if (data.status === 200) {
           receiveCartInfoFromServer(data.data);
-        }
-        else if (data.status === 404) {
-          
+        } else if (data.status === 404) {
         } else {
           window.alert(data.message);
           throw new Error(data.message);
@@ -38,21 +38,44 @@ function App() {
       })
       .catch((error) => {
         window.alert(error);
-    })
+      });
   }, []);
 
   return (
     <div className="App">
       <BrowserRouter>
         <GlobalStyles />
-        <Header setBodyLocation={setBodyLocation}/>
+        <Header setBodyLocation={setBodyLocation} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            exact
+            element={
+              <>
+                <Home /> <ItemDisplay />
+                <HomeRandomItem />
+              </>
+            }
+          />
           <Route path="/item/:itemId" element={<Item userId={userId} />} />
-          <Route path="/category/:category" element={<Category  bodyLocation={bodyLocation} setBodyLocation={setBodyLocation} />}/>
+          <Route
+            path="/category/:category"
+            element={
+              <Category
+                bodyLocation={bodyLocation}
+                setBodyLocation={setBodyLocation}
+              />
+            }
+          />
           <Route path="/company-profile/:companyId" element={<Profile />} />
-          <Route path="/cart" element={<Cart userId={userId} setOrderId={setOrderId}/>} />
-          <Route path="/confirmation" element={<Confirmation orderId={orderId}/>} />
+          <Route
+            path="/cart"
+            element={<Cart userId={userId} setOrderId={setOrderId} />}
+          />
+          <Route
+            path="/confirmation"
+            element={<Confirmation orderId={orderId} />}
+          />
           <Route path="*" element={<h1>404: Oops!</h1>} />
         </Routes>
         <Footer />

@@ -1,43 +1,17 @@
 import { NavLink, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import banner from "../assets/watchBanner.png";
 import HeroVideo from "../assets/watchBanner2.mp4";
 
 const Home = () => {
-  const [itemsArr, setItemsArr] = useState([]);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    fetch(`/api/get-items`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === 200) {
-          let randomIndexArray = [];
-          while (randomIndexArray.length < 5) {
-            const randomIndex = Math.floor(Math.random() * data.data.length);
-            if (!randomIndexArray.includes(randomIndex)) {
-              randomIndexArray.push(randomIndex);
-            }
-          }
-          setItemsArr(
-            randomIndexArray.map((randomIndex) => {
-              return data.data[randomIndex];
-            })
-          );
-        } else {
-          window.alert(data.message);
-          throw new Error(data.message);
-        }
-      })
-      .catch((error) => {
-        window.alert(error);
-      });
-  }, []);
-
   return (
     <HomeContainer>
+      <aside className="heroText">
+        <div className="logo">AllStar</div>
+        <div className="heroSubText">Stay Active, Stay Timed</div>
+        <a href="*" className="heroButton">
+          Discover
+        </a>
+      </aside>
       <video
         className="bannerHero"
         src={HeroVideo}
@@ -46,22 +20,6 @@ const Home = () => {
         muted
         alt="hero-video"
       />
-
-      <h2 className="discover">Discover</h2>
-      <div className="randomItems">
-        {itemsArr &&
-          itemsArr.map((randomItem) => {
-            return (
-              <DiscoverItem to={`/item/${randomItem._id}`} key={randomItem._id}>
-                <img src={randomItem.imageSrc} />
-
-                <button onClick={() => navigate(`/item/${randomItem._id}`)}>
-                  More Info
-                </button>
-              </DiscoverItem>
-            );
-          })}
-      </div>
     </HomeContainer>
   );
 };
@@ -74,93 +32,51 @@ const HomeContainer = styled.section`
     width: 100%;
     height: 100vh;
     object-fit: cover;
+    -webkit-mask-image: linear-gradient(transparent 0, #000000 8%);
+    mask-image: linear-gradient(transparent 0, #000000 9%);
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
-  & .discover {
+  & .heroText {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding-top: 50px;
-    color: var(--color-blackfont-titles);
-    font-size: 40px;
-    font-family: var(--Font-heading-title);
-  }
-
-  & .randomItems {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
-    padding: 50px 0px;
-  }
-`;
-
-const DiscoverItem = styled(Link)`
-  display: grid;
-  position: relative;
-  place-items: center;
-  border-color: black;
-  border-radius: 5px;
-  width: 280px;
-  height: 360px;
-  transition: 0.5s ease-in-out;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-
-  :hover {
-    transform: translateY(10px);
-  }
-  :after {
-    content: "";
-    border-radius: 5px;
-    display: block;
+    flex-direction: column;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    transition: 1s all;
-    opacity: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 204, 255, 0.1),
-      rgba(191, 128, 64, 0.3)
-    );
-  }
-  :hover:after {
-    opacity: 1;
-  }
+    bottom: 50px;
+    left: 50px;
+    z-index: 30;
+    color: var(--color-white);
+    text-transform: uppercase;
+    text-shadow: 0 0 10px black;
+    letter-spacing: 5px;
 
-  button {
-    width: 130px;
-    transition: 1s all;
-    border-style: none;
-    padding: 5px;
-    border-radius: 5px;
-    position: absolute;
-    bottom: 5px;
-    z-index: 10;
-    color: var(--color-blackfont-text);
-    opacity: 0;
-    font-family: var(--font-text);
-    font-weight: bold;
-    font-size: 20px;
-    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
-      rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
-      rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
-      rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
-      rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
-      rgba(0, 0, 0, 0.09) 0px 32px 16px;
-  }
-  :hover button {
-    opacity: 1;
-    color: white;
-  }
+    & .logo {
+      font-family: var(--font-heading-title);
+      font-style: italic;
+      font-weight: bold;
+      font-size: clamp(3rem, 4.2vw, 4rem);
+    }
 
-  button:hover {
-    color: rgba(0, 255, 255, 0.8);
+    & .heroSubText {
+      font-size: clamp(5rem, 4.2vw, 6rem);
+      font-weight: 500;
+    }
+
+    & .heroButton {
+      width: fit-content;
+      height: fit-content;
+      margin-top: 50px;
+      font-size: clamp(1.8rem, 3.5vw, 1.8rem);
+      padding: 2% 18%;
+      border-radius: 40px;
+      background-color: var(--color-purple);
+      box-shadow: 0 0 10px black;
+      transition: background-color 0.3s linear;
+
+      &:hover {
+        background-color: var(--color-black);
+      }
+    }
   }
 `;
 export default Home;

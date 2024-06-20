@@ -98,9 +98,9 @@ const Header = ({ setBodyLocation }) => {
 
       <div className="userOptions">
         <SearchBar />
-        <NavLink to={"/cart"}>
+        <a href={"/cart"}>
           <AiOutlineShoppingCart />
-        </NavLink>
+        </a>
       </div>
     </HeaderContainer>
   );
@@ -112,7 +112,7 @@ const HeaderContainer = styled.section`
   top: 50px;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 10;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -140,7 +140,8 @@ const HeaderContainer = styled.section`
     font-family: var(--font-heading-title);
     font-style: italic;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 4rem;
+    letter-spacing: 5px;
 
     &:hover {
       color: rgb(71, 63, 244, 1);
@@ -172,11 +173,11 @@ const HeaderContainer = styled.section`
       & .dropdown-content {
         position: absolute;
         left: 0;
-        background-color: #f1f1f1;
+        background-color: var(--color-white);
         width: 100%;
         height: 0%;
         top: 72px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
         z-index: 1;
 
         -webkit-transition: height 0.3s ease-in-out;
@@ -217,12 +218,15 @@ const HeaderContainer = styled.section`
     align-items: center;
     gap: 30px;
 
-    & svg {
+    & a svg {
       padding: 5px 25px;
       border-radius: 15px;
-      background-color: rgb(71, 63, 244, 1);
+      background-color: var(--color-purple);
+      transition: background-color 0.3s linear;
+
       &:hover {
-        background-color: rgb(51, 43, 224, 1);
+        color: var(--color-white);
+        background-color: var(--color-black);
       }
     }
   }
