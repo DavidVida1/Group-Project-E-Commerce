@@ -12,7 +12,7 @@ import Profile from "./Profile";
 import Cart from "./Cart";
 import Confirmation from "./Confirmation";
 import Category from "./Category";
-import HomeRandomItem from "./HomeRandomItem";
+import HomeRandomItem from "./FeaturedItems";
 import ItemDisplay from "./ItemDisplay";
 import CategoryBento from "./CategoryBento";
 

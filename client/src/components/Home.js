@@ -76,10 +76,12 @@ const HomeContainer = styled.section`
       padding: 2% 18%;
       border-radius: 40px;
       background-color: var(--color-purple);
+      border: 2px solid var(--color-purple);
       box-shadow: 0 0 10px black;
       transition: background-color 0.3s linear;
 
       &:hover {
+        border: 2px solid var(--color-white);
         background-color: var(--color-black);
       }
     }

@@ -98,10 +98,12 @@ const ItemDisplayContainer = styled.section`
           padding: 15px 25px;
           border-radius: 40px;
           box-shadow: 0 0 10px black;
+          border: 2px solid var(--color-purple);
           transition: background-color 0.3s linear;
 
           &:hover {
             background-color: var(--color-black);
+            border: 2px solid var(--color-white);
           }
         }
         & :nth-child(2) {

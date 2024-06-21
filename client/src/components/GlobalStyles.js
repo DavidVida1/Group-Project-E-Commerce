@@ -156,7 +156,7 @@ body {
   line-height: 1;
   font-family: var(--font-text);
   font-weight: 300;
-  background-color: var(--color-white);
+  background-color: #F6F6F6;
   overflow-x: hidden; /*Some probleme with the card animation*/
 }
 
@@ -187,7 +187,7 @@ table {
 
 h2 {        
   font-size: clamp(3rem, 4.2vw, 4rem);
-  font-weight: 800;
+  font-weight: 500;
   text-shadow: 0 0 2px var(--color-black);
 
 }
