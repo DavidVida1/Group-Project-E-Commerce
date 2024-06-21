@@ -25,6 +25,7 @@ const ItemDisplay = () => {
           className="modelWatchDisplay"
           src={modelDisplayitemImg}
           alt="modelDisplayItem"
+          loading="lazy"
         />
         {itemDisplayData ? (
           <div className="displayWatchText">

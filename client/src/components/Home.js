@@ -19,6 +19,7 @@ const Home = () => {
         loop
         muted
         alt="hero-video"
+        loading="lazy"
       />
     </HomeContainer>
   );

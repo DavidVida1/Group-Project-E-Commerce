@@ -35,7 +35,7 @@ const CategoryBento = () => {
         {itemsCategory ? (
           itemsCategory.map((category) => {
             return (
-              <a href={`/category/${category}`}>
+              <a href={`/category/${category}`} loading="lazy">
                 <p>{category}</p>
               </a>
             );

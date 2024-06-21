@@ -130,10 +130,10 @@ const FeaturedItemsContainer = styled.section`
           rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
           rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 
-        :hover {
+        &:hover {
           transform: translateY(10px);
         }
-        :after {
+        &:after {
           content: "";
           border-radius: 5px;
           display: block;
@@ -151,7 +151,7 @@ const FeaturedItemsContainer = styled.section`
             rgba(191, 128, 64, 0.3)
           );
         }
-        :hover:after {
+        &:hover:after {
           opacity: 1;
         }
         img {
