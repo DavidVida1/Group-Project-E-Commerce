@@ -36,7 +36,7 @@ const ItemDisplay = () => {
             </div>
           </div>
         ) : (
-          <h2>Loading...</h2>
+          <></>
         )}
       </div>
     </ItemDisplayContainer>

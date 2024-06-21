@@ -48,26 +48,23 @@ const FeaturedItems = () => {
       <h2 className="discover">Featured </h2>
       <Swiper
         slidesPerView={3}
-        spaceBetween={20}
-        pagination={{
-          clickable: true,
-        }}
+        spaceBetween={0}
         navigation={true}
         breakpoints={{
           640: {
             slidesPerView: 2,
-            spaceBetween: 20,
+            spaceBetween: 0,
           },
           768: {
-            slidesPerView: 4,
-            spaceBetween: 40,
+            slidesPerView: 2,
+            spaceBetween: 0,
           },
           1024: {
-            slidesPerView: 5,
-            spaceBetween: 50,
+            slidesPerView: 3,
+            spaceBetween: 0,
           },
         }}
-        modules={[Pagination, Navigation]}
+        modules={[Navigation]}
         className="mySwiper"
       >
         {itemsArr &&
@@ -81,6 +78,8 @@ const FeaturedItems = () => {
                 >
                   <img src={randomItem.imageSrc} />
                 </a>
+                <p className="featuredItemName">{randomItem.name}</p>
+                <p className="featuredItemPrice">{randomItem.price}</p>
               </SwiperSlide>
             );
           })}
@@ -90,7 +89,7 @@ const FeaturedItems = () => {
 };
 
 const FeaturedItemsContainer = styled.section`
-  width: 100%;
+  width: 100dvw;
   height: 100dvh;
 
   & .discover {
@@ -105,14 +104,16 @@ const FeaturedItemsContainer = styled.section`
   }
 
   & .swiper {
-    height: 70%;
-    width: 90%;
+    height: 75%;
+    width: 100%;
 
     & .swiper-slide {
       /* Center slide text vertically */
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
 
       & .featuredItemCards {
         position: relative;
@@ -121,8 +122,8 @@ const FeaturedItemsContainer = styled.section`
         justify-content: space-around;
         background-color: white;
         border-radius: 15px;
-        width: 80%;
-        height: 90%;
+        width: 500px;
+        height: 800px;
         transition: 0.5s ease-in-out;
         overflow: hidden;
         box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
@@ -153,9 +154,18 @@ const FeaturedItemsContainer = styled.section`
         :hover:after {
           opacity: 1;
         }
-
-        & img {
+        img {
         }
+      }
+
+      & .featuredItemName {
+        text-align: center;
+        padding: 15px 0px;
+        font-size: 1.8rem;
+        font-weight: 500;
+      }
+      & .featuredItemPrice {
+        font-size: 1.5rem;
       }
     }
   }

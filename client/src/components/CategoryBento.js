@@ -53,11 +53,10 @@ const CategoryBentoContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100dvh;
+  width: 100dvw;
+  height: 100%;
 
   & .subHeader {
-    margin: 20px 0px;
     text-align: center;
     color: var(--grey-subHeader);
   }
