@@ -58,7 +58,7 @@ const CategoryBentoContainer = styled.section`
 
   & .subHeader {
     text-align: center;
-    color: var(--grey-subHeader);
+    color: var(--font-grey);
   }
 
   & .categoryBentoWrapper {
@@ -66,17 +66,17 @@ const CategoryBentoContainer = styled.section`
     width: 95%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    grid-auto-rows: minmax(202px, auto);
+    gap: 15px;
+    grid-auto-rows: minmax(200px, auto);
 
     a {
       display: flex;
       align-items: flex-end;
-      border-radius: 15px;
+      border-radius: var(--radius-card);
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
-      box-shadow: 0 0 5px var(--color-black);
+      box-shadow: var(--sdw-black-card);
       -webkit-filter: grayscale(30%);
       filter: grayscale(30%);
       transition: all 0.5s ease;
@@ -88,10 +88,10 @@ const CategoryBentoContainer = styled.section`
       }
 
       & p {
-        color: var(--color-white);
-        font-size: clamp(4rem, 4.2vw, 4rem);
-        font-weight: 500;
-        text-shadow: 0 0 10px var(--color-black);
+        color: var(--font-white);
+        font-size: var(--font-size-40);
+        font-weight: var(--font-weight-500);
+        text-shadow: 0 0 10px var(--font-sdw);
         padding: 5px;
       }
 

@@ -45,7 +45,7 @@ const FeaturedItems = () => {
 
   return (
     <FeaturedItemsContainer className="container">
-      <h2 className="discover">Featured </h2>
+      <h2 className="featureHeader">Featured </h2>
       <Swiper
         slidesPerView={3}
         spaceBetween={0}
@@ -92,20 +92,25 @@ const FeaturedItemsContainer = styled.section`
   width: 100dvw;
   height: 100dvh;
 
-  & .discover {
+  & .featureHeader {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     padding: 50px 0px 50px 0px;
-    color: var(--grey-subHeader);
-    font-size: 4rem;
+    color: var(--font-grey);
+    font-size: var(--font-size-40);
     font-family: var(--Font-heading-title);
   }
 
   & .swiper {
     height: 75%;
     width: 100%;
+
+    & .swiper-button-next,
+    .swiper-button-prev {
+      color: var(--purple);
+    }
 
     & .swiper-slide {
       /* Center slide text vertically */
@@ -120,22 +125,20 @@ const FeaturedItemsContainer = styled.section`
         display: flex;
         align-items: center;
         justify-content: space-around;
-        background-color: white;
-        border-radius: 15px;
+        background-color: var(--bg-card);
+        border-radius: var(--radius-card);
         width: 500px;
         height: 800px;
         transition: 0.5s ease-in-out;
         overflow: hidden;
-        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-          rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
-          rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        box-shadow: var(--sdw-black-card);
 
         &:hover {
           transform: translateY(10px);
         }
         &:after {
           content: "";
-          border-radius: 5px;
+          border-radius: var(--radius-card);
           display: block;
           position: absolute;
           top: 0;
@@ -145,27 +148,25 @@ const FeaturedItemsContainer = styled.section`
           z-index: 2;
           transition: 1s all;
           opacity: 0;
-          background: linear-gradient(
-            to bottom,
-            rgba(0, 204, 255, 0.1),
-            rgba(191, 128, 64, 0.3)
-          );
+          background: var(--bg-overlay);
         }
+
         &:hover:after {
           opacity: 1;
         }
         img {
+          height: 200px;
         }
       }
 
       & .featuredItemName {
         text-align: center;
         padding: 15px 0px;
-        font-size: 1.8rem;
-        font-weight: 500;
+        font-size: var(--font-size-18);
+        font-weight: var(--font-weight-500);
       }
       & .featuredItemPrice {
-        font-size: 1.5rem;
+        font-size: var(--font-size-15);
       }
     }
   }

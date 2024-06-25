@@ -99,15 +99,58 @@ video {
 --color-black: rgba(0,0,0,1);
 --footer-bg: rgba(31,31,31,1);
 
+
+/***************Color***********************/
+--white: rgba(255,255,255,1);
+--black: rgba(0,0,0,1);
+--purple: rgba(71,63,244,1);
+--purple-darker: rgba(51,43,224,1);
+
+--font-white:rgba(255,255,255,1);
+--font-black:rgba(0,0,0,1);
+--font-grey:#5f6b6e;
+--font-purple: rgba(71,63,244,1);
+--font-sdw: rgba(0,0,0,1);
+
+--bg-black:rgba(31,31,31,1);
+--bg-white: #F6F6F6;
+--bg-header: rgba(255,255,255,1);
+--bg-card:rgba(255,255,255,1);
+--bg-search:#f1f1f14d;
+--bg-footer-sdw:rgba(0, 0, 0, 0.45) 0px -25px 20px -20px;
+--bg-overlay:linear-gradient(to bottom, rgba(0, 204, 255, 0.1), rgba(191, 128, 64, 0.3));
+
+--sdw-black-card:  rgba(0, 0, 0, 0.4) 0px 2px 4px,
+  rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+  rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+/***************Border-radius***************/
+--radius-card:15px;
+--radius-button:40px;
+/***************Font************************/
+--font-heading-title:"Teko","sans-serif";
+--font-text:"DM Sans", "sans-serif";
+--font-weight-500:500;
+/*price,terms*/
+--font-size-15:1.5rem;
+/*text*/ 
+--font-size-18:1.8rem;
+/*media,headerText*/
+--font-size-25:2.5rem;
+/*categoryText,subHeader*/ 
+--font-size-40:4rem;
+/*logo*/ 
+--font-size-logo:4.5rem;
+
+
 --grey-subHeader: #5f6b6e;
 --color-blackfont-text:#000000;
---color-background:#F5F5F5;
+--color-background:#FF55F5;
 --color-bgSearch: #f1f1f14d;
 --color-purple: rgba(71,63,244,1);
 --color-purple-hover: rgba(51,43,224,1);
 
---font-heading-title:"Teko","sans-serif";
---font-text:"DM Sans", "sans-serif";
+
 
 
 
@@ -156,7 +199,7 @@ body {
   line-height: 1;
   font-family: var(--font-text);
   font-weight: 300;
-  background-color: #F6F6F6;
+  background-color: var(--bg-white);
   overflow-x: hidden; /*Some probleme with the card animation*/
 }
 
@@ -185,13 +228,20 @@ table {
     border-spacing: 0;
 }
 
+/*subHeader*/ 
 h2 {        
   font-size: clamp(3rem, 4.2vw, 4rem);
   font-weight: 500;
   text-shadow: 0 0 2px var(--color-black);
   margin: 20px 0px;
-
 }
+
+/*footer header*/
+h3 {         
+  font-family: var(--font-heading-title);
+  letter-spacing: 5px;
+  font-size:  var(--font-size-25);
+  }
 
 
 & .container {

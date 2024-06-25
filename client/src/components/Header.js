@@ -57,50 +57,51 @@ const Header = ({ setBodyLocation }) => {
 
   return (
     <HeaderContainer
-      className="container"
       ref={bgRef}
       onMouseEnter={handleMouseEnterNav}
       onMouseLeave={handleMouseLeaveNav}
     >
-      <a className="logo" href={"/"}>
-        AllStar
-      </a>
-
-      <div className="nav">
-        <div>Home</div>
-        <div
-          className="dropdown"
-          onMouseEnter={handleMouseEnterCollections}
-          onMouseLeave={handleMouseLeaveCollections}
-        >
-          <div className="dropbtn">Collections</div>
-          <div className="dropdown-content" ref={dropdownRef}>
-            <div className="categoryTitle">Watches</div>
-            {itemsCategory ? (
-              itemsCategory.map((category) => {
-                return (
-                  <NavLink
-                    key={category}
-                    to={`/category/${category}`}
-                    onClick={() => setBodyLocation(null)}
-                  >
-                    {category}
-                  </NavLink>
-                );
-              })
-            ) : (
-              <h1>Loading categories...</h1>
-            )}
-          </div>
-        </div>
-        <div>About</div>
-      </div>
-
-      <div className="userOptions">
-        <SearchBar />
-        <a href={"/cart"}>
-          <AiOutlineShoppingCart />
+      <div className="headerWrapper container">
+        <a className="logo" href={"/"}>
+          AllStar
         </a>
+
+        <div className="nav">
+          <div>Home</div>
+          <div
+            className="dropdown"
+            onMouseEnter={handleMouseEnterCollections}
+            onMouseLeave={handleMouseLeaveCollections}
+          >
+            <div className="dropbtn">Collections</div>
+            <div className="dropdown-content" ref={dropdownRef}>
+              <div className="categoryTitle">Watches</div>
+              {itemsCategory ? (
+                itemsCategory.map((category) => {
+                  return (
+                    <NavLink
+                      key={category}
+                      to={`/category/${category}`}
+                      onClick={() => setBodyLocation(null)}
+                    >
+                      {category}
+                    </NavLink>
+                  );
+                })
+              ) : (
+                <h1>Loading categories...</h1>
+              )}
+            </div>
+          </div>
+          <div>About</div>
+        </div>
+
+        <div className="userOptions">
+          <SearchBar />
+          <a href={"/cart"}>
+            <AiOutlineShoppingCart />
+          </a>
+        </div>
       </div>
     </HeaderContainer>
   );
@@ -108,125 +109,119 @@ const Header = ({ setBodyLocation }) => {
 
 const HeaderContainer = styled.section`
   position: absolute;
+  display: flex;
+  align-items: center;
   width: 100%;
-  top: 50px;
+  height: 72px;
+  top: 36px;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 72px;
-  color: var(--color-white);
-  font-size: 2.3rem;
-
+  color: var(--font-white);
+  font-size: var(--font-size-25);
   transition-property: background-color;
   transition-duration: 0.3s;
-  border-radius: 15px 15px 0px 0px;
-
+  /*border-radius: 15px 15px 0px 0px;*/
   &.showBg {
-    background-color: var(--color-white);
-    color: var(--color-black);
+    background-color: var(--bg-header);
+    color: var(--font-black);
     & section input {
-      color: red;
-      background-color: #ebebeb;
       &::placeholder {
-        color: var(--color-black);
+        color: var(--font-black);
       }
     }
   }
 
-  & .logo {
-    font-family: var(--font-heading-title);
-    font-style: italic;
-    font-weight: bold;
-    font-size: 4rem;
-    letter-spacing: 5px;
-
-    &:hover {
-      color: rgb(71, 63, 244, 1);
-      filter: drop-shadow(0 0 10px var(--color-white));
-      text-shadow: 0 0 5px white;
-    }
-  }
-
-  & .nav {
+  & .headerWrapper {
     display: flex;
-    flex-direction: row;
-    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 
-    & :hover {
-      text-shadow: 0 0 5px var(--color-black);
+    & .logo {
+      font-family: var(--font-heading-title);
+      font-style: italic;
+      font-weight: bold;
+      font-size: var(--font-size-logo);
+      letter-spacing: 5px;
+
+      &:hover {
+        color: rgb(71, 63, 244, 1);
+        filter: drop-shadow(0 0 10px var(--white));
+        text-shadow: 0 0 5px var(--white);
+      }
     }
 
-    & .dropdown {
-      &:hover {
-        background-color: var(--color-white);
-        color: var(--color-black);
-      }
+    & .nav {
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
 
-      & .dropbtn {
-        border: none;
-        cursor: pointer;
-      }
-
-      & .dropdown-content {
-        position: absolute;
-        left: 0;
-        background-color: var(--color-white);
-        width: 100%;
-        height: 0%;
-        top: 72px;
-
-        z-index: 1;
-
-        -webkit-transition: height 0.3s ease-in-out;
-        transition: height 0.3s ease-in-out;
-        overflow: hidden;
-        border-radius: 0px 0px 15px 15px;
-
-        & .categoryTitle {
-          padding: 10px 0px 0px 16px;
-          font-size: 2rem;
-          font-family: var(--font-heading-title);
-          color: rgb(51, 43, 224, 1);
-          box-shadow: none;
+      & .dropdown {
+        & .dropbtn {
+          border: none;
+          cursor: pointer;
         }
 
-        & a {
-          padding: 12px 16px;
-          text-decoration: none;
-          display: block;
-          color: var(--color-black);
+        & .dropdown-content {
+          position: absolute;
+          left: 0;
+          background-color: var(--bg-header);
+          width: 100%;
+          height: 0%;
+          top: 72px;
+          z-index: 1;
+          -webkit-transition: height 0.3s ease-in-out;
+          transition: height 0.3s ease-in-out;
+          overflow: hidden;
+          border-radius: 0px 0px 15px 15px;
 
-          &:hover {
-            background-color: green;
+          & .categoryTitle {
+            padding: 10px 0px 0px 16px;
+            font-size: 2rem;
+            font-family: var(--font-heading-title);
+            color: var(--font-purple);
             box-shadow: none;
           }
-        }
 
-        &.show {
-          height: 400px;
+          & a {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            color: var(--font-black);
+
+            &:hover {
+              background-color: green;
+              box-shadow: none;
+            }
+          }
+
+          &.show {
+            height: 400px;
+          }
         }
       }
     }
-  }
 
-  & .userOptions {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 30px;
+    & .userOptions {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 15px;
 
-    & a svg {
-      padding: 5px 25px;
-      border-radius: 15px;
-      background-color: var(--color-purple);
-      transition: background-color 0.3s linear;
+      & a svg {
+        padding: 5px 25px;
+        border-radius: var(--radius-button);
+        background-color: var(--purple);
+        border: 2px solid var(--purple);
+        transition: background-color 0.3s linear;
 
-      &:hover {
-        color: var(--color-white);
-        background-color: var(--color-black);
+        &:hover {
+          color: var(--white);
+          border: 2px solid var(--white);
+          background-color: var(--black);
+        }
       }
     }
   }

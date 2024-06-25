@@ -3,6 +3,13 @@ import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 import items from "../assets/items.json";
 import { AiFillGithub } from "react-icons/ai";
+import { FaPinterest } from "react-icons/fa";
+import { FaFacebookF } from "react-icons/fa";
+import { SiYoutubeshorts } from "react-icons/si";
+import { FaInstagram } from "react-icons/fa";
+
+import { FaXTwitter } from "react-icons/fa6";
+
 const Footer = () => {
   return (
     <FooterContainer>
@@ -13,36 +20,44 @@ const Footer = () => {
           </a>
 
           <div className="media">
-            <AiFillGithub />
-            <AiFillGithub />
-            <AiFillGithub />
-            <AiFillGithub />
+            <FaInstagram />
+
+            <FaPinterest />
+            <FaFacebookF />
+            <SiYoutubeshorts />
+            <FaXTwitter />
             <AiFillGithub />
           </div>
         </aside>
 
         <aside className="footerNav">
           <ul className="footerNavList">
-            <div className="headerList">
+            <h3 className="headerList">
               <AiFillGithub />
               &nbsp;Github
-            </div>
+            </h3>
             <li>
-              <a href="https://github.com/DavidVida1">David Vidal</a>
+              <a href="https://github.com/DavidVida1">David Vidal -Frontend</a>
             </li>
             <li>
-              <a href="https://github.com/MTLFibbs">Philippe Pellerin</a>
+              <a href="https://github.com/MTLFibbs">
+                Philippe Pellerin -Backend
+              </a>
             </li>
             <li>
-              <a href="https://github.com/durandal1409">Mariia Kladova</a>
+              <a href="https://github.com/durandal1409">
+                Mariia Kladova -Frontend
+              </a>
             </li>
             <li>
-              <a href="https://github.com/Mansurmohamed">Mansuer Mohamed</a>
+              <a href="https://github.com/Mansurmohamed">
+                Mansuer Mohamed -Backend
+              </a>
             </li>
           </ul>
 
           <ul className="footerNavList">
-            <div className="headerList">Company</div>
+            <h3 className="headerList">Company</h3>
             <li>
               <a>Categories</a>
             </li>
@@ -58,7 +73,7 @@ const Footer = () => {
           </ul>
 
           <ul className="footerNavList">
-            <div className="headerList">Customer Support</div>
+            <h3 className="headerList">Customer Support</h3>
             <li>
               <a>Customer Service</a>
             </li>
@@ -83,7 +98,7 @@ const Footer = () => {
           </ul>
 
           <ul className="footerNavList">
-            <div className="headerList">Order & Returns</div>
+            <h3 className="headerList">Order & Returns</h3>
             <li>
               <a>Shipping</a>
             </li>
@@ -115,22 +130,22 @@ const FooterContainer = styled.footer`
   position: relative;
   bottom: 0;
   width: 100%;
-  height: 70dvh;
-  background-color: var(--footer-bg);
+  height: 100%;
+  background-color: var(--bg-black);
 
   & .wrapper {
     position: relative;
     display: flex;
     flex-direction: column;
     height: fit-content;
-    width: 100%;
-    gap: 40px;
-    color: var(--color-white);
-    padding-top: 50px;
-    box-shadow: rgba(0, 0, 0, 0.45) 0px -25px 20px -20px;
+    width: 90%;
+    height: 80dvh;
+    gap: 50px;
+    color: var(--font-white);
+    padding-top: 100px;
+    box-shadow: var(--bg-footer-sdw);
 
     & .logoAndMedia {
-      width: 100%;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -138,45 +153,52 @@ const FooterContainer = styled.footer`
         font-family: var(--font-heading-title);
         font-style: italic;
         font-weight: bold;
-        font-size: 4rem;
+        font-size: var(--font-size-logo);
         letter-spacing: 5px;
 
         &:hover {
-          color: rgb(71, 63, 244, 1);
-          filter: drop-shadow(0 0 10px var(--color-black));
-          text-shadow: 0 0 5px black;
+          color: var(--font-purple);
+          filter: drop-shadow(0 0 10px var(--black));
+          text-shadow: 0 0 5px var(--black);
         }
       }
       & .media {
         display: flex;
         gap: 25px;
-        font-size: 3rem;
+        font-size: var(--font-size-25);
+
+        & :hover {
+          color: var(--font-purple);
+          filter: drop-shadow(0 0 10px var(--black));
+          text-shadow: 0 0 5px var(--black);
+          cursor: pointer;
+        }
       }
     }
 
     & .footerNav {
       display: flex;
       flex-direction: row;
-      gap: 20%;
+      height: 80%;
 
       & .footerNavList {
-        display: flex;
+        display: grid;
         flex-direction: column;
-        list-style-type: none;
-        gap: 25px;
+        height: 75%;
+        width: 100%;
 
         & .headerList {
-          font-family: var(--font-heading-title);
-          letter-spacing: 5px;
-          font-size: 2rem;
           margin: 20px 0px;
-          color: white;
         }
 
         & li a {
-          font-size: 1.8rem;
-          & :hover {
-            color: var(--color-purple);
+          font-size: var(--font-size-18);
+
+          &:hover {
+            color: var(--font-purple);
+            filter: drop-shadow(0 0 10px var(--black));
+            text-shadow: 0 0 5px var(--black);
+            cursor: pointer;
           }
         }
       }
@@ -188,19 +210,19 @@ const FooterContainer = styled.footer`
     display: flex;
     flex-direction: column;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: var(--font-size-15);
     width: 100%;
     height: 40px;
     bottom: 0;
 
-    color: var(--color-white);
+    color: var(--font-white);
 
     &:before {
       content: "";
       height: 10px;
       align-self: center;
       width: 90%;
-      border-top: 1px solid var(--color-purple);
+      border-top: 1px solid var(--purple);
       padding-bottom: 5px;
     }
   }
@@ -212,16 +234,16 @@ const FooterContainer = styled.footer`
     font-family: var(--font-heading-title);
     font-style: italic;
     font-weight: bold;
-    color: var(--color-white);
+    color: var(--font-white);
 
-    font-size: 4rem;
-    letter-spacing: 1.2rem;
+    font-size: var(--font-size-logo);
+    letter-spacing: 2.5rem;
     rotate: 180deg;
     writing-mode: vertical-rl;
     &:hover {
-      color: var(--color-purple);
-      filter: drop-shadow(0 0 10px var(--color-black));
-      text-shadow: 0 0 5px black;
+      color: var(--font-purple);
+      filter: drop-shadow(0 0 10px var(--black));
+      text-shadow: 0 0 5px var(--font-sdw);
     }
   }
 `;

@@ -21,12 +21,15 @@ const ItemDisplay = () => {
   return (
     <ItemDisplayContainer className="container">
       <div className="itemDisplayWrapper">
-        <img
-          className="modelWatchDisplay"
-          src={modelDisplayitemImg}
-          alt="modelDisplayItem"
-          loading="lazy"
-        />
+        <aside className="imgWrapper">
+          <img
+            className="modelWatchDisplay"
+            src={modelDisplayitemImg}
+            alt="modelDisplayItem"
+            loading="lazy"
+          />
+        </aside>
+
         {itemDisplayData ? (
           <div className="displayWatchText">
             <div className="new">New</div>
@@ -58,12 +61,20 @@ const ItemDisplayContainer = styled.section`
     height: 100%;
     width: 100%;
 
-    & .modelWatchDisplay {
+    & .imgWrapper {
       height: 90%;
       width: 95%;
-      border-radius: 15px;
       box-shadow: 0 0 5px var(--color-black);
+      border-radius: 40px;
+
+      & .modelWatchDisplay {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 40px;
+      }
     }
+
     & .displayWatchText {
       position: absolute;
       top: 50%;
@@ -83,7 +94,7 @@ const ItemDisplayContainer = styled.section`
       }
 
       & .displayWatchName {
-        font-size: clamp(4rem, 4.2vw, 4rem);
+        font-size: clamp(1.8rem, 4.2vw, 4rem);
         font-weight: 500;
       }
 
@@ -97,7 +108,7 @@ const ItemDisplayContainer = styled.section`
         & :first-child {
           background-color: var(--color-purple);
           padding: 15px 25px;
-          border-radius: 40px;
+          border-radius: var(--radius-button);
           box-shadow: 0 0 10px black;
           border: 2px solid var(--color-purple);
           transition: background-color 0.3s linear;
@@ -111,7 +122,7 @@ const ItemDisplayContainer = styled.section`
           color: var(--color-black);
           background-color: var(--color-white);
           padding: 15px 25px;
-          border-radius: 40px;
+          border-radius: var(--radius-button);
           border: 2px solid var(--color-white);
           box-shadow: 0 0 10px black;
           transition: background-color 0.3s linear;
