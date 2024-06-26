@@ -37,21 +37,21 @@ const Footer = () => {
               &nbsp;Github
             </h3>
             <li>
-              <a href="https://github.com/DavidVida1">David Vidal -Frontend</a>
+              <a href="https://github.com/DavidVida1">David Vidal - Frontend</a>
             </li>
             <li>
               <a href="https://github.com/MTLFibbs">
-                Philippe Pellerin -Backend
+                Philippe Pellerin - Backend
               </a>
             </li>
             <li>
               <a href="https://github.com/durandal1409">
-                Mariia Kladova -Frontend
+                Mariia Kladova - Frontend
               </a>
             </li>
             <li>
               <a href="https://github.com/Mansurmohamed">
-                Mansuer Mohamed -Backend
+                Mansuer Mohamed - Backend
               </a>
             </li>
           </ul>
@@ -164,7 +164,7 @@ const FooterContainer = styled.footer`
       }
       & .media {
         display: flex;
-        gap: 25px;
+        gap: var(--gap-25);
         font-size: var(--font-size-25);
 
         & :hover {
@@ -182,7 +182,8 @@ const FooterContainer = styled.footer`
       height: 80%;
 
       & .footerNavList {
-        display: grid;
+        display: flex;
+        gap: 10%;
         flex-direction: column;
         height: 75%;
         width: 100%;

@@ -27,17 +27,13 @@ const Home = () => {
 
 const HomeContainer = styled.section`
   position: relative;
-  background: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 1) 32%,
-    rgba(0, 0, 0, 1) 48%
-  );
-
+  background: var(--bg-home);
   width: 100vw;
+  height: 100vh;
 
   & video {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     object-fit: cover;
     -webkit-mask-image: linear-gradient(transparent 0, #000000 8%);
     mask-image: linear-gradient(transparent 0, #000000 9%);
@@ -52,38 +48,38 @@ const HomeContainer = styled.section`
     bottom: 50px;
     left: 50px;
     z-index: 30;
-    color: var(--color-white);
+    color: var(--font-white);
     text-transform: uppercase;
-    text-shadow: 0 0 10px black;
+    text-shadow: 0 0 10px var(--font-sdw);
     letter-spacing: 5px;
 
     & .logo {
       font-family: var(--font-heading-title);
       font-style: italic;
       font-weight: bold;
-      font-size: clamp(3rem, 4.2vw, 4rem);
+      font-size: clamp(2rem, 4.2vw, 3rem);
     }
 
     & .heroSubText {
       font-size: clamp(5rem, 4.2vw, 6rem);
-      font-weight: 500;
+      font-weight: var(--font-weight-500);
     }
 
     & .heroButton {
       width: fit-content;
       height: fit-content;
-      margin-top: 50px;
-      font-size: clamp(1.8rem, 3.5vw, 1.8rem);
+      margin-top: 40px;
+      font-size: var(--font-size-18);
       padding: 2% 18%;
-      border-radius: 40px;
-      background-color: var(--color-purple);
-      border: 2px solid var(--color-purple);
-      box-shadow: 0 0 10px black;
+      border-radius: var(--radius-button);
+      background-color: var(--btn-purple);
+      border: 2px solid var(--purple);
+      box-shadow: 0 0 10px var(--font-sdw);
       transition: background-color 0.3s linear;
 
       &:hover {
-        border: 2px solid var(--color-white);
-        background-color: var(--color-black);
+        border: 2px solid var(--white);
+        background-color: var(--btn-black);
       }
     }
   }

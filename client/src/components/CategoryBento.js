@@ -66,7 +66,7 @@ const CategoryBentoContainer = styled.section`
     width: 95%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    gap: var(--gap-15);
     grid-auto-rows: minmax(200px, auto);
 
     a {

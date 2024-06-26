@@ -113,7 +113,6 @@ const FeaturedItemsContainer = styled.section`
     }
 
     & .swiper-slide {
-      /* Center slide text vertically */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -121,16 +120,14 @@ const FeaturedItemsContainer = styled.section`
       overflow: hidden;
 
       & .featuredItemCards {
-        position: relative;
         display: flex;
         align-items: center;
         justify-content: space-around;
         background-color: var(--bg-card);
         border-radius: var(--radius-card);
-        width: 500px;
-        height: 800px;
+        width: 450px;
+        height: 650px;
         transition: 0.5s ease-in-out;
-        overflow: hidden;
         box-shadow: var(--sdw-black-card);
 
         &:hover {
@@ -156,6 +153,7 @@ const FeaturedItemsContainer = styled.section`
         }
         img {
           height: 200px;
+          width: 200px;
         }
       }
 

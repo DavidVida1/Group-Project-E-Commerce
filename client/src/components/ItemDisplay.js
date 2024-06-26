@@ -52,7 +52,7 @@ const ItemDisplayContainer = styled.section`
   width: 100%;
   height: 100dvh;
   padding: 50px 0px 0px 0px;
-  color: var(--color-white);
+  color: var(--font-white);
 
   & .itemDisplayWrapper {
     position: relative;
@@ -64,14 +64,14 @@ const ItemDisplayContainer = styled.section`
     & .imgWrapper {
       height: 90%;
       width: 95%;
-      box-shadow: 0 0 5px var(--color-black);
-      border-radius: 40px;
+      box-shadow: var(--sdw-black-card);
+      border-radius: var(--radius-display);
 
       & .modelWatchDisplay {
         height: 100%;
         width: 100%;
         object-fit: cover;
-        border-radius: 40px;
+        border-radius: var(--radius-display);
       }
     }
 
@@ -80,28 +80,28 @@ const ItemDisplayContainer = styled.section`
       top: 50%;
       left: 50%;
       transform: translate(-85%, -30%);
-      text-shadow: 0 0 10px black;
+      text-shadow: 0 0 10px var(--font-sdw);
 
       & .new {
         border-radius: 40px;
-        background-color: var(--color-white);
+        background-color: var(--bg-white);
         width: max-content;
         color: var(--color-black);
         padding: 10px 20px;
-        font-size: 1.3rem;
-        margin-bottom: 10px;
-        font-weight: 500;
+        font-size: var(--font-size-15);
+        margin-bottom: 15px;
+        font-weight: var(--font-weight-500);
       }
 
       & .displayWatchName {
         font-size: clamp(1.8rem, 4.2vw, 4rem);
-        font-weight: 500;
+        font-weight: var(--font-weight-500);
       }
 
       & .displayWatchOptions {
         display: flex;
         flex-direction: row;
-        margin-top: 50px;
+        margin-top: 40px;
         font-size: clamp(1.8rem, 3.5vw, 1.8rem);
         gap: 20px;
 

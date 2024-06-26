@@ -147,16 +147,16 @@ const HeaderContainer = styled.section`
       letter-spacing: 5px;
 
       &:hover {
-        color: rgb(71, 63, 244, 1);
-        filter: drop-shadow(0 0 10px var(--white));
-        text-shadow: 0 0 5px var(--white);
+        color: var(--purple);
+        filter: drop-shadow(0 0 10px var(--black));
+        text-shadow: 0 0 5px var(--font-sdw);
       }
     }
 
     & .nav {
       display: flex;
       flex-direction: row;
-      gap: 15px;
+      gap: var(--gap-15);
 
       & .dropdown {
         & .dropbtn {
@@ -208,19 +208,19 @@ const HeaderContainer = styled.section`
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 15px;
+      gap: var(--gap-15);
 
       & a svg {
-        padding: 5px 25px;
+        padding: 5px 30px;
         border-radius: var(--radius-button);
-        background-color: var(--purple);
+        background-color: var(--btn-purple);
         border: 2px solid var(--purple);
         transition: background-color 0.3s linear;
 
         &:hover {
           color: var(--white);
           border: 2px solid var(--white);
-          background-color: var(--black);
+          background-color: var(--btn-black);
         }
       }
     }

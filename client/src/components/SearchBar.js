@@ -18,18 +18,18 @@ const SearchBarContainer = styled.section`
   display: flex;
   align-items: center;
   & input {
-    background-color: var(--color-bgSearch);
+    background-color: var(--bg-search);
     padding: 10px 15px;
-    border-radius: 15px;
+    border-radius: var(--radius-button);
     border: none;
 
     &::placeholder {
-      color: var(--color-white);
+      color: var(--font-white);
       font-family: var(--font-text);
     }
 
     &:focus {
-      color: red;
+      color: var(--font-black);
     }
   }
   & .searchIcone {

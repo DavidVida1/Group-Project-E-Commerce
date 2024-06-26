@@ -114,11 +114,16 @@ video {
 
 --bg-black:rgba(31,31,31,1);
 --bg-white: #F6F6F6;
+--bg-purple: rgba(71,63,244,1);
 --bg-header: rgba(255,255,255,1);
 --bg-card:rgba(255,255,255,1);
 --bg-search:#f1f1f14d;
+--bg-home:linear-gradient(0deg, rgba(255, 255, 255, 1) 32%, rgba(0, 0, 0, 1) 48%);
 --bg-footer-sdw:rgba(0, 0, 0, 0.45) 0px -25px 20px -20px;
 --bg-overlay:linear-gradient(to bottom, rgba(0, 204, 255, 0.1), rgba(191, 128, 64, 0.3));
+
+--btn-black: rgba(0,0,0,1);
+--btn-purple:rgba(71,63,244,1);
 
 --sdw-black-card:  rgba(0, 0, 0, 0.4) 0px 2px 4px,
   rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
@@ -127,13 +132,14 @@ video {
 /***************Border-radius***************/
 --radius-card:15px;
 --radius-button:40px;
+--radius-display:40px;
 /***************Font************************/
 --font-heading-title:"Teko","sans-serif";
 --font-text:"DM Sans", "sans-serif";
 --font-weight-500:500;
 /*price,terms*/
 --font-size-15:1.5rem;
-/*text*/ 
+/*text, heroButton*/ 
 --font-size-18:1.8rem;
 /*media,headerText*/
 --font-size-25:2.5rem;
@@ -141,7 +147,9 @@ video {
 --font-size-40:4rem;
 /*logo*/ 
 --font-size-logo:4.5rem;
-
+/***************Gap************************/
+--gap-15:15px;
+--gap-25:25px;
 
 --grey-subHeader: #5f6b6e;
 --color-blackfont-text:#000000;
