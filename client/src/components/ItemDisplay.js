@@ -66,36 +66,45 @@ const ItemDisplay = () => {
       <Swiper
         direction={"vertical"}
         slidesPerView={1}
-        height={window.innerHeight}
+        /* height={window.innerHeight}*/
         spaceBetween={30}
-        mousewheel={{ forceToAxis: true, sensitivity: 1, releaseOnEdges: true }}
+        mousewheel={{
+          forceToAxis: true,
+          sensitivity: 1,
+          releaseOnEdges: true,
+        }}
         pagination={{
           clickable: true,
         }}
         modules={[Mousewheel, Pagination]}
         className="mySwiper"
       >
-        {items &&
+        {items ? (
           items.map((item) => {
             return (
-              <SwiperSlide key={item.id}>
-                <div className="displayWatchText">
-                  <div className="new">New</div>
-                  <div className="displayWatchName">{item.name}</div>
-                  <div className="displayWatchOptions">
-                    <a href={`/item/${item._id}`}>Buy now</a>
-                    <a href="/category/Entertainment">Explore More</a>
+              <>
+                <SwiperSlide key={item.id}>
+                  <div className="displayWatchText">
+                    <div className="new">New</div>
+                    <div className="displayWatchName">{item.name}</div>
+                    <div className="displayWatchOptions">
+                      <a href={`/item/${item._id}`}>Buy now</a>
+                      <a href="/category/Entertainment">Explore More</a>
+                    </div>
                   </div>
-                </div>
-                <img
-                  className="modelWatchDisplay"
-                  src={item.imageUrl}
-                  alt={item.name}
-                  loading="lazy"
-                />
-              </SwiperSlide>
+                  <img
+                    className="modelWatchDisplay"
+                    src={item.imageUrl}
+                    alt={item.name}
+                    loading="lazy"
+                  />
+                </SwiperSlide>
+              </>
             );
-          })}
+          })
+        ) : (
+          <h2>Loading ...</h2>
+        )}
       </Swiper>
     </ItemDisplayContainer>
   );
@@ -107,13 +116,13 @@ const ItemDisplayContainer = styled.section`
   width: 100%;
   height: 100dvh;
   padding: 50px 0px 0px 0px;
-  border: 1px solid red;
   color: var(--font-white);
 
   & .swiper {
     height: 100%;
-    width: 100%;
-    border: 1px solid blue;
+    width: 95%;
+    border-radius: var(--radius-display);
+    box-shadow: var(--sdw-black-card);
 
     & .swiper-pagination-bullet {
       background-color: var(--purple);
@@ -122,14 +131,12 @@ const ItemDisplayContainer = styled.section`
     & .swiper-slide {
       width: 100%;
       height: 100%;
-      border: 1px solid green;
 
       & .modelWatchDisplay {
         display: block;
         height: 100%;
         width: 100%;
         object-fit: cover;
-        box-shadow: var(--sdw-black-card);
         border-radius: var(--radius-display);
       }
 
