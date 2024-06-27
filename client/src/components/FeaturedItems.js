@@ -48,20 +48,20 @@ const FeaturedItems = () => {
       <h2 className="featureHeader">Featured </h2>
       <Swiper
         slidesPerView={3}
-        spaceBetween={0}
+        spaceBetween={15}
         navigation={true}
         breakpoints={{
           640: {
             slidesPerView: 2,
-            spaceBetween: 0,
+            spaceBetween: 15,
           },
           768: {
             slidesPerView: 2,
-            spaceBetween: 0,
+            spaceBetween: 15,
           },
           1024: {
             slidesPerView: 3,
-            spaceBetween: 0,
+            spaceBetween: 15,
           },
         }}
         modules={[Navigation]}
@@ -113,6 +113,8 @@ const FeaturedItemsContainer = styled.section`
     }
 
     & .swiper-slide {
+      height: 100%;
+      width: 70%;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -120,6 +122,7 @@ const FeaturedItemsContainer = styled.section`
       overflow: hidden;
 
       & .featuredItemCards {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: space-around;

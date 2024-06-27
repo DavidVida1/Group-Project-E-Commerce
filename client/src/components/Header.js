@@ -219,7 +219,7 @@ const HeaderContainer = styled.section`
 
         &:hover {
           color: var(--white);
-          border: 2px solid var(--white);
+          border: 2px solid var(--btn-white);
           background-color: var(--btn-black);
         }
       }

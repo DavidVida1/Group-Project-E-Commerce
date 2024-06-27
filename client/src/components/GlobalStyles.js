@@ -124,6 +124,7 @@ video {
 
 --btn-black: rgba(0,0,0,1);
 --btn-purple:rgba(71,63,244,1);
+--btn-white:rgba(255,255,255,1);
 
 --sdw-black-card:  rgba(0, 0, 0, 0.4) 0px 2px 4px,
   rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
