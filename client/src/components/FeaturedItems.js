@@ -67,7 +67,7 @@ const FeaturedItems = () => {
         modules={[Navigation]}
         className="mySwiper"
       >
-        {itemsArr &&
+        {itemsArr ? (
           itemsArr.map((randomItem) => {
             return (
               <SwiperSlide>
@@ -82,7 +82,10 @@ const FeaturedItems = () => {
                 <p className="featuredItemPrice">{randomItem.price}</p>
               </SwiperSlide>
             );
-          })}
+          })
+        ) : (
+          <h2 className="loading">Loading ...</h2>
+        )}
       </Swiper>
     </FeaturedItemsContainer>
   );

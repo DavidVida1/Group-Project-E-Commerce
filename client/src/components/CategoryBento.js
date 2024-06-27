@@ -41,7 +41,7 @@ const CategoryBento = () => {
             );
           })
         ) : (
-          <h1>Loading categories...</h1>
+          <h2 className="loading">Loading categories...</h2>
         )}
       </div>
     </CategoryBentoContainer>

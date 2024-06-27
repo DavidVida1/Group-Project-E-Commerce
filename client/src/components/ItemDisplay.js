@@ -103,7 +103,7 @@ const ItemDisplay = () => {
             );
           })
         ) : (
-          <h2>Loading ...</h2>
+          <h2 className="loading">Loading ...</h2>
         )}
       </Swiper>
     </ItemDisplayContainer>
@@ -143,7 +143,7 @@ const ItemDisplayContainer = styled.section`
       & .displayWatchText {
         position: absolute;
         top: 75%;
-        left: 50%;
+        left: 48%;
         transform: translate(-85%, -30%);
         text-shadow: 0 0 10px var(--font-sdw);
         z-index: 10;

@@ -118,7 +118,7 @@ video {
 --bg-header: rgba(255,255,255,1);
 --bg-card:rgba(255,255,255,1);
 --bg-search:#f1f1f14d;
---bg-home:linear-gradient(0deg, rgba(255, 255, 255, 1) 32%, rgba(0, 0, 0, 1) 48%);
+--bg-home:linear-gradient(0deg, rgba(255, 255, 255, 1) 32%, rgba(0, 0, 0, 0.9) 48%);
 --bg-footer-sdw:rgba(0, 0, 0, 0.45) 0px -25px 20px -20px;
 --bg-overlay:linear-gradient(to bottom, rgba(0, 204, 255, 0.1), rgba(191, 128, 64, 0.3));
 
@@ -250,6 +250,13 @@ h3 {
   font-family: var(--font-heading-title);
   letter-spacing: 5px;
   font-size:  var(--font-size-25);
+  }
+
+.loading {  
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: rebeccapurple;
   }
 
 
