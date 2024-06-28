@@ -1,6 +1,15 @@
 import { NavLink, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import HeroVideo from "../assets/watchBanner2.mp4";
+import casioLogo from "../assets/casioLogo.png";
+import fitbitLogo from "../assets/fitbitLogo.png";
+import garminLogo from "../assets/garminLogo.png";
+import gshockLogo from "../assets/gshockLogo.png";
+import jawboneLogo from "../assets/jawboneLogo.png";
+import magellanLogo from "../assets/magellanLogo.png";
+import polarLogo from "../assets/polarLogo.png";
+import samsungLogo from "../assets/samsungLogo.png";
 
 const Home = () => {
   return (
@@ -21,6 +30,35 @@ const Home = () => {
         alt="hero-video"
         loading="lazy"
       />
+
+      <div className="slider">
+        <div className="list">
+          <a className="item" href="/company-profile/13334">
+            <img src={casioLogo} />
+          </a>
+          <a className="item" href="/company-profile/10759">
+            <img src={fitbitLogo} />
+          </a>
+          <a className="item" href="/company-profile/10713">
+            <img src={garminLogo} />
+          </a>
+          <a className="item" href="/company-profile/13334">
+            <img src={gshockLogo} />
+          </a>
+          <a className="item" href="/company-profile/18834">
+            <img src={jawboneLogo} />
+          </a>
+          <a className="item" href="/company-profile/16475">
+            <img src={magellanLogo} />
+          </a>
+          <a className="item" href="/company-profile/11837">
+            <img src={polarLogo} />
+          </a>
+          <a className="item" href="/company-profile/18432">
+            <img src={samsungLogo} />
+          </a>
+        </div>
+      </div>
     </HomeContainer>
   );
 };
@@ -33,7 +71,7 @@ const HomeContainer = styled.section`
 
   & video {
     width: 100%;
-    height: 100%;
+    height: 90%;
     object-fit: cover;
     -webkit-mask-image: linear-gradient(transparent 0, #000000 8%);
     mask-image: linear-gradient(transparent 0, #000000 9%);
@@ -45,7 +83,7 @@ const HomeContainer = styled.section`
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: 50px;
+    bottom: 150px;
     left: 50px;
     z-index: 30;
     color: var(--font-white);
@@ -80,6 +118,24 @@ const HomeContainer = styled.section`
       &:hover {
         border: 2px solid var(--white);
         background-color: var(--btn-black);
+      }
+    }
+  }
+  & .slider {
+    width: 100%;
+    height: 50px;
+    border: 1px solid red;
+    & .list {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      & .item {
+        width: 100px;
+        height: 50px;
+        & img {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   }

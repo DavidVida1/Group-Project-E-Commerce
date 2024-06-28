@@ -152,14 +152,8 @@ video {
 --gap-15:15px;
 --gap-25:25px;
 
---grey-subHeader: #5f6b6e;
---color-blackfont-text:#000000;
---color-background:#FF55F5;
---color-bgSearch: #f1f1f14d;
---color-purple: rgba(71,63,244,1);
---color-purple-hover: rgba(51,43,224,1);
 
-
+/***************MISC************************/
 
 
 
