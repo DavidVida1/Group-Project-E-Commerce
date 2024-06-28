@@ -100,7 +100,7 @@ const FeaturedItemsContainer = styled.section`
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    padding: 50px 0px 50px 0px;
+    padding: 50px 0px 50px 1px;
     color: var(--font-grey);
     font-size: var(--font-size-40);
     font-family: var(--Font-heading-title);
