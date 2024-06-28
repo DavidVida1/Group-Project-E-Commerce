@@ -103,13 +103,14 @@ const HomeContainer = styled.section`
     mask-image: linear-gradient(transparent 0, #000000 9%);
     background-repeat: no-repeat;
     background-size: cover;
+    border-radius: 0 0 40px 40px;
   }
 
   & .heroText {
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: 200px;
+    bottom: 22%;
     left: 50px;
     z-index: 30;
     color: var(--font-white);
