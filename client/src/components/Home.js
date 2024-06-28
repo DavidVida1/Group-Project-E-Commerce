@@ -1,5 +1,5 @@
 import { NavLink, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import HeroVideo from "../assets/watchBanner2.mp4";
 import casioLogo from "../assets/casioLogo.png";
@@ -10,8 +10,49 @@ import jawboneLogo from "../assets/jawboneLogo.png";
 import magellanLogo from "../assets/magellanLogo.png";
 import polarLogo from "../assets/polarLogo.png";
 import samsungLogo from "../assets/samsungLogo.png";
+import skechersLogo from "../assets/skechersLogo.png";
+import nikeLogo from "../assets/nikeLogo.png";
+
+const logos = [
+  { src: casioLogo, href: "/company-profile/13334" },
+  { src: fitbitLogo, href: "/company-profile/10759" },
+  { src: garminLogo, href: "/company-profile/10713" },
+  { src: gshockLogo, href: "/company-profile/13334" },
+  { src: jawboneLogo, href: "/company-profile/18834" },
+  { src: magellanLogo, href: "/company-profile/16475" },
+  { src: polarLogo, href: "/company-profile/11837" },
+  { src: samsungLogo, href: "/company-profile/18432" },
+  { src: skechersLogo, href: "/company-profile/15211" },
+  { src: nikeLogo, href: "/company-profile/11939" },
+];
 
 const Home = () => {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          videoRef.current.src = HeroVideo;
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: "200px",
+      }
+    );
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => {
+      if (videoRef.current) {
+        observer.unobserve(videoRef.current);
+      }
+    };
+  }, []);
+
   return (
     <HomeContainer>
       <aside className="heroText">
@@ -23,7 +64,7 @@ const Home = () => {
       </aside>
       <video
         className="bannerHero"
-        src={HeroVideo}
+        ref={videoRef}
         autoPlay
         loop
         muted
@@ -31,32 +72,13 @@ const Home = () => {
         loading="lazy"
       />
 
-      <div className="slider">
+      <div className="slider" reverse="false">
         <div className="list">
-          <a className="item" href="/company-profile/13334">
-            <img src={casioLogo} />
-          </a>
-          <a className="item" href="/company-profile/10759">
-            <img src={fitbitLogo} />
-          </a>
-          <a className="item" href="/company-profile/10713">
-            <img src={garminLogo} />
-          </a>
-          <a className="item" href="/company-profile/13334">
-            <img src={gshockLogo} />
-          </a>
-          <a className="item" href="/company-profile/18834">
-            <img src={jawboneLogo} />
-          </a>
-          <a className="item" href="/company-profile/16475">
-            <img src={magellanLogo} />
-          </a>
-          <a className="item" href="/company-profile/11837">
-            <img src={polarLogo} />
-          </a>
-          <a className="item" href="/company-profile/18432">
-            <img src={samsungLogo} />
-          </a>
+          {logos.map((logo, index) => (
+            <SliderItem key={index} position={index + 1} href={logo.href}>
+              <img src={logo.src} alt="company-logo" loading="lazy" />
+            </SliderItem>
+          ))}
         </div>
       </div>
     </HomeContainer>
@@ -71,7 +93,7 @@ const HomeContainer = styled.section`
 
   & video {
     width: 100%;
-    height: 90%;
+    height: 93%;
     object-fit: cover;
     -webkit-mask-image: linear-gradient(transparent 0, #000000 8%);
     mask-image: linear-gradient(transparent 0, #000000 9%);
@@ -121,23 +143,71 @@ const HomeContainer = styled.section`
       }
     }
   }
+
   & .slider {
     width: 100%;
-    height: 50px;
-    border: 1px solid red;
+    height: var(--slider-height);
+    background-color: var(--bg-white);
+    overflow: hidden;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      var(--black) 10% 90%,
+      transparent
+    );
     & .list {
+      position: relative;
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      & .item {
-        width: 100px;
-        height: 50px;
-        & img {
-          width: 100%;
-          height: 100%;
-        }
-      }
+      width: 100%;
+      min-width: calc(var(--slider-width) * var(--slider-quantity));
+    }
+
+    &:hover a {
+      animation-play-state: paused !important;
+      filter: grayscale(1);
+    }
+
+    a:hover {
+      filter: grayscale(0);
+    }
+  }
+  .slider[reverse="true"] a {
+    animation: reverseRun 20s linear infinite;
+  }
+
+  @keyframes autoRun {
+    from {
+      left: calc(var(--slider-width) * -1);
+    }
+    to {
+      left: 100%;
+    }
+  }
+
+  @keyframes reverseRun {
+    from {
+      left: 100%;
+    }
+    to {
+      left: calc(var(--slider-width) * -1);
     }
   }
 `;
+
+const SliderItem = styled.a`
+  position: absolute;
+  width: var(--slider-width);
+  height: var(--slider-height);
+  left: 100%;
+  animation: autoRun 20s linear infinite;
+  transition: filter 0.5s;
+  animation-delay: ${({ position }) =>
+    `calc((20s / var(--slider-quantity)) * ${position - 1})`}!important;
+
+  & img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
 export default Home;

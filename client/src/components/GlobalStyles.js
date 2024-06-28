@@ -153,9 +153,10 @@ video {
 --gap-25:25px;
 
 
-/***************MISC************************/
-
-
+/***************sliderHome************************/
+--slider-quantity:10;
+--slider-height: 60px;
+--slider-width:125px;
 
 font-size:62.5%;
 }
