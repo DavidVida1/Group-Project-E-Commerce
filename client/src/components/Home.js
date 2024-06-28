@@ -93,7 +93,7 @@ const HomeContainer = styled.section`
 
   & video {
     width: 100%;
-    height: 93%;
+    height: 93.5%;
     object-fit: cover;
     -webkit-mask-image: linear-gradient(transparent 0, #000000 8%);
     mask-image: linear-gradient(transparent 0, #000000 9%);
