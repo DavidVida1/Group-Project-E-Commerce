@@ -155,8 +155,9 @@ video {
 
 /***************sliderHome************************/
 --slider-quantity:10;
---slider-height: 60px;
---slider-width:125px;
+--slider-height: 50px;
+--slider-width:130px;
+--slider-time:50s;
 
 font-size:62.5%;
 }

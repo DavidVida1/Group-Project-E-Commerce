@@ -71,14 +71,15 @@ const Home = () => {
         alt="hero-video"
         loading="lazy"
       />
-
-      <div className="slider" reverse="false">
-        <div className="list">
-          {logos.map((logo, index) => (
-            <SliderItem key={index} position={index + 1} href={logo.href}>
-              <img src={logo.src} alt="company-logo" loading="lazy" />
-            </SliderItem>
-          ))}
+      <div className="wrapperSlider">
+        <div className="slider" reverse="false">
+          <div className="list">
+            {logos.map((logo, index) => (
+              <SliderItem key={index} position={index + 1} href={logo.href}>
+                <img src={logo.src} alt="company-logo" loading="lazy" />
+              </SliderItem>
+            ))}
+          </div>
         </div>
       </div>
     </HomeContainer>
@@ -87,13 +88,16 @@ const Home = () => {
 
 const HomeContainer = styled.section`
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: var(--bg-home);
   width: 100vw;
   height: 100vh;
 
   & video {
     width: 100%;
-    height: 93.5%;
+    height: 85%;
     object-fit: cover;
     -webkit-mask-image: linear-gradient(transparent 0, #000000 8%);
     mask-image: linear-gradient(transparent 0, #000000 9%);
@@ -143,54 +147,60 @@ const HomeContainer = styled.section`
       }
     }
   }
-
-  & .slider {
+  & .wrapperSlider {
+    display: flex;
+    align-items: center;
+    height: 100%;
     width: 100%;
-    height: var(--slider-height);
     background-color: var(--bg-white);
-    overflow: hidden;
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      var(--black) 10% 90%,
-      transparent
-    );
-    & .list {
-      position: relative;
-      display: flex;
+
+    & .slider {
       width: 100%;
-      min-width: calc(var(--slider-width) * var(--slider-quantity));
-    }
+      height: var(--slider-height);
+      overflow: hidden;
+      mask-image: linear-gradient(
+        to right,
+        transparent,
+        var(--black) 10% 90%,
+        transparent
+      );
 
-    &:hover a {
-      animation-play-state: paused !important;
-      filter: grayscale(1);
-    }
+      & .list {
+        position: relative;
+        display: flex;
+        width: 100%;
+        min-width: calc(var(--slider-width) * var(--slider-quantity));
+      }
 
-    a:hover {
-      filter: grayscale(0);
-    }
-  }
-  .slider[reverse="true"] a {
-    animation: reverseRun 20s linear infinite;
-  }
+      &:hover a {
+        animation-play-state: paused !important;
+      }
 
-  @keyframes autoRun {
-    from {
-      left: calc(var(--slider-width) * -1);
+      a:hover {
+        filter: opacity(1);
+      }
     }
-    to {
-      left: 100%;
-    }
-  }
+    /*.slider[reverse="true"] a {
+      animation: reverseRun var(--slider-time) linear infinite;
+    }*/
 
-  @keyframes reverseRun {
-    from {
-      left: 100%;
+    @keyframes autoRun {
+      from {
+        left: calc(var(--slider-width) * -1);
+      }
+      to {
+        left: 100%;
+      }
     }
-    to {
-      left: calc(var(--slider-width) * -1);
-    }
+    /*
+    @keyframes reverseRun {
+      from {
+        left: 100%;
+      }
+      to {
+        left: calc(var(--slider-width) * -1);
+      }
+    }*/
   }
 `;
 
@@ -199,10 +209,13 @@ const SliderItem = styled.a`
   width: var(--slider-width);
   height: var(--slider-height);
   left: 100%;
-  animation: autoRun 20s linear infinite;
+  animation: autoRun var(--slider-time) linear infinite;
   transition: filter 0.5s;
   animation-delay: ${({ position }) =>
-    `calc((20s / var(--slider-quantity)) * ${position - 1})`}!important;
+    `calc((var(--slider-time) / var(--slider-quantity)) * ${
+      position - 1
+    })`}!important;
+  filter: opacity(0.2);
 
   & img {
     width: 100%;
