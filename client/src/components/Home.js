@@ -109,7 +109,7 @@ const HomeContainer = styled.section`
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: 150px;
+    bottom: 200px;
     left: 50px;
     z-index: 30;
     color: var(--font-white);
