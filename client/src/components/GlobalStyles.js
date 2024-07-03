@@ -114,11 +114,12 @@ video {
 
 --bg-black:rgba(31,31,31,1);
 --bg-white: #F6F6F6;
+--bg-grey:#4f4f4f;
 --bg-purple: rgba(71,63,244,1);
 --bg-header: rgba(255,255,255,1);
 --bg-card:rgba(255,255,255,1);
 --bg-search:#f1f1f14d;
---bg-home:linear-gradient(0deg, rgba(255, 255, 255, 1) 32%, rgba(0, 0, 0, 0.9) 48%);
+--bg-home:linear-gradient(0deg, #F6F6F6 32%, rgba(0, 0, 0, 0.9) 48%);
 --bg-footer-sdw:rgba(0, 0, 0, 0.45) 0px -25px 20px -20px;
 --bg-overlay:linear-gradient(to bottom, rgba(0, 204, 255, 0.1), rgba(191, 128, 64, 0.3));
 
@@ -233,8 +234,8 @@ table {
     border-spacing: 0;
 }
 
-/*subHeader*/ 
-h2 {        
+/*subHeader, findus Text*/ 
+& h2 {        
   font-size: clamp(3rem, 4.2vw, 4rem);
   font-weight: 500;
   text-shadow: 0 0 2px var(--color-black);
@@ -242,19 +243,49 @@ h2 {
 }
 
 /*footer header*/
-h3 {         
+& h3 {         
   font-family: var(--font-heading-title);
   letter-spacing: 5px;
   font-size:  var(--font-size-25);
   }
 
-.loading {  
+& .loading {  
   width: 100%;
   height: 100%;
   text-align: center;
   color: rebeccapurple;
   }
 
+& .button {
+  width: fit-content;
+  height: fit-content;
+  font-size: var(--font-size-18);
+  padding: 15px 100px;
+  border-radius: var(--radius-button);
+  background-color: var(--btn-purple);
+  border: 2px solid var(--purple);
+  box-shadow: 0 0 10px var(--font-sdw);
+  transition: background-color 0.3s linear;
+
+  &:hover {
+  border: 2px solid var(--white);
+  background-color: var(--btn-black);
+  }
+}
+
+& .logo {
+  font-family: var(--font-heading-title);
+  font-style: italic;
+  font-weight: bold;
+  font-size: var(--font-size-logo);
+  letter-spacing: 5px;
+
+  &:hover {
+  color: var(--purple);
+  filter: drop-shadow(0 0 10px var(--black));
+  text-shadow: 0 0 5px var(--font-sdw);
+  }
+}
 
 & .container {
 max-width: 1920px;
@@ -262,13 +293,12 @@ margin-left: auto;
 margin-right: auto;
 padding-left: 0.5rem;
 padding-right: 0.5rem;
-
 }
 
 /*3xl*/
 @media (max-width: 1920px) {
   .container {
-    max-width: 1800px;
+    max-width: 1700px;
   }
 }
 

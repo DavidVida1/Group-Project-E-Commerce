@@ -58,7 +58,7 @@ const Home = () => {
       <aside className="heroText">
         <div className="logo">AllStar</div>
         <h1 className="heroSubText">Stay Active, Stay Timed</h1>
-        <a href="*" className="heroButton">
+        <a href="*" className="button">
           Discover
         </a>
       </aside>
@@ -99,8 +99,8 @@ const HomeContainer = styled.section`
     width: 100%;
     height: 85%;
     object-fit: cover;
-    -webkit-mask-image: linear-gradient(transparent 0, #000000 8%);
-    mask-image: linear-gradient(transparent 0, #000000 9%);
+    -webkit-mask-image: linear-gradient(transparent 0, #000000 9%);
+    mask-image: linear-gradient(transparent 0, #000000 15%);
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 0 0 40px 40px;
@@ -130,22 +130,9 @@ const HomeContainer = styled.section`
       font-weight: var(--font-weight-500);
     }
 
-    & .heroButton {
-      width: fit-content;
-      height: fit-content;
-      margin-top: 40px;
-      font-size: var(--font-size-18);
+    & .button {
+      margin-top: 20px;
       padding: 2% 18%;
-      border-radius: var(--radius-button);
-      background-color: var(--btn-purple);
-      border: 2px solid var(--purple);
-      box-shadow: 0 0 10px var(--font-sdw);
-      transition: background-color 0.3s linear;
-
-      &:hover {
-        border: 2px solid var(--white);
-        background-color: var(--btn-black);
-      }
     }
   }
   & .wrapperSlider {

@@ -98,7 +98,7 @@ const Header = ({ setBodyLocation }) => {
 
         <div className="userOptions">
           <SearchBar />
-          <a href={"/cart"}>
+          <a href={"/cart"} className="button">
             <AiOutlineShoppingCart />
           </a>
         </div>
@@ -138,20 +138,6 @@ const HeaderContainer = styled.section`
     align-items: center;
     width: 100%;
     height: 100%;
-
-    & .logo {
-      font-family: var(--font-heading-title);
-      font-style: italic;
-      font-weight: bold;
-      font-size: var(--font-size-logo);
-      letter-spacing: 5px;
-
-      &:hover {
-        color: var(--purple);
-        filter: drop-shadow(0 0 10px var(--black));
-        text-shadow: 0 0 5px var(--font-sdw);
-      }
-    }
 
     & .nav {
       display: flex;
@@ -210,12 +196,10 @@ const HeaderContainer = styled.section`
       align-items: center;
       gap: var(--gap-15);
 
-      & a svg {
+      & .button {
         padding: 5px 30px;
-        border-radius: var(--radius-button);
-        background-color: var(--btn-purple);
-        border: 2px solid var(--purple);
-        transition: background-color 0.3s linear;
+        font-size: 2rem;
+        box-shadow: 0 0 10px var(--font-sdw);
 
         &:hover {
           color: var(--white);

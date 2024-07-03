@@ -12,9 +12,10 @@ import Profile from "./Profile";
 import Cart from "./Cart";
 import Confirmation from "./Confirmation";
 import Category from "./Category";
-import HomeRandomItem from "./FeaturedItems";
+import FeaturedItemsItem from "./FeaturedItems";
 import ItemDisplay from "./ItemDisplay";
 import CategoryBento from "./CategoryBento";
+import FindUs from "./FindUs";
 
 function App() {
   const userId = "JimmyBuyMore@realcustomer.ca";
@@ -55,7 +56,8 @@ function App() {
               <>
                 <Home /> <ItemDisplay />
                 <CategoryBento />
-                <HomeRandomItem />
+                <FeaturedItemsItem />
+                <FindUs />
               </>
             }
           />

@@ -88,8 +88,12 @@ const ItemDisplay = () => {
                     <div className="new">New</div>
                     <div className="displayWatchName">{item.name}</div>
                     <div className="displayWatchOptions">
-                      <a href={`/item/${item._id}`}>Buy now</a>
-                      <a href="/category/Entertainment">Explore More</a>
+                      <a href={`/item/${item._id}`} className="button">
+                        Buy now
+                      </a>
+                      <a href="/category/Entertainment" className="button">
+                        Explore More
+                      </a>
                     </div>
                   </div>
                   <img
@@ -120,7 +124,7 @@ const ItemDisplayContainer = styled.section`
 
   & .swiper {
     height: 100%;
-    width: 95%;
+    width: 100%;
     border-radius: var(--radius-display);
     box-shadow: var(--sdw-black-card);
 
@@ -167,31 +171,19 @@ const ItemDisplayContainer = styled.section`
         & .displayWatchOptions {
           display: flex;
           flex-direction: row;
-          margin-top: 40px;
+          margin-top: 20px;
           font-size: clamp(1.8rem, 3.5vw, 1.8rem);
           gap: var(--gap-15);
 
           & :first-child {
-            background-color: var(--btn-purple);
             padding: 15px 25px;
-            border-radius: var(--radius-button);
-            box-shadow: 0 0 10px var(--font-sdw);
-            border: 2px solid var(--btn-purple);
-            transition: background-color 0.3s linear;
-
-            &:hover {
-              background-color: var(--btn-black);
-              border: 2px solid var(--btn-white);
-            }
           }
           & :nth-child(2) {
             color: var(--btn-black);
             background-color: var(--btn-white);
             padding: 15px 25px;
-            border-radius: var(--radius-button);
             border: 2px solid var(--btn-white);
             box-shadow: 0 0 10px var(--font-sdw);
-            transition: background-color 0.3s linear;
 
             &:hover {
               color: var(--btn-white);
