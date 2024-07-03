@@ -3,10 +3,12 @@ import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import { NavLink } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
 const Header = ({ setBodyLocation }) => {
   const [itemsCategory, setItemsCategory] = useState(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const dropdownRef = useRef(null);
   const bgRef = useRef(null);
   const timeoutRef = useRef(null);
@@ -26,23 +28,40 @@ const Header = ({ setBodyLocation }) => {
       .catch((error) => {
         window.alert(error);
       });
+
+    /*BURGER BREAKPOINT*/
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      if (window.innerWidth > 768) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
+  /*HEADER HOVER EFECT*/
   const handleMouseEnterNav = () => {
+    if (isMobile) return;
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-
     bgRef.current.classList.add("showBg");
   };
 
   const handleMouseLeaveNav = () => {
+    if (isMobile) return;
     timeoutRef.current = setTimeout(() => {
       bgRef.current.classList.remove("showBg");
     }, 500);
   };
 
   const handleMouseEnterCollections = () => {
+    if (isMobile) return;
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -50,14 +69,22 @@ const Header = ({ setBodyLocation }) => {
   };
 
   const handleMouseLeaveCollections = () => {
+    if (isMobile) return;
     timeoutRef.current = setTimeout(() => {
       dropdownRef.current.classList.remove("show");
     }, 300);
   };
 
+  /*OPENING SIDEBAR*/
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+    bgRef.current.classList.add("showBg");
+  };
+
   return (
     <HeaderContainer
       ref={bgRef}
+      className={isSidebarOpen ? "showBg" : ""}
       onMouseEnter={handleMouseEnterNav}
       onMouseLeave={handleMouseLeaveNav}
     >
@@ -66,35 +93,37 @@ const Header = ({ setBodyLocation }) => {
           AllStar
         </a>
 
-        <div className="nav">
-          <div>Home</div>
-          <div
-            className="dropdown"
-            onMouseEnter={handleMouseEnterCollections}
-            onMouseLeave={handleMouseLeaveCollections}
-          >
-            <div className="dropbtn">Collections</div>
-            <div className="dropdown-content" ref={dropdownRef}>
-              <div className="categoryTitle">Watches</div>
-              {itemsCategory ? (
-                itemsCategory.map((category) => {
-                  return (
-                    <NavLink
-                      key={category}
-                      to={`/category/${category}`}
-                      onClick={() => setBodyLocation(null)}
-                    >
-                      {category}
-                    </NavLink>
-                  );
-                })
-              ) : (
-                <h1>Loading categories...</h1>
-              )}
+        {!isMobile && (
+          <div className="nav">
+            <div>Home</div>
+            <div
+              className="dropdown"
+              onMouseEnter={handleMouseEnterCollections}
+              onMouseLeave={handleMouseLeaveCollections}
+            >
+              <div className="dropbtn">Collections</div>
+              <div className="dropdown-content" ref={dropdownRef}>
+                <div className="categoryTitle">Watches</div>
+                {itemsCategory ? (
+                  itemsCategory.map((category) => {
+                    return (
+                      <NavLink
+                        key={category}
+                        to={`/category/${category}`}
+                        onClick={() => setBodyLocation(null)}
+                      >
+                        {category}
+                      </NavLink>
+                    );
+                  })
+                ) : (
+                  <h1>Loading categories...</h1>
+                )}
+              </div>
             </div>
+            <div>About</div>
           </div>
-          <div>About</div>
-        </div>
+        )}
 
         <div className="userOptions">
           <SearchBar />
@@ -102,7 +131,31 @@ const Header = ({ setBodyLocation }) => {
             <AiOutlineShoppingCart />
           </a>
         </div>
+
+        {isMobile && (
+          <div className="burgerMenu" onClick={toggleSidebar}>
+            {isSidebarOpen ? (
+              <>
+                <AiOutlineClose />
+                <p>Close</p>
+              </>
+            ) : (
+              <>
+                <AiOutlineMenu />
+                <p>Menu</p>
+              </>
+            )}
+          </div>
+        )}
       </div>
+
+      {isSidebarOpen && (
+        <Sidebar>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/collections">Collections</NavLink>
+          <NavLink to="/about">About</NavLink>
+        </Sidebar>
+      )}
     </HeaderContainer>
   );
 };
@@ -121,7 +174,7 @@ const HeaderContainer = styled.section`
   font-size: var(--font-size-25);
   transition-property: background-color;
   transition-duration: 0.3s;
-  /*border-radius: 15px 15px 0px 0px;*/
+
   &.showBg {
     background-color: var(--bg-header);
     color: var(--font-black);
@@ -207,6 +260,55 @@ const HeaderContainer = styled.section`
           background-color: var(--btn-black);
         }
       }
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    & .burgerMenu {
+      display: none;
+      cursor: pointer;
+      font-size: 2rem;
+      color: var(--font-purple);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      @media screen and (max-width: 768px) {
+        display: flex;
+      }
+
+      & p {
+        margin: 5px 0;
+        font-size: 0.8rem;
+        color: var(--font-purple);
+      }
+    }
+  }
+`;
+
+const Sidebar = styled.div`
+  position: fixed;
+  width: 250px;
+  top: 72px; /* Place it directly under the header */
+  right: 0;
+  height: calc(100dvh - 72px);
+  background-color: var(--bg-black);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+
+  & a {
+    margin: 10px 0;
+    font-size: 1.5rem;
+    color: var(--font-white);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--font-purple);
     }
   }
 `;

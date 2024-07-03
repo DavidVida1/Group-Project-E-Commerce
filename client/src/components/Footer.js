@@ -302,7 +302,7 @@ const FooterTop = styled.div`
     width: 100%;
     height: 100%;
     color: var(--font-white);
-    gap: var(--gap-25);
+    gap: var(--gap-10);
 
     & .logo {
       &:hover {

@@ -99,8 +99,8 @@ const HomeContainer = styled.section`
     width: 100%;
     height: 85%;
     object-fit: cover;
-    -webkit-mask-image: linear-gradient(transparent 0, #000000 9%);
-    mask-image: linear-gradient(transparent 0, #000000 15%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000000 9%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000000 9%);
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 0 0 40px 40px;
