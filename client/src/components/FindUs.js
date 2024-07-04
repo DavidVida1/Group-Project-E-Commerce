@@ -33,7 +33,7 @@ const FindUs = () => {
 const FindUsContainer = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 500px;
+  grid-template-rows: 450px;
   height: 100%;
 
   & .image-wrapper {

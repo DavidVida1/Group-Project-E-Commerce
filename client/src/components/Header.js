@@ -154,6 +154,9 @@ const Header = ({ setBodyLocation }) => {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/collections">Collections</NavLink>
           <NavLink to="/about">About</NavLink>
+          <NavLink to="/cart">Cart</NavLink>
+
+          <SearchBar />
         </Sidebar>
       )}
     </HeaderContainer>

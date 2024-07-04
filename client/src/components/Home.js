@@ -92,18 +92,18 @@ const HomeContainer = styled.section`
   flex-direction: column;
   align-items: center;
   background: var(--bg-home);
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 
   & video {
     width: 100%;
-    height: 85%;
+    height: 850px;
     object-fit: cover;
     -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000000 9%);
     mask-image: linear-gradient(180deg, transparent 0%, #000000 9%);
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 0 0 40px 40px;
+    border-radius: 0 0 var(--radius-video) var(--radius-video);
   }
 
   & .heroText {

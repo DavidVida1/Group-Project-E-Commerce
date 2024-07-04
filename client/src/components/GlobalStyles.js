@@ -133,8 +133,10 @@ video {
 
 /***************Border-radius***************/
 --radius-card:15px;
+--radius-video:20px;
 --radius-button:40px;
 --radius-display:40px;
+
 /***************Font************************/
 --font-heading-title:"Teko","sans-serif";
 --font-text:"DM Sans", "sans-serif";
