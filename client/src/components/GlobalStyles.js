@@ -113,7 +113,7 @@ video {
 --font-sdw: rgba(0,0,0,1);
 
 --bg-black:rgba(31,31,31,1);
---bg-white: #F6F6F6;
+--bg-white: rgba(246, 246, 246);
 --bg-grey:#4f4f4f;
 --bg-purple: rgba(71,63,244,1);
 --bg-header: rgba(255,255,255,1);
@@ -141,28 +141,30 @@ video {
 --font-heading-title:"Teko","sans-serif";
 --font-text:"DM Sans", "sans-serif";
 --font-weight-500:500;
-/*price,terms*/
+/*price,terms, right header*/
 --font-size-15:1.5rem;
-/*text, heroButton*/ 
+/*text, heroButton, category header*/ 
 --font-size-18:1.8rem;
 /*media,headerText*/
 --font-size-25:2.5rem;
+/*header Icone*/ 
+--font-size-30:3rem;
 /*categoryText,subHeader*/ 
 --font-size-40:4rem;
 /*logo*/ 
 --font-size-logo:4.5rem;
 /***************Gap************************/
---gap-15:10px;
+--gap-10:10px;
 --gap-15:15px;
 --gap-25:25px;
-
-
 /***************sliderHome************************/
 --slider-quantity:10;
 --slider-height: 50px;
 --slider-width:130px;
 --slider-time:50s;
-
+/***************Header************************/
+--header-height:50px;
+--promotion-height:45px;
 font-size:62.5%;
 }
 
@@ -283,11 +285,11 @@ table {
   font-size: var(--font-size-logo);
   letter-spacing: 5px;
 
-  &:hover {
+  /*&:hover {
   color: var(--purple);
   filter: drop-shadow(0 0 10px var(--black));
   text-shadow: 0 0 5px var(--font-sdw);
-  }
+  }*/
 }
 
 & .container {
@@ -298,11 +300,16 @@ padding-left: 0.5rem;
 padding-right: 0.5rem;
 }
 
+.headerContainer {
+    max-width: 97%;
+  }
+
 /*3xl*/
 @media (max-width: 1920px) {
   .container {
     max-width: 1700px;
   }
+
 }
 
 @media (max-width: 1800px) {

@@ -97,20 +97,19 @@ const HomeContainer = styled.section`
 
   & video {
     width: 100%;
-    height: 850px;
+    height: 100dvh;
     object-fit: cover;
     -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000000 9%);
     mask-image: linear-gradient(180deg, transparent 0%, #000000 9%);
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 0 0 var(--radius-video) var(--radius-video);
   }
 
   & .heroText {
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: 22%;
+    bottom: 12%;
     left: 50px;
     z-index: 30;
     color: var(--font-white);
@@ -138,8 +137,10 @@ const HomeContainer = styled.section`
   & .wrapperSlider {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 100%;
     width: 100%;
+    padding-top: 10px;
     background-color: var(--bg-white);
 
     & .slider {

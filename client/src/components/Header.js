@@ -4,6 +4,9 @@ import SearchBar from "./SearchBar";
 import { NavLink } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { GiWatch } from "react-icons/gi";
+import { CiLocationOn } from "react-icons/ci";
+import { FaDev } from "react-icons/fa";
 
 const Header = ({ setBodyLocation }) => {
   const [itemsCategory, setItemsCategory] = useState(null);
@@ -88,63 +91,95 @@ const Header = ({ setBodyLocation }) => {
       onMouseEnter={handleMouseEnterNav}
       onMouseLeave={handleMouseLeaveNav}
     >
-      <div className="headerWrapper container">
-        <a className="logo" href={"/"}>
-          AllStar
-        </a>
+      <div className="promotion">
+        <p className="">
+          DISCOVER THE T-TOUCH CONNECT SPORT COLLECTION <span>HERE</span>
+        </p>
+      </div>
 
-        {!isMobile && (
-          <div className="nav">
-            <div>Home</div>
-            <div
-              className="dropdown"
-              onMouseEnter={handleMouseEnterCollections}
-              onMouseLeave={handleMouseLeaveCollections}
-            >
-              <div className="dropbtn">Collections</div>
-              <div className="dropdown-content" ref={dropdownRef}>
-                <div className="categoryTitle">Watches</div>
-                {itemsCategory ? (
-                  itemsCategory.map((category) => {
-                    return (
-                      <NavLink
-                        key={category}
-                        to={`/category/${category}`}
-                        onClick={() => setBodyLocation(null)}
-                      >
-                        {category}
-                      </NavLink>
-                    );
-                  })
-                ) : (
-                  <h1>Loading categories...</h1>
-                )}
-              </div>
-            </div>
-            <div>About</div>
-          </div>
-        )}
-
-        <div className="userOptions">
-          <SearchBar />
-          <a href={"/cart"} className="button">
-            <AiOutlineShoppingCart />
+      <div className="headerTop headerContainer">
+        <div className="leftHeader">
+          <a href={"https://github.com/DavidVida1"}>
+            <FaDev />
           </a>
         </div>
+        <div className="middleHeader">
+          <a className="logo" href={"/"}>
+            AllStar
+          </a>
+        </div>
+        <nav className="rightMenu">
+          <ul>
+            <li>
+              <a>
+                <GiWatch />
+                <p>Collection</p>
+              </a>
+            </li>
+            <li>
+              <a>
+                <CiLocationOn />
+                <p>Location</p>
+              </a>
+            </li>
+            <li>
+              <a>
+                <SearchBar />
+                <p>Search</p>
+              </a>
+            </li>
+            <li>
+              <a href={"/cart"}>
+                <AiOutlineShoppingCart />
+                <p>Cart</p>
+              </a>
+            </li>
+          </ul>
 
-        {isMobile && (
-          <div className="burgerMenu" onClick={toggleSidebar}>
-            {isSidebarOpen ? (
-              <>
-                <AiOutlineClose />
-                <p>Close</p>
-              </>
-            ) : (
-              <>
-                <AiOutlineMenu />
-                <p>Menu</p>
-              </>
-            )}
+          {isMobile && (
+            <div className="burgerMenu" onClick={toggleSidebar}>
+              {isSidebarOpen ? (
+                <div className="burgerButton">
+                  <AiOutlineClose />
+                  <p>Close</p>
+                </div>
+              ) : (
+                <div className="burgerButton">
+                  <AiOutlineMenu />
+                  <p>Menu</p>
+                </div>
+              )}
+            </div>
+          )}
+        </nav>
+      </div>
+
+      <div className="bottomHeader">
+        {!isMobile && (
+          <div
+            className="dropdown"
+            onMouseEnter={handleMouseEnterCollections}
+            onMouseLeave={handleMouseLeaveCollections}
+          >
+            <div className="dropbtn">Collection</div>
+            <div className="dropdown-content" ref={dropdownRef}>
+              <div className="categoryTitle">Watches</div>
+              {itemsCategory ? (
+                itemsCategory.map((category) => {
+                  return (
+                    <NavLink
+                      key={category}
+                      to={`/category/${category}`}
+                      onClick={() => setBodyLocation(null)}
+                    >
+                      {category}
+                    </NavLink>
+                  );
+                })
+              ) : (
+                <h1>Loading categories...</h1>
+              )}
+            </div>
           </div>
         )}
       </div>
@@ -166,10 +201,10 @@ const Header = ({ setBodyLocation }) => {
 const HeaderContainer = styled.section`
   position: absolute;
   display: flex;
+  flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 72px;
-  top: 36px;
+  top: var(--promotion-height);
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
@@ -177,6 +212,26 @@ const HeaderContainer = styled.section`
   font-size: var(--font-size-25);
   transition-property: background-color;
   transition-duration: 0.3s;
+
+  & .promotion {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: var(--promotion-height);
+    margin-top: 30px;
+    width: 100%;
+    background-color: var(--bg-purple);
+
+    & p {
+      font-size: 1.5rem;
+      color: var(--font-white);
+      & span {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
 
   &.showBg {
     background-color: var(--bg-header);
@@ -188,103 +243,159 @@ const HeaderContainer = styled.section`
     }
   }
 
-  & .headerWrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  & .headerTop {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    height: var(--header-height);
+    padding-top: 5px;
     width: 100%;
-    height: 100%;
 
-    & .nav {
+    & .leftHeader {
+      display: flex;
+      align-items: center;
+      justify-self: start;
+      font-size: var(--font-size-30);
+
+      &:hover {
+        color: var(--font-purple);
+      }
+    }
+
+    & .middleHeader {
+      justify-self: center;
+    }
+
+    & .rightMenu {
       display: flex;
       flex-direction: row;
-      gap: var(--gap-15);
+      justify-self: end;
 
-      & .dropdown {
-        & .dropbtn {
-          border: none;
-          cursor: pointer;
+      & ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        font-size: var(--font-size-30);
+
+        @media screen and (max-width: 768px) {
+          display: none;
         }
 
-        & .dropdown-content {
-          position: absolute;
-          left: 0;
-          background-color: var(--bg-header);
-          width: 100%;
-          height: 0%;
-          top: 72px;
-          z-index: 1;
-          -webkit-transition: height 0.3s ease-in-out;
-          transition: height 0.3s ease-in-out;
-          overflow: hidden;
-          border-radius: 0px 0px 15px 15px;
-
-          & .categoryTitle {
-            padding: 10px 0px 0px 16px;
-            font-size: 2rem;
-            font-family: var(--font-heading-title);
-            color: var(--font-purple);
-            box-shadow: none;
-          }
-
+        & li {
           & a {
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            color: var(--font-black);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            text-transform: uppercase;
+
+            & svg {
+              margin-bottom: 5px;
+            }
 
             &:hover {
-              background-color: green;
-              box-shadow: none;
+              color: var(--font-purple);
+
+              & p {
+                visibility: visible;
+              }
+            }
+
+            & p {
+              visibility: hidden;
+              font-size: var(--font-size-15);
+              font-weight: var(--font-weight-500);
             }
           }
-
-          &.show {
-            height: 400px;
-          }
         }
       }
-    }
 
-    & .userOptions {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: var(--gap-15);
-
-      & .button {
-        padding: 5px 30px;
-        font-size: 2rem;
-        box-shadow: 0 0 10px var(--font-sdw);
+      & .burgerMenu .burgerButton {
+        display: none;
+        font-size: var(--font-size-30);
+        cursor: pointer;
+        color: var(--font-white);
 
         &:hover {
-          color: var(--white);
-          border: 2px solid var(--btn-white);
-          background-color: var(--btn-black);
+          color: var(--font-purple);
+        }
+
+        @media screen and (max-width: 768px) {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          justify-self: end;
+          align-items: center;
+        }
+
+        & svg {
+          margin-bottom: 5px;
+        }
+
+        & p {
+          font-size: var(--font-size-15);
+          font-weight: var(--font-weight-500);
         }
       }
-      @media screen and (max-width: 768px) {
-        display: none;
-      }
     }
+  }
 
-    & .burgerMenu {
-      display: none;
-      cursor: pointer;
-      font-size: 2rem;
-      color: var(--font-purple);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+  & .bottomHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    height: 100%;
+    width: 100%;
 
-      @media screen and (max-width: 768px) {
-        display: flex;
+    & .dropdown {
+      & .dropbtn {
+        padding-top: 10px;
+        border: none;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-size: var(--font-size-18);
+        font-weight: 500;
       }
 
-      & p {
-        margin: 5px 0;
-        font-size: 0.8rem;
-        color: var(--font-purple);
+      & .dropdown-content {
+        position: absolute;
+        left: 0;
+        background-color: var(--bg-header);
+        width: 100%;
+        height: 0%;
+        top: calc(var(--header-height)+var(--promotion-height));
+        z-index: 1;
+        -webkit-transition: height 0.3s ease-in-out;
+        transition: height 0.3s ease-in-out;
+        overflow: hidden;
+        border-radius: 0px 0px 15px 15px;
+
+        & .categoryTitle {
+          padding: 10px 0px 0px 16px;
+          font-size: var(--font-size-25);
+          font-family: var(--font-heading-title);
+          color: var(--font-purple);
+          box-shadow: none;
+        }
+
+        & a {
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          color: var(--font-black);
+
+          &:hover {
+            background-color: green;
+            box-shadow: none;
+          }
+        }
+
+        &.show {
+          height: 400px;
+        }
       }
     }
   }
@@ -293,7 +404,9 @@ const HeaderContainer = styled.section`
 const Sidebar = styled.div`
   position: fixed;
   width: 250px;
-  top: 72px; /* Place it directly under the header */
+  top: calc(
+    var(--header-height) + var(--promotion-height)
+  ); /* Place it directly under the header */
   right: 0;
   height: calc(100dvh - 72px);
   background-color: var(--bg-black);
@@ -302,7 +415,6 @@ const Sidebar = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
 
   & a {
     margin: 10px 0;

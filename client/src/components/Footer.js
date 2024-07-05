@@ -327,16 +327,17 @@ const FooterTop = styled.div`
       & input {
         height: 50px;
         width: 30%;
-        border-radius: var(--radius-card);
+        border-radius: var(--radius-button);
         border: none;
         padding: 5px 15px;
         &::placeholder {
           text-transform: uppercase;
           font-weight: 700;
         }
+        box-shadow: 0 0 10px var(--font-sdw);
       }
       & .button {
-        padding: 20px 50px;
+        padding: 17px 50px;
         color: var(--font-white);
       }
     }
