@@ -39,10 +39,10 @@ const Sidebar = ({ itemsCategory }) => {
 const SidebarContainer = styled.div`
   position: fixed;
   width: 100%;
-  top: calc(var(--header-height) + var(--promotion-height) + 5px);
-  height: 100dvh;
+  top: calc(var(--promotion-height) +5px);
+  height: 100%;
   background-color: var(--bg-header);
-  z-index: 200;
+  z-index: 100;
   display: flex;
   flex-direction: column;
   align-items: left;

@@ -163,7 +163,6 @@ video {
 --slider-width:130px;
 --slider-time:50s;
 /***************Header************************/
---header-height:50px;
 --promotion-height:45px;
 font-size:62.5%;
 }
