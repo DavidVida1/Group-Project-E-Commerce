@@ -360,5 +360,6 @@ padding-right: 0.5rem;
   }
 }
 
+/*only screen and (min-width:426px) and (max-width:896px) and (orientation:landscape)*/
 `;
 export default GlobalStyles;

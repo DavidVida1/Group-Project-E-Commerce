@@ -7,11 +7,12 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { GiWatch } from "react-icons/gi";
 import { CiLocationOn } from "react-icons/ci";
 import { FaDev } from "react-icons/fa";
+import Sidebar from "./Sidebar";
 
 const Header = ({ setBodyLocation }) => {
   const [itemsCategory, setItemsCategory] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1280);
   const dropdownRef = useRef(null);
   const bgRef = useRef(null);
   const timeoutRef = useRef(null);
@@ -34,8 +35,8 @@ const Header = ({ setBodyLocation }) => {
 
     /*BURGER BREAKPOINT*/
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-      if (window.innerWidth > 768) {
+      setIsMobile(window.innerWidth <= 1280);
+      if (window.innerWidth > 1280) {
         setIsSidebarOpen(false);
       }
     };
@@ -139,12 +140,12 @@ const Header = ({ setBodyLocation }) => {
           {isMobile && (
             <div className="burgerMenu" onClick={toggleSidebar}>
               {isSidebarOpen ? (
-                <div className="burgerButton">
+                <div className="closeButton">
                   <AiOutlineClose />
                   <p>Close</p>
                 </div>
               ) : (
-                <div className="burgerButton">
+                <div className="menuButton">
                   <AiOutlineMenu />
                   <p>Menu</p>
                 </div>
@@ -184,16 +185,7 @@ const Header = ({ setBodyLocation }) => {
         )}
       </div>
 
-      {isSidebarOpen && (
-        <Sidebar>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/collections">Collections</NavLink>
-          <NavLink to="/about">About</NavLink>
-          <NavLink to="/cart">Cart</NavLink>
-
-          <SearchBar />
-        </Sidebar>
-      )}
+      {isSidebarOpen && <Sidebar itemsCategory={itemsCategory} />}
     </HeaderContainer>
   );
 };
@@ -204,7 +196,7 @@ const HeaderContainer = styled.section`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  top: var(--promotion-height);
+  top: calc(var(--promotion-height) + 15px);
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
@@ -219,12 +211,11 @@ const HeaderContainer = styled.section`
     justify-content: center;
     align-items: center;
     height: var(--promotion-height);
-    margin-top: 30px;
     width: 100%;
     background-color: var(--bg-purple);
 
     & p {
-      font-size: 1.5rem;
+      font-size: var(--font-size-15);
       color: var(--font-white);
       & span {
         cursor: pointer;
@@ -256,7 +247,7 @@ const HeaderContainer = styled.section`
       align-items: center;
       justify-self: start;
       font-size: var(--font-size-30);
-
+      transition: color 0.2s ease-in;
       &:hover {
         color: var(--font-purple);
       }
@@ -277,7 +268,7 @@ const HeaderContainer = styled.section`
         grid-template-rows: 1fr;
         font-size: var(--font-size-30);
 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 1280px) {
           display: none;
         }
 
@@ -289,6 +280,7 @@ const HeaderContainer = styled.section`
             align-items: center;
             cursor: pointer;
             text-transform: uppercase;
+            transition: color 0.2s ease-in;
 
             & svg {
               margin-bottom: 5px;
@@ -311,31 +303,46 @@ const HeaderContainer = styled.section`
         }
       }
 
-      & .burgerMenu .burgerButton {
+      & .burgerMenu {
         display: none;
         font-size: var(--font-size-30);
+        font-weight: var(--font-weight-500);
         cursor: pointer;
-        color: var(--font-white);
 
-        &:hover {
-          color: var(--font-purple);
-        }
-
-        @media screen and (max-width: 768px) {
+        & .menuButton,
+        & .closeButton {
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          justify-self: end;
           align-items: center;
+          gap: 5px;
+          transition: color 0.2s ease-in;
         }
 
-        & svg {
-          margin-bottom: 5px;
+        & .menuButton {
+          color: var(--font-white);
+          &:hover {
+            color: var(--font-purple);
+          }
+        }
+
+        & .closeButton {
+          color: var(--font-black);
+          &:hover {
+            color: var(--font-purple);
+          }
         }
 
         & p {
           font-size: var(--font-size-15);
           font-weight: var(--font-weight-500);
+        }
+
+        @media screen and (max-width: 1280px) {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          justify-self: end;
+          align-items: center;
         }
       }
     }
@@ -397,33 +404,6 @@ const HeaderContainer = styled.section`
           height: 400px;
         }
       }
-    }
-  }
-`;
-
-const Sidebar = styled.div`
-  position: fixed;
-  width: 250px;
-  top: calc(
-    var(--header-height) + var(--promotion-height)
-  ); /* Place it directly under the header */
-  right: 0;
-  height: calc(100dvh - 72px);
-  background-color: var(--bg-black);
-  z-index: 200;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-
-  & a {
-    margin: 10px 0;
-    font-size: 1.5rem;
-    color: var(--font-white);
-    text-decoration: none;
-
-    &:hover {
-      color: var(--font-purple);
     }
   }
 `;
