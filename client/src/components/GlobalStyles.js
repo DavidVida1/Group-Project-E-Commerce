@@ -145,7 +145,7 @@ video {
 --font-size-15:1.5rem;
 /*text, heroButton, category header*/ 
 --font-size-18:1.8rem;
-/*media,headerText*/
+/*media,headerText, sidebarText*/
 --font-size-25:2.5rem;
 /*header Icone*/ 
 --font-size-30:3rem;

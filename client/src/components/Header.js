@@ -167,7 +167,11 @@ const Header = ({ setBodyLocation }) => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
     setIsPromotionVisible(isSidebarOpen);
-    bgRef.current.classList.add("showBg");
+    if (isSidebarOpen) {
+      bgRef.current.classList.add("showBg");
+    } else {
+      bgRef.current.classList.remove("showBg");
+    }
   };
 
   return (
@@ -252,7 +256,7 @@ const Header = ({ setBodyLocation }) => {
             >
               <div className="dropbtn">Collection</div>
               <div className="dropdown-content" ref={dropdownRef}>
-                <div className="categoryTitle">Watches</div>
+                <div className="categoryTitle">categories</div>
                 {itemsCategory ? (
                   itemsCategory.map((category) => {
                     return (
@@ -273,7 +277,11 @@ const Header = ({ setBodyLocation }) => {
           )}
         </div>
       </div>
-      {isSidebarOpen && <Sidebar itemsCategory={itemsCategory} />}
+      <SidebarContainer
+        className={isSidebarOpen ? "sidebarOpen" : "sidebarClosed"}
+      >
+        {isSidebarOpen && <Sidebar itemsCategory={itemsCategory} />}
+      </SidebarContainer>
     </HeaderContainer>
   );
 };
@@ -322,7 +330,7 @@ const HeaderContainer = styled.section`
       color: var(--font-black);
 
       & .rightMenu .burgerMenu .menuButton {
-        color: black;
+        color: var(--font-black) !important;
       }
 
       & section input {
@@ -332,12 +340,22 @@ const HeaderContainer = styled.section`
       }
     }
 
+    & .sidebarOpen {
+      right: 0;
+      transition: right 0.3s ease-in-out;
+    }
+
+    & .sidebarClosed {
+      right: -100%;
+      transition: right 0.3s ease-in-out;
+    }
+
     & .headerTop {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       grid-template-rows: 1fr;
       height: var(--header-height);
-      padding-top: 5px;
+      padding-top: 10px;
       width: 100%;
 
       & .leftHeader {
@@ -453,6 +471,7 @@ const HeaderContainer = styled.section`
       justify-content: center;
       align-items: center;
       justify-self: center;
+      padding-bottom: 10px;
       height: 100%;
       width: 100%;
       z-index: 100;
@@ -460,6 +479,7 @@ const HeaderContainer = styled.section`
       & .dropdown {
         & .dropbtn {
           position: relative;
+          display: block;
           height: 100%;
           padding-top: 10px;
           border: none;
@@ -467,6 +487,26 @@ const HeaderContainer = styled.section`
           text-transform: uppercase;
           font-size: var(--font-size-18);
           font-weight: 500;
+          padding: 0.2em 0;
+          overflow: hidden;
+
+          &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0.1em;
+            background-color: var(--bg-purple);
+            opacity: 1;
+            transform: translate3d(-100%, 0, 0);
+            transition: opacity 300ms, transform 300ms;
+          }
+
+          &:hover::after,
+          &:focus::after {
+            transform: translate3d(0, 0, 0);
+          }
         }
 
         & .dropdown-content {
@@ -508,6 +548,25 @@ const HeaderContainer = styled.section`
         }
       }
     }
+  }
+`;
+
+const SidebarContainer = styled.div`
+  position: fixed;
+  width: 100%;
+  right: -100%; // Start off-screen to the right
+  width: 100%;
+  top: calc(var(--promotion-height) +5px);
+  height: 100%;
+  background-color: var(--bg-header);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  transition: right 0.3s ease-in-out; // Transition for sliding effect
+
+  &.sidebarOpen {
+    right: 0; // Moves sidebar into view
   }
 `;
 

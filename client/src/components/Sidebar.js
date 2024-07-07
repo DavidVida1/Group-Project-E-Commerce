@@ -13,71 +13,86 @@ const Sidebar = ({ itemsCategory }) => {
   };
 
   return (
-    <SidebarContainer>
-      <div className="sidebarWrapper">
-        <div className="collectionsDropdown" onClick={toggleDropdown}>
-          <p>Collections</p>
-          <RiArrowDropDownLine />
-        </div>
-        {isDropdownOpen && (
-          <Dropdown>
-            {itemsCategory.map((category) => (
-              <DropdownItem key={category} to={`/category/${category}`}>
-                {category}
-              </DropdownItem>
-            ))}
-          </Dropdown>
-        )}
-        <NavLink to="/location">Location</NavLink>
-        <NavLink to="/cart">Cart</NavLink>
-        <SearchBar />
+    <SidebarWrapper>
+      <div className="buttonDropdown" onClick={toggleDropdown}>
+        <p>Collections</p>
+        <RiArrowDropDownLine />
       </div>
-    </SidebarContainer>
+
+      {isDropdownOpen && (
+        <div className="dropdown">
+          <div className="categoryTitle">Categories</div>
+          {itemsCategory.map((category) => (
+            <DropdownItem key={category} to={`/category/${category}`}>
+              {category}
+            </DropdownItem>
+          ))}
+        </div>
+      )}
+      <NavLink to="/location">Location</NavLink>
+      <NavLink to="/cart">Cart</NavLink>
+      <SearchBar />
+    </SidebarWrapper>
   );
 };
 
-const SidebarContainer = styled.div`
-  position: fixed;
-  width: 100%;
-  top: calc(var(--promotion-height) +5px);
-  height: 100%;
-  background-color: var(--bg-header);
-  z-index: 100;
+const SidebarWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: left;
-  border-top: 1px solid var(--bg-grey);
+  padding: 20px;
+  margin: 10px 0;
+  gap: 20px;
+  font-size: var(--font-size-25);
+  font-weight: var(--font-weight-500);
+  color: var(--font-black);
+  text-decoration: none;
+  text-transform: uppercase;
 
-  .sidebarWrapper {
-    width: 98%;
-    & a {
-      margin: 10px 0;
-      font-size: var(--font-size-30);
-      font-weight: var(--font-weight-500);
-      color: var(--font-black);
-      text-decoration: none;
+  & :hover&:not(.categoryTitle) {
+    color: var(--font-purple);
+  }
 
-      &:hover {
-        color: var(--font-purple);
-      }
+  & .buttonDropdown {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0.1em;
+      background-color: var(--bg-purple);
+      opacity: 1;
+      transform: translate3d(-110%, 0, 0);
+      transition: opacity 300ms, transform 300ms;
     }
 
-    .collectionsDropdown {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+    &:hover::after,
+    &:focus::after {
+      transform: translate3d(0, 0, 0);
+    }
+    & svg {
+      font-size: 4rem;
+    }
+  }
+  & .dropdown {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px; /* To indent the dropdown items */
+
+    & .categoryTitle {
+      color: var(--font-purple);
     }
   }
 `;
 
-const Dropdown = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px; /* To indent the dropdown items */
-`;
-
 const DropdownItem = styled(NavLink)`
-  margin: 5px 0;
+  margin: 15px 0;
   font-size: var(--font-size-20);
   color: var(--font-black);
   text-decoration: none;
