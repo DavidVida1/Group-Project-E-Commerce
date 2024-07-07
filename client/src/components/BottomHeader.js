@@ -74,6 +74,7 @@ const BottomHeaderWrapper = styled.section`
   height: 100%;
   width: 100%;
   z-index: 100;
+  text-transform: uppercase;
 
   & .dropdown {
     & .dropbtn {
@@ -151,7 +152,7 @@ const BottomHeaderWrapper = styled.section`
         color: var(--font-black);
 
         &:hover {
-          background-color: green;
+          color: var(--font-purple);
           box-shadow: none;
         }
       }
