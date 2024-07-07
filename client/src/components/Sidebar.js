@@ -2,8 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import { NavLink } from "react-router-dom";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { RiArrowDropUpLine } from "react-icons/ri";
+import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 
 const Sidebar = ({ itemsCategory }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -16,7 +15,7 @@ const Sidebar = ({ itemsCategory }) => {
     <SidebarWrapper>
       <div className="buttonDropdown" onClick={toggleDropdown}>
         <p>Collections</p>
-        <RiArrowDropDownLine />
+        {isDropdownOpen ? <RiArrowDropUpLine /> : <RiArrowDropDownLine />}
       </div>
 
       {isDropdownOpen && (
@@ -48,16 +47,18 @@ const SidebarWrapper = styled.div`
   text-decoration: none;
   text-transform: uppercase;
 
-  & :hover&:not(.categoryTitle) {
+  & :hover:not(.categoryTitle) {
     color: var(--font-purple);
   }
 
-  & .buttonDropdown {
+  .buttonDropdown {
     position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+    overflow: hidden;
 
     &::after {
       content: "";
@@ -68,7 +69,7 @@ const SidebarWrapper = styled.div`
       height: 0.1em;
       background-color: var(--bg-purple);
       opacity: 1;
-      transform: translate3d(-110%, 0, 0);
+      transform: translate3d(-100%, 0, 0);
       transition: opacity 300ms, transform 300ms;
     }
 
@@ -76,17 +77,33 @@ const SidebarWrapper = styled.div`
     &:focus::after {
       transform: translate3d(0, 0, 0);
     }
-    & svg {
-      font-size: 4rem;
+
+    svg {
+      font-size: 2.5rem;
+      transition: transform 0.3s ease;
     }
   }
-  & .dropdown {
+
+  .dropdown {
     display: flex;
     flex-direction: column;
     margin-left: 20px; /* To indent the dropdown items */
 
-    & .categoryTitle {
+    .categoryTitle {
+      position: relative;
       color: var(--font-purple);
+      padding-bottom: 15px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 5px;
+        width: 100%;
+        border-top: 1px solid var(--purple-light);
+      }
     }
   }
 `;

@@ -105,6 +105,7 @@ video {
 --black: rgba(0,0,0,1);
 --purple: rgba(71,63,244,1);
 --purple-darker: rgba(51,43,224,1);
+--purple-light:rgba(71, 63, 244, 0.21);
 
 --font-white:rgba(255,255,255,1);
 --font-black:rgba(0,0,0,1);
@@ -248,9 +249,11 @@ table {
 
 /*footer header*/
 & h3 {         
-  font-family: var(--font-heading-title);
-  letter-spacing: 5px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   font-size:  var(--font-size-25);
+  color: var(--font-purple);
+  font-weight: var(--font-weight-500);
   }
 
 & .loading {  

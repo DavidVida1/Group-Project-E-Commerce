@@ -8,10 +8,14 @@ import { GiWatch } from "react-icons/gi";
 import { CiLocationOn } from "react-icons/ci";
 import { FaDev } from "react-icons/fa";
 import Sidebar from "./Sidebar";
+import BottomHeader from "./BottomHeader";
 
 const Header = ({ setBodyLocation }) => {
   // State to hold the category items fetched from the API
   const [itemsCategory, setItemsCategory] = useState(null);
+
+  // State to hold the category items fetched from the API
+  const [locationArr, setLocationArr] = useState(null);
 
   // State to track if the sidebar is open or closed
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -42,6 +46,26 @@ const Header = ({ setBodyLocation }) => {
           // Map the data to a sorted list of categories
           const categories = data.Categories.map((obj) => obj.category);
           setItemsCategory(categories.sort());
+        } else {
+          // Show an alert if there is an error
+          window.alert(data.message);
+          throw new Error(data.message);
+        }
+      })
+      .catch((error) => {
+        // Show an alert if there is a fetch error
+        window.alert(error);
+      });
+  }, []); // Empty dependency array to run only on mount
+
+  // Fetch category data from the API and set it to state
+  useEffect(() => {
+    fetch(`/api/get-bodyLocation`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 200) {
+          // Map the data to a sorted list of categories
+          setLocationArr(data.bodyLocations.map((obj) => obj.name));
         } else {
           // Show an alert if there is an error
           window.alert(data.message);
@@ -247,40 +271,20 @@ const Header = ({ setBodyLocation }) => {
           </nav>
         </div>
 
-        <div className="bottomHeader">
-          {!isMobile && (
-            <div
-              className="dropdown"
-              onMouseEnter={handleMouseEnterCollections}
-              onMouseLeave={handleMouseLeaveCollections}
-            >
-              <div className="dropbtn">Collection</div>
-              <div className="dropdown-content" ref={dropdownRef}>
-                <div className="categoryTitle">categories</div>
-                {itemsCategory ? (
-                  itemsCategory.map((category) => {
-                    return (
-                      <NavLink
-                        key={category}
-                        to={`/category/${category}`}
-                        onClick={() => setBodyLocation(null)}
-                      >
-                        {category}
-                      </NavLink>
-                    );
-                  })
-                ) : (
-                  <h1>Loading categories...</h1>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
+        {!isMobile && (
+          <BottomHeader
+            itemsCategory={itemsCategory}
+            locationArr={locationArr}
+            setBodyLocation={setBodyLocation}
+          />
+        )}
       </div>
       <SidebarContainer
         className={isSidebarOpen ? "sidebarOpen" : "sidebarClosed"}
       >
-        {isSidebarOpen && <Sidebar itemsCategory={itemsCategory} />}
+        {isSidebarOpen && (
+          <Sidebar itemsCategory={itemsCategory} locationArr={locationArr} />
+        )}
       </SidebarContainer>
     </HeaderContainer>
   );
@@ -459,91 +463,6 @@ const HeaderContainer = styled.section`
             justify-content: center;
             justify-self: end;
             align-items: center;
-          }
-        }
-      }
-    }
-
-    & .bottomHeader {
-      position: relative;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      justify-self: center;
-      padding-bottom: 10px;
-      height: 100%;
-      width: 100%;
-      z-index: 100;
-
-      & .dropdown {
-        & .dropbtn {
-          position: relative;
-          display: block;
-          height: 100%;
-          padding-top: 10px;
-          border: none;
-          cursor: pointer;
-          text-transform: uppercase;
-          font-size: var(--font-size-18);
-          font-weight: 500;
-          padding: 0.2em 0;
-          overflow: hidden;
-
-          &::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 0.1em;
-            background-color: var(--bg-purple);
-            opacity: 1;
-            transform: translate3d(-100%, 0, 0);
-            transition: opacity 300ms, transform 300ms;
-          }
-
-          &:hover::after,
-          &:focus::after {
-            transform: translate3d(0, 0, 0);
-          }
-        }
-
-        & .dropdown-content {
-          position: absolute;
-          left: 0;
-          background-color: var(--bg-header);
-          width: 100%;
-          height: 0%;
-          top: 100%;
-          z-index: 100;
-          -webkit-transition: height 0.3s ease-in-out;
-          transition: height 0.3s ease-in-out;
-          overflow: hidden;
-          border-radius: 0px 0px 15px 15px;
-
-          & .categoryTitle {
-            padding: 10px 0px 0px 16px;
-            font-size: var(--font-size-25);
-            font-family: var(--font-heading-title);
-            color: var(--font-purple);
-            box-shadow: none;
-          }
-
-          & a {
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            color: var(--font-black);
-
-            &:hover {
-              background-color: green;
-              box-shadow: none;
-            }
-          }
-
-          &.show {
-            height: 400px;
           }
         }
       }
