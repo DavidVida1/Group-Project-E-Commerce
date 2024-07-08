@@ -129,7 +129,7 @@ const BottomHeaderWrapper = styled.section`
         display: flex;
         flex-direction: column;
         padding: 10px 0px 0px 16px;
-        gap: 16px;
+        gap: 15px;
         font-size: var(--font-size-25);
         color: var(--font-purple);
         box-shadow: none;
