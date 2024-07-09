@@ -78,10 +78,10 @@ const Footer = () => {
 
           <aside className="footerNav">
             <ul className="footerNavList">
-              <h3 className="headerList">
+              <h4 className="headerList">
                 <AiFillGithub />
                 &nbsp;Github
-              </h3>
+              </h4>
               <li>
                 <a href="https://github.com/DavidVida1">
                   David Vidal - Frontend
@@ -105,7 +105,7 @@ const Footer = () => {
             </ul>
 
             <ul className="footerNavList">
-              <h3 className="headerList">Company</h3>
+              <h4 className="headerList">Company</h4>
               <li>
                 <a>Categories</a>
               </li>
@@ -121,7 +121,7 @@ const Footer = () => {
             </ul>
 
             <ul className="footerNavList">
-              <h3 className="headerList">Customer Support</h3>
+              <h4 className="headerList">Customer Support</h4>
               <li>
                 <a>Customer Service</a>
               </li>
@@ -146,7 +146,7 @@ const Footer = () => {
             </ul>
 
             <ul className="footerNavList">
-              <h3 className="headerList">Order & Returns</h3>
+              <h4 className="headerList">Order & Returns</h4>
               <li>
                 <a>Shipping</a>
               </li>
@@ -183,6 +183,8 @@ const FooterContainer = styled.footer`
   bottom: 0;
 
   & .footerBottom {
+    width: 100%;
+    height: 100%;
     padding-top: 5dvh;
     box-shadow: var(--bg-footer-sdw);
     background-color: var(--bg-black);
@@ -234,6 +236,7 @@ const FooterContainer = styled.footer`
 
           & li a {
             font-size: var(--font-size-18);
+            font-weight: var(--font-weight-500);
 
             &:hover {
               color: var(--font-purple);
@@ -292,6 +295,8 @@ const FooterContainer = styled.footer`
 const FooterTop = styled.div`
   box-shadow: var(--bg-footer-sdw);
   background-color: var(--bg-grey);
+  width: 100%;
+  height: 100%;
 
   & .wrapper {
     position: relative;
@@ -313,8 +318,9 @@ const FooterTop = styled.div`
     }
 
     & p {
-      font-size: 2rem;
+      font-size: clamp(2rem, 4.2vw, 2.5rem);
     }
+
     .input-container {
       display: flex;
       flex-direction: row;

@@ -209,7 +209,7 @@ const Header = ({ setBodyLocation }) => {
         {isPromotionVisible && (
           <div className="promotion">
             <p>
-              DISCOVER THE T-TOUCH CONNECT SPORT COLLECTION <span>HERE</span>
+              DISCOVER THE THE POLAR RC3 GPS FITNESS WATCH <span>HERE</span>
             </p>
           </div>
         )}

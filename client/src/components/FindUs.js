@@ -64,6 +64,10 @@ const FindUsContainer = styled.section`
         display: flex;
         justify-content: center;
       }
+
+      & a {
+        font-size: var(--font-size-18);
+      }
     }
   }
 `;

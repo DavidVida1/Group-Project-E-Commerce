@@ -142,11 +142,12 @@ video {
 --font-heading-title:"Teko","sans-serif";
 --font-text:"DM Sans", "sans-serif";
 --font-weight-500:500;
+--font-weight-800:800;
 /*price,terms, right header*/
 --font-size-15:1.5rem;
-/*text, heroButton, category header*/ 
+/*text, heroButton, category header,header text*/ 
 --font-size-18:1.8rem;
-/*media,headerText, sidebarText*/
+/*media, sidebarText*/
 --font-size-25:2.5rem;
 /*header Icone*/ 
 --font-size-30:3rem;
@@ -239,7 +240,7 @@ table {
     border-spacing: 0;
 }
 
-/*subHeader, findus Text*/ 
+/* findus Text*/ 
 & h2 {        
   font-size: clamp(3rem, 4.2vw, 4rem);
   font-weight: 500;
@@ -247,13 +248,24 @@ table {
   margin: 20px 0px;
 }
 
-/*footer header*/
-& h3 {         
+/* */
+& h3 {
+  color:red;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size:  var(--font-size-25);
   color: var(--font-purple);
   font-weight: var(--font-weight-500);
+  }
+/*Header subtitle, footer sub*/ 
+  & h4 {    
+  margin :20px 0px ;
+  width: 60%;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size:  var(--font-size-18);
+  color: var(--font-purple);
+  font-weight: var(--font-weight-800);
   }
 
 & .loading {  

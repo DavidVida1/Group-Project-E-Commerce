@@ -1,10 +1,28 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const BottomHeader = ({ itemsCategory, locationArr, setBodyLocation }) => {
   const dropdownRef = useRef(null);
   const timeoutRef = useRef(null);
+  const [headerItem, setHeaderItem] = useState(null);
+
+  useEffect(() => {
+    fetch(`/api/get-item/6951`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 200) {
+          setHeaderItem(data.data); // Assuming data.items contains the array of items
+        } else {
+          throw new Error(data.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching item 6951:", error);
+        window.alert(`Failed to fetch item 6951: ${error.message}`);
+      });
+    console.log(headerItem);
+  }, []);
 
   /* Handle mouse enter on the collections dropdown */
   const handleMouseEnterCollections = () => {
@@ -31,7 +49,7 @@ const BottomHeader = ({ itemsCategory, locationArr, setBodyLocation }) => {
         <div className="dropbtn">Collection</div>
         <div className="dropdownContent" ref={dropdownRef}>
           <div className="dropdownWrapper">
-            <h3>Categories</h3>
+            <h4>Categories</h4>
             {itemsCategory ? (
               itemsCategory.map((category) => (
                 <NavLink
@@ -47,8 +65,8 @@ const BottomHeader = ({ itemsCategory, locationArr, setBodyLocation }) => {
             )}
           </div>
 
-          <div className="dropdownBodyWrapper">
-            <h3>Body Location</h3>
+          <div className="dropdownWrapper">
+            <h4>Body Location</h4>
             {locationArr ? (
               locationArr.map((location) => (
                 <NavLink key={location}>{location}</NavLink>
@@ -57,6 +75,31 @@ const BottomHeader = ({ itemsCategory, locationArr, setBodyLocation }) => {
               <h1>Loading locations...</h1>
             )}
           </div>
+          <div className="dropdownWrapper">
+            <h4>Customer Support</h4>
+
+            <NavLink>Customer Service</NavLink>
+
+            <NavLink>Need a Repair</NavLink>
+
+            <NavLink>Repair Order Status</NavLink>
+            <NavLink>FAQs</NavLink>
+
+            <NavLink>Warranty</NavLink>
+
+            <NavLink>Watch Size Guide</NavLink>
+
+            <NavLink>Contact Us</NavLink>
+          </div>
+
+          <a href={`/item/6951`} className="itemWrapper">
+            {headerItem && (
+              <>
+                <img src={headerItem.imageSrc} alt={headerItem.name} />
+                <h2>{headerItem.name}</h2>
+              </>
+            )}
+          </a>
         </div>
       </div>
     </BottomHeaderWrapper>
@@ -86,7 +129,7 @@ const BottomHeaderWrapper = styled.section`
       cursor: pointer;
       text-transform: uppercase;
       font-size: var(--font-size-18);
-      font-weight: 500;
+      font-weight: var(--font-weight-500);
       padding: 0.2em 0;
       overflow: hidden;
 
@@ -111,9 +154,11 @@ const BottomHeaderWrapper = styled.section`
 
     & .dropdownContent {
       position: absolute;
-      display: flex;
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr;
       left: 0;
+      justify-items: center;
       background-color: var(--bg-header);
       width: 100%;
       height: 0%;
@@ -124,41 +169,79 @@ const BottomHeaderWrapper = styled.section`
       overflow: hidden;
       border-radius: 0px 0px 15px 15px;
 
-      & .dropdownWrapper,
-      .dropdownBodyWrapper {
+      & > :first-child {
+        background-color: rgba(71, 63, 244, 0.04);
+        border-radius: 0px 15px 0px 0px;
+      }
+
+      & .dropdownWrapper {
         display: flex;
         flex-direction: column;
-        padding: 10px 0px 0px 16px;
+        align-items: center;
         gap: 15px;
-        font-size: var(--font-size-25);
+        width: 100%;
+        font-size: var(--font-size-18);
+        font-weight: var(--font-weight-500);
         color: var(--font-purple);
         box-shadow: none;
-      }
 
-      & .dropdownBodyWrapper {
-        width: 250px;
-        border: 1px solid red;
-
-        a {
+        & a {
           display: flex;
-          flex-wrap: wrap;
-          border: 1px solid blue;
-        }
-      }
+          flex-direction: column;
+          align-self: left;
+          text-decoration: none;
+          width: 60%;
+          display: block;
+          color: var(--font-black);
 
-      & a {
-        text-decoration: none;
-        display: block;
-        color: var(--font-black);
-
-        &:hover {
-          color: var(--font-purple);
-          box-shadow: none;
+          &:hover {
+            color: var(--font-purple);
+            box-shadow: none;
+          }
         }
       }
 
       &.show {
-        height: 400px;
+        height: 500px;
+      }
+
+      & .itemWrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+          color: var(--font-purple);
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          display: block;
+          border-radius: 15px 0px 0px 0px;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 2;
+          opacity: 1;
+          background: linear-gradient(
+            to bottom,
+            rgba(0, 204, 255, 0.1),
+            rgba(71, 63, 244, 0.04)
+          );
+        }
+
+        & img {
+          width: 350px;
+          height: auto;
+        }
+
+        & h2 {
+          font-size: var(--font-size-18);
+        }
       }
     }
   }
