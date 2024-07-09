@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import { NavLink } from "react-router-dom";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
+import { CiLocationOn } from "react-icons/ci";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { SiAircanada } from "react-icons/si";
 
 const Sidebar = ({ itemsCategory, locationArr }) => {
   const [isCollectionsOpen, setIsCollectionsOpen] = useState(false);
   const [isBodyLocationOpen, setIsBodyLocationOpen] = useState(false);
   const [isCustomerSupportOpen, setIsCustomerSupportOpen] = useState(false);
+  const [montrealTime, setMontrealTime] = useState("");
 
   const toggleDropdown = (dropdown) => {
     if (dropdown === "collections") {
@@ -25,6 +29,24 @@ const Sidebar = ({ itemsCategory, locationArr }) => {
     }
   };
 
+  useEffect(() => {
+    const updateTime = () => {
+      const options = {
+        timeZone: "America/Montreal",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      };
+      const formatter = new Intl.DateTimeFormat([], options);
+      setMontrealTime(formatter.format(new Date()));
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <SidebarWrapper>
       <section className="firstSection">
@@ -32,7 +54,7 @@ const Sidebar = ({ itemsCategory, locationArr }) => {
           className="buttonDropdown"
           onClick={() => toggleDropdown("collections")}
         >
-          <p>Collections</p>
+          <p>Collection</p>
           {isCollectionsOpen ? <RiArrowDropUpLine /> : <RiArrowDropDownLine />}
         </div>
 
@@ -77,24 +99,42 @@ const Sidebar = ({ itemsCategory, locationArr }) => {
 
         {isCustomerSupportOpen && (
           <div className="dropdown">
-            <DropdownItem>
-              <NavLink to="/customer-service">Customer Service</NavLink>
-              <NavLink to="/need-a-repair">Need a Repair</NavLink>
-              <NavLink to="/repair-order-status">Repair Order Status</NavLink>
-              <NavLink to="/faqs">FAQs</NavLink>
-              <NavLink to="/warranty">Warranty</NavLink>
-              <NavLink to="/watch-size-guide">Watch Size Guide</NavLink>
-              <NavLink to="/contact-us">Contact Us</NavLink>
-            </DropdownItem>
+            {[
+              "/customer-service",
+              "/need-a-repair",
+              "/repair-order-status",
+              "/faqs",
+              "/warranty",
+              "/watch-size-guide",
+              "/contact-us",
+            ].map((link, index) => (
+              <DropdownItem key={index} to={link}>
+                {link.replace("/", "").replace(/-/g, " ")}
+              </DropdownItem>
+            ))}
           </div>
         )}
       </section>
 
-      <NavLink to="/location" className="test">
-        Location
-      </NavLink>
-      <NavLink to="/cart">Cart</NavLink>
-      <SearchBar />
+      <section className="secondSection">
+        <NavLink to="/location" className="test">
+          <CiLocationOn />
+          <p>Location</p>
+        </NavLink>
+
+        <a href={"/cart"}>
+          <AiOutlineShoppingCart />
+          <p>Cart</p>
+        </a>
+        <div>
+          <SiAircanada />
+          <p>Montreal: {montrealTime}</p>
+        </div>
+      </section>
+
+      <section className="thirdSection">
+        <SearchBar />
+      </section>
     </SidebarWrapper>
   );
 };
@@ -114,7 +154,7 @@ const SidebarWrapper = styled.div`
   & .firstSection {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     font-size: var(--font-size-25);
     font-weight: var(--font-weight-500);
     color: var(--font-black);
@@ -189,18 +229,69 @@ const SidebarWrapper = styled.div`
       padding-bottom: 5px;
     }
   }
+
+  & .secondSection {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    font-size: var(--font-size-25);
+    font-weight: var(--font-weight-500);
+    color: var(--font-black);
+    text-decoration: none;
+    text-transform: uppercase;
+
+    & a {
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+    }
+
+    & div {
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+    }
+    & :hover:not(.categoryTitle) {
+      color: var(--font-purple);
+    }
+    &:after {
+      content: "";
+      height: 10px;
+      align-self: center;
+      width: 100%;
+      border-top: 1px solid var(--purple);
+      padding-bottom: 5px;
+    }
+  }
+
+  & .thirdSection {
+    border-radius: var(--radius-button);
+    background-color: var(--purple-light);
+    padding: 10px 10px;
+  }
 `;
 
 const DropdownItem = styled(NavLink)`
-  display: flex;
-  flex-direction: column;
   margin: 15px 0;
+  padding: 10px;
   font-size: var(--font-size-20);
   color: var(--font-black);
   text-decoration: none;
 
   &:hover {
     color: var(--font-purple);
+  }
+
+  & > a {
+    margin: 15px 0;
+    padding: 10px;
+    font-size: var(--font-size-20);
+    color: var(--font-black);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--font-purple);
+    }
   }
 `;
 
