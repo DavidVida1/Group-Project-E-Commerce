@@ -103,6 +103,7 @@ video {
 /***************Color***********************/
 --white: rgba(255,255,255,1);
 --black: rgba(0,0,0,1);
+--grey:#ccc;
 --purple: rgba(71,63,244,1);
 --purple-darker: rgba(51,43,224,1);
 --purple-light:rgba(71, 63, 244, 0.21);
@@ -119,7 +120,7 @@ video {
 --bg-purple: rgba(71,63,244,1);
 --bg-header: rgba(255,255,255,1);
 --bg-card:rgba(255,255,255,1);
---bg-search:#f1f1f14d;
+--bg-search:rgba(241, 241, 241, 0.2);
 --bg-home:linear-gradient(0deg, #F6F6F6 32%, rgba(0, 0, 0, 0.9) 48%);
 --bg-footer-sdw:rgba(0, 0, 0, 0.45) 0px -25px 20px -20px;
 --bg-overlay:linear-gradient(to bottom, rgba(0, 204, 255, 0.1), rgba(191, 128, 64, 0.3));

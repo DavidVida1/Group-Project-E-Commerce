@@ -167,25 +167,25 @@ const Header = ({ setBodyLocation }) => {
     }, 500);
   };
 
-  /* Handle mouse enter on the collections dropdown */
+  /* 
   const handleMouseEnterCollections = () => {
     if (isMobile) return;
-    // Clear any existing timeouts for hiding the dropdown
+
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-    // Add the 'show' class to the dropdown content
+
     dropdownRef.current.classList.add("show");
   };
 
-  /* Handle mouse leave from the collections dropdown */
+
   const handleMouseLeaveCollections = () => {
     if (isMobile) return;
-    // Set a timeout to remove the 'show' class after 300ms
+
     timeoutRef.current = setTimeout(() => {
       dropdownRef.current.classList.remove("show");
     }, 300);
-  };
+  };*/
 
   /* Toggle the sidebar open/close state */
   const toggleSidebar = () => {
@@ -225,6 +225,7 @@ const Header = ({ setBodyLocation }) => {
               AllStar
             </a>
           </div>
+
           <nav className="rightMenu">
             <ul>
               <li>
@@ -240,10 +241,7 @@ const Header = ({ setBodyLocation }) => {
                 </a>
               </li>
               <li>
-                <a>
-                  <SearchBar />
-                  <p>Search</p>
-                </a>
+                <SearchBar />
               </li>
               <li>
                 <a href={"/cart"}>
@@ -339,7 +337,7 @@ const HeaderContainer = styled.section`
 
       & section input {
         &::placeholder {
-          color: var(--font-black);
+          color: var(--font-black) !important;
         }
       }
     }
@@ -361,6 +359,7 @@ const HeaderContainer = styled.section`
       height: var(--header-height);
       padding-top: 10px;
       width: 100%;
+      margin-bottom: 5px;
 
       & .leftHeader {
         display: flex;
@@ -401,10 +400,6 @@ const HeaderContainer = styled.section`
               cursor: pointer;
               text-transform: uppercase;
               transition: color 0.2s ease-in;
-
-              & svg {
-                margin-bottom: 5px;
-              }
 
               &:hover {
                 color: var(--font-purple);

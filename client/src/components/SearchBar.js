@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
+import { IoMdSearch } from "react-icons/io";
 
 const SearchBar = () => {
   const [itemsArr, setItemsArr] = useState([]);
@@ -58,12 +59,16 @@ const SearchBar = () => {
 
   return (
     <SearchBarWrapper ref={searchBarRef}>
-      <input
-        type="text"
-        placeholder="Search..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+      <div className="inputWrapper">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <IoMdSearch className="searchIcon" />
+      </div>
+
       {isLoading && searchTerm && <p>Searching...</p>}
       {filteredItems.length > 0 && (
         <Dropdown>
@@ -85,18 +90,38 @@ const SearchBarWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  color: var(--font-black) !important !important;
+  width: 100%;
+  height: 100%;
 
-  input {
-    padding: 10px;
-    font-size: 16px;
-  }
+  & .inputWrapper {
+    position: relative;
+    width: 100%;
 
-  p {
-    margin: 0;
-    padding: 10px;
-    font-size: 14px;
-    color: var(--font-black) !important !important;
+    & input {
+      width: 100%;
+      min-width: 300px;
+      padding: 10px 5px 10px 10px;
+      font-size: 16px;
+      border-radius: var(--radius-button);
+      background: rgba(255, 255, 255, 0.15);
+      mix-blend-mode: difference;
+      border: none;
+
+      &::placeholder {
+        color: white;
+        mix-blend-mode: difference;
+      }
+    }
+
+    & .searchIcon {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: var(--font-white);
+      mix-blend-mode: difference;
+    }
   }
 `;
 
@@ -106,9 +131,8 @@ const Dropdown = styled.div`
   left: 0;
   width: 100%;
   background-color: white;
-  border: 1px solid #ccc;
-  max-height: 200px;
-  overflow-y: auto;
+  max-height: 300px;
+  padding: 0px 5px;
   z-index: 1000;
 `;
 
@@ -117,23 +141,30 @@ const DropdownItem = styled.div`
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #ccc;
-  color: var(--font-black) !important !important;
 
-  &:hover {
-    background-color: #f0f0f0;
-  }
+  & a {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
 
-  img {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    margin-right: 10px;
-  }
+    & img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      margin-right: 10px;
+    }
 
-  p {
-    margin: 0;
-    font-size: 14px;
-    color: var(--font-black) !important !important;
+    & p {
+      margin: 0;
+      font-size: 14px;
+      visibility: visible !important;
+      color: var(--font-black);
+      &:hover {
+        color: var(--font-purple);
+      }
+    }
   }
 `;
 

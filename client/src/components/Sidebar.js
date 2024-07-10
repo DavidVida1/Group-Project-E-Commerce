@@ -266,8 +266,13 @@ const SidebarWrapper = styled.div`
 
   & .thirdSection {
     border-radius: var(--radius-button);
-    background-color: var(--purple-light);
-    padding: 10px 10px;
+    border: 2px solid var(--purple);
+    padding: 0px 15px 0px 0px;
+
+    & .inputWrapper {
+      background: rgba(255, 255, 255, 1);
+      border-radius: var(--radius-button);
+    }
   }
 `;
 
