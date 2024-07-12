@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-const Category = ({bodyLocation, setBodyLocation}) => {
+const Category = ({ bodyLocation, setBodyLocation }) => {
   const [itemsArr, setItemsArr] = useState(null);
   const [filteredItems, setFilteredItems] = useState(null);
   const [locationArr, setLocationArr] = useState(null);
   const { category } = useParams();
-  
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,15 +24,15 @@ const Category = ({bodyLocation, setBodyLocation}) => {
       })
       .catch((error) => {
         window.alert(error);
-      })
-    
+      });
   }, []);
+
   useEffect(() => {
     fetch(`/api/get-bodylocation`)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-          setLocationArr(data.bodyLocations.map(obj => obj.name));
+          setLocationArr(data.bodyLocations.map((obj) => obj.name));
         } else {
           window.alert(data.message);
           throw new Error(data.message);
@@ -40,20 +40,23 @@ const Category = ({bodyLocation, setBodyLocation}) => {
       })
       .catch((error) => {
         window.alert(error);
-      })
-  }, [])
+      });
+  }, []);
 
   useEffect(() => {
     // filtering only items from chosen category
     if (itemsArr) {
-      setFilteredItems(itemsArr.filter(item => {
-        const isChosenBodyLocation = bodyLocation ? item.body_location === bodyLocation : true;
-        const isChosenCategory = item.category === category 
-        return isChosenBodyLocation && isChosenCategory
-      }));
+      setFilteredItems(
+        itemsArr.filter((item) => {
+          const isChosenBodyLocation = bodyLocation
+            ? item.body_location === bodyLocation
+            : true;
+          const isChosenCategory = item.category === category;
+          return isChosenBodyLocation && isChosenCategory;
+        })
+      );
     }
-  }, [category, itemsArr, bodyLocation])
-  
+  }, [category, itemsArr, bodyLocation]);
 
   return (
     <Wrapper>

@@ -124,6 +124,8 @@ video {
 --bg-home:linear-gradient(0deg, #F6F6F6 32%, rgba(0, 0, 0, 0.9) 48%);
 --bg-footer-sdw:rgba(0, 0, 0, 0.45) 0px -25px 20px -20px;
 --bg-overlay:linear-gradient(to bottom, rgba(0, 204, 255, 0.1), rgba(191, 128, 64, 0.3));
+--bg-overlay2:linear-gradient(to top, rgba(0, 204, 255, 0.1), rgba(71, 63, 244, 0.01));
+
 
 --btn-black: rgba(0,0,0,1);
 --btn-purple:rgba(71,63,244,1);
@@ -258,7 +260,7 @@ table {
   font-weight: var(--font-weight-500); 
   color :red;
   }
-  
+
 /*Header subtitle, footer sub*/ 
   & h4 {    
   margin :20px 0px ;

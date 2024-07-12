@@ -10,7 +10,6 @@ const Item = ({ userId }) => {
   const [itemData, setItemData] = useState(null);
   const [companyData, setCompanyData] = useState(null);
   const [itemQuantity, setItemQuantity] = useState(1);
-  // disables button AddToCart while fetching
   const [isFetching, setIsFetching] = useState(false);
   const {
     state,
@@ -18,8 +17,6 @@ const Item = ({ userId }) => {
   } = useContext(CartContext);
   const navigate = useNavigate();
 
-  // fetching item data
-  // and after that fetch company with the companyId from item
   const fetchItemAndCompany = async () => {
     const item = await fetch(`/api/get-item/${itemId}`).then((res) =>
       res.json()
@@ -43,16 +40,12 @@ const Item = ({ userId }) => {
     fetchItemAndCompany();
   }, []);
 
-  // sending item data to BE
-  // and changing cart data in context after receiving response
   const handleAddToCart = (e) => {
-    // check if the stock has the required quantity
     if (itemQuantity > itemData.numInStock) {
       window.alert(`The seller only has ${itemData.numInStock} items.`);
       setItemQuantity(1);
       return;
     }
-    // disable btns
     setIsFetching(true);
     fetch("/api/add-to-cart", {
       method: "POST",
@@ -68,11 +61,8 @@ const Item = ({ userId }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // enable btns
         setIsFetching(false);
         if (data.status === 201) {
-          // if item already in cart then change quantity
-          // otherwise add new item to the cart
           if (
             state.find((item) => Number(item.itemId) === Number(itemData._id))
           ) {
@@ -80,7 +70,6 @@ const Item = ({ userId }) => {
           } else {
             addItem(data.data);
           }
-          // reset input
           setItemQuantity(1);
         } else {
           window.alert(data.message);
@@ -91,7 +80,6 @@ const Item = ({ userId }) => {
       });
   };
 
-  // buttons and input handlers, change only local state
   const handleQuantityChange = (e, action) => {
     if (action === "plus") {
       setItemQuantity(itemQuantity + 1);
@@ -107,6 +95,7 @@ const Item = ({ userId }) => {
       }
     }
   };
+
   const handleCompanyClick = (e) => {
     navigate(`/company-profile/${companyData._id}`);
   };
@@ -122,44 +111,53 @@ const Item = ({ userId }) => {
             </div>
 
             <div className="itemData">
-              <p>{itemData.name}</p>
-              <p>{itemData.price}</p>
-
-              {itemData.numInStock > 0 ? (
-                <div className="cartWrapper">
-                  <QuantityBtns
-                    handleQuantityChange={handleQuantityChange}
-                    itemQuantity={itemQuantity}
-                  />
-
-                  <div
-                    className="cartButton"
-                    onClick={handleAddToCart}
-                    disabled={isFetching}
-                  >
-                    Add To Cart
+              <div className="topItemData">
+                {companyData ? (
+                  <div onClick={handleCompanyClick}>
+                    <p className="companyName">{companyData.name}</p>
                   </div>
-                  {/* <h3>Item added to the cart.</h3> */}
-                </div>
-              ) : (
-                <p>Out of stock.</p>
-              )}
+                ) : (
+                  <h2>Loading...</h2>
+                )}
+                <h4 className="itemName">{itemData.name}</h4>
+                <h4 className="itemPrice">{itemData.price}</h4>
+              </div>
 
-              {companyData ? (
-                <div onClick={handleCompanyClick} className="companyData">
-                  <p>Seller: </p>
-                  <p>{companyData.name}</p>
-                  <a
-                    href={companyData.url}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {companyData.url}
-                  </a>
-                  <p>Country: {companyData.country}</p>
-                </div>
-              ) : (
-                <h2>Loading...</h2>
-              )}
+              <div className="bottomItemData">
+                {companyData ? (
+                  <div className="companyData">
+                    <p className="companyCountry">{companyData.country}</p>
+                    <a
+                      className="companyUrl"
+                      href={companyData.url}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {companyData.url}
+                    </a>
+                  </div>
+                ) : (
+                  <h2>Loading...</h2>
+                )}
+
+                {itemData.numInStock > 0 ? (
+                  <div className="cartWrapper">
+                    <QuantityBtns
+                      handleQuantityChange={handleQuantityChange}
+                      itemQuantity={itemQuantity}
+                    />
+
+                    <div
+                      className="cartButton"
+                      onClick={handleAddToCart}
+                      disabled={isFetching}
+                    >
+                      Add To Cart
+                    </div>
+                  </div>
+                ) : (
+                  <p>Out of stock.</p>
+                )}
+              </div>
             </div>
           </div>
         </>
@@ -185,15 +183,14 @@ const ItemContainer = styled.section`
 
   & .itemWrapper {
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 60% 35%;
     grid-template-rows: 1fr;
     align-items: center;
     justify-items: center;
     height: 100%;
     width: 100%;
-    border: 1px solid red;
     margin: 100px 0px;
-    background-color: var(--bg-card);
+    background-color: var(--bg-white);
 
     & .itemImg {
       position: relative;
@@ -219,10 +216,10 @@ const ItemContainer = styled.section`
         z-index: 2;
         transition: 1s all;
         opacity: 1;
-        background: var(--bg-overlay);
+        background: var(--bg-overlay2);
       }
 
-      img {
+      & img {
         height: 200px;
         width: 200px;
       }
@@ -230,27 +227,90 @@ const ItemContainer = styled.section`
 
     & .itemData {
       position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      height: 100%;
 
-      & .cartWrapper {
+      & .topItemData {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        background-color: blue;
+        gap: 20px;
 
-        & .cartButton {
-          transition: 0.5s ease-in-out;
-          background-color: red;
+        & .companyName {
+          border-radius: 10px;
+          background-color: var(--bg-purple);
+          width: max-content;
+          color: var(--font-white);
+          letter-spacing: 2px;
+          padding: 10px 20px;
+          font-size: var(--font-size-18);
+          font-weight: var(--font-weight-500);
+          text-transform: uppercase;
+          cursor: pointer;
+        }
 
-          :hover {
-            color: rgb(71, 103, 161);
-            transform: translateY(2px);
-          }
+        & .itemName {
+          font-size: 4rem;
+          width: 100%;
+          color: var(--black);
+          margin: 0px 0px;
+        }
+
+        & .itemPrice {
+          margin: 20px 0px;
+          font-size: var(--font-size-30);
         }
       }
 
-      & .companyData {
-        background-color: green;
+      & .bottomItemData {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+
+        & .companyData {
+          display: flex;
+          flex-direction: column;
+          font-weight: var(--font-weight-500);
+          gap: 10px;
+
+          & .companyCountry {
+            margin: 0px 0px;
+            font-size: var(--font-size-25);
+          }
+
+          & .companyUrl {
+            margin: 0px 0px;
+            font-size: var(--font-size-25);
+          }
+        }
+
+        & .cartWrapper {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+
+          & .cartButton {
+            width: 100%;
+            font-size: var(--font-size-18);
+            text-align: center;
+            padding: 15px 0px;
+            text-transform: uppercase;
+            font-weight: var(--font-weight-500);
+            color: var(--font-white);
+            border-radius: 10px;
+            background-color: var(--btn-purple);
+            border: 2px solid var(--purple);
+            box-shadow: 0 0 10px var(--font-sdw);
+            transition: background-color 0.3s linear;
+
+            &:hover {
+              border: 2px solid var(--white);
+              background-color: var(--btn-black);
+            }
+          }
+        }
       }
     }
   }
