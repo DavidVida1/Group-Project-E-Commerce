@@ -112,187 +112,148 @@ const Item = ({ userId }) => {
   };
 
   return (
-    <Wrapper>
+    <ItemContainer className="container">
+      <div className="test"></div>
       {itemData ? (
         <>
-          {itemData.numInStock > 0 ? (
-            <ToCart>
-              <QuantityBtns
-                handleQuantityChange={handleQuantityChange}
-                itemQuantity={itemQuantity}
-              />
-              <ButtonCart onClick={handleAddToCart} disabled={isFetching}>
-                Add To Cart
-              </ButtonCart>
-              {/* <h3>Item added to the cart.</h3> */}
-            </ToCart>
-          ) : (
-            <p>Out of stock.</p>
-          )}{" "}
-          <DiscoverItem>
-            <h1>{itemData.name}</h1>
-            <img src={itemData.imageSrc} alt={itemData.name} />{" "}
-            <h2>{itemData.price}</h2>{" "}
-          </DiscoverItem>
+          <div className="itemWrapper">
+            <div className="itemImg">
+              <img src={itemData.imageSrc} alt={itemData.name} />
+            </div>
+
+            <div className="itemData">
+              <p>{itemData.name}</p>
+              <p>{itemData.price}</p>
+
+              {itemData.numInStock > 0 ? (
+                <div className="cartWrapper">
+                  <QuantityBtns
+                    handleQuantityChange={handleQuantityChange}
+                    itemQuantity={itemQuantity}
+                  />
+
+                  <div
+                    className="cartButton"
+                    onClick={handleAddToCart}
+                    disabled={isFetching}
+                  >
+                    Add To Cart
+                  </div>
+                  {/* <h3>Item added to the cart.</h3> */}
+                </div>
+              ) : (
+                <p>Out of stock.</p>
+              )}
+
+              {companyData ? (
+                <div onClick={handleCompanyClick} className="companyData">
+                  <p>Seller: </p>
+                  <p>{companyData.name}</p>
+                  <a
+                    href={companyData.url}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {companyData.url}
+                  </a>
+                  <p>Country: {companyData.country}</p>
+                </div>
+              ) : (
+                <h2>Loading...</h2>
+              )}
+            </div>
+          </div>
         </>
       ) : (
         <h2>Loading...</h2>
       )}
-      {companyData ? (
-        <Location onClick={handleCompanyClick}>
-          <h3>Seller: </h3>
-          <p>{companyData.name}</p>
-          <a href={companyData.url} onClick={(e) => e.stopPropagation()}>
-            {companyData.url}
-          </a>
-          <p>Country: {companyData.country}</p>
-        </Location>
-      ) : (
-        <h2>Loading...</h2>
-      )}
-    </Wrapper>
+    </ItemContainer>
   );
 };
 
-const Wrapper = styled.div`
-  display: flex;
+const ItemContainer = styled.section`
   position: relative;
-  flex-direction: row-reverse;
-  padding-left: 150px;
-  padding-right: 150px;
-  padding-top: 30px;
-  padding-bottom: 50px;
-  justify-content: space-around;
-  flex-wrap: wrap;
   width: 100%;
-  row-gap: 10px;
-  column-gap: 0px;
-  min-height: 400px;
-  p {
-    font-family: var(--Font-heading-title);
-    font-weight: bold;
-    font-size: 30px;
-  }
-`;
-const ToCart = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  font-family: var(--Font-heading-title);
-  font-weight: bold;
-  font-size: 20px;
-  border-radius: 5px;
-  width: 250px;
-  height: 100px; ;
-`;
+  height: 100%;
+  min-height: 100dvh;
+  background-color: var(--bg-white);
 
-const ButtonCart = styled.button`
-  height: 5vh;
-  width: 27vh;
-  border-radius: 5px;
-  border-style: none;
-  font-family: var(--Font-heading-title);
-  font-size: 20px;
-  font-weight: bold;
-  transition: 0.5s ease-in-out;
-  background-color: var(--color-background);
-  border-style: solid;
-  border-width: 1px;
-
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  :hover {
-    color: rgb(71, 103, 161);
-    transform: translateY(2px);
-  }
-  :after {
-    content: "";
-    border-radius: 5px;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    /* width: 100%;*/
-    height: 100%;
-    transition: 1s all;
-    opacity: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 204, 255, 0.1),
-      rgba(191, 128, 64, 0.3)
-    );
-  }
-  :hover:after {
-    opacity: 1;
-  }
-`;
-const Location = styled.div`
-  display: grid;
-  align-self: flex-start;
-  place-items: center;
-  border-style: solid;
-  border-color: black;
-  font-family: var(--Font-heading-title);
-  font-weight: bold;
-  font-size: 20px;
-  border-radius: 5px;
-  width: 250px;
-  height: 360px;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-  cursor: pointer;
-  transition: 0.5s ease-in-out;
-  :hover {
-    transform: translateY(2px);
-  }
-  h3 {
-    font-size: 25px;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
-  }
-  a:hover {
-    color: rgba(0, 153, 255);
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
-  }
-  p {
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
-  }
-  a {
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
-  }
-`;
-const DiscoverItem = styled.div`
-  display: grid;
-  position: relative;
-  place-items: center;
-  font-family: var(--Font-heading-title);
-  font-weight: bold;
-  font-size: 20px;
-  border-radius: 5px;
-  width: 600px;
-  height: 360px;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-  h2 {
-    text-align: center;
-    font-size: 25px;
-  }
-  h1 {
-    text-align: center;
-    font-size: 25px;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
-  }
-  :after {
-    content: "";
-    border-radius: 5px;
-    display: block;
-    position: absolute;
+  & .test {
+    background-color: black;
+    height: 140px;
     width: 100%;
+  }
+
+  & .itemWrapper {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-items: center;
     height: 100%;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 204, 255, 0.1),
-      rgba(191, 128, 64, 0.3)
-    );
+    width: 100%;
+    border: 1px solid red;
+    margin: 100px 0px;
+    background-color: var(--bg-card);
+
+    & .itemImg {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--bg-card);
+      border-radius: var(--radius-card);
+      width: 800px;
+      height: 650px;
+      transition: 0.5s ease-in-out;
+      box-shadow: var(--sdw-black-card);
+
+      &:after {
+        content: "";
+        border-radius: var(--radius-card);
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        transition: 1s all;
+        opacity: 1;
+        background: var(--bg-overlay);
+      }
+
+      img {
+        height: 200px;
+        width: 200px;
+      }
+    }
+
+    & .itemData {
+      position: relative;
+
+      & .cartWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        background-color: blue;
+
+        & .cartButton {
+          transition: 0.5s ease-in-out;
+          background-color: red;
+
+          :hover {
+            color: rgb(71, 103, 161);
+            transform: translateY(2px);
+          }
+        }
+      }
+
+      & .companyData {
+        background-color: green;
+      }
+    }
   }
 `;
+
 export default Item;

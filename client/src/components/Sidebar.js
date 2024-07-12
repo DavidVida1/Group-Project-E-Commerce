@@ -126,6 +126,7 @@ const Sidebar = ({ itemsCategory, locationArr }) => {
           <AiOutlineShoppingCart />
           <p>Cart</p>
         </a>
+
         <div>
           <SiAircanada />
           <p>Montreal: {montrealTime}</p>

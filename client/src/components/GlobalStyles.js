@@ -249,15 +249,16 @@ table {
   margin: 20px 0px;
 }
 
-/* */
+/* Loading*/
 & h3 {
-  color:red;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size:  var(--font-size-25);
   color: var(--font-purple);
-  font-weight: var(--font-weight-500);
+  font-weight: var(--font-weight-500); 
+  color :red;
   }
+  
 /*Header subtitle, footer sub*/ 
   & h4 {    
   margin :20px 0px ;

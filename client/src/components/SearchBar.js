@@ -105,6 +105,7 @@ const SearchBarWrapper = styled.div`
       border-radius: var(--radius-button);
       background: rgba(255, 255, 255, 0.15);
       mix-blend-mode: difference;
+      color: var(--font-white);
       border: none;
 
       &::placeholder {
