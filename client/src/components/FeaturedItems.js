@@ -78,8 +78,11 @@ const FeaturedItems = () => {
                 >
                   <img src={randomItem.imageSrc} />
                 </a>
-                <p className="featuredItemName">{randomItem.name}</p>
-                <p className="featuredItemPrice">{randomItem.price}</p>
+
+                <a href={`/item/${randomItem._id}`} className="itemInfo">
+                  <p className="featuredItemName">{randomItem.name}</p>
+                  <p className="featuredItemPrice">{randomItem.price}</p>
+                </a>
               </SwiperSlide>
             );
           })
@@ -127,6 +130,7 @@ const FeaturedItemsContainer = styled.section`
       & .featuredItemCards {
         position: relative;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: space-around;
         background-color: var(--bg-card);
@@ -165,15 +169,23 @@ const FeaturedItemsContainer = styled.section`
         }
       }
 
-      & .featuredItemName {
-        width: 450px;
-        text-align: center;
-        padding: 15px 0px;
-        font-size: var(--font-size-18);
-        font-weight: var(--font-weight-500);
-      }
-      & .featuredItemPrice {
-        font-size: var(--font-size-15);
+      & .itemInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        & .featuredItemName {
+          width: 450px;
+          height: 100%;
+          padding: 15px 0px;
+          font-size: var(--font-size-18);
+          font-weight: var(--font-weight-500);
+        }
+        & .featuredItemPrice {
+          font-size: var(--font-size-15);
+          font-weight: 300;
+        }
       }
     }
   }

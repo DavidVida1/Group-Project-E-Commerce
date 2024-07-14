@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom"; // Import useLocation
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { GiWatch } from "react-icons/gi";
@@ -36,6 +37,8 @@ const Header = ({ setBodyLocation }) => {
   const dropdownRef = useRef(null);
   const bgRef = useRef(null);
   const timeoutRef = useRef(null);
+
+  const location = useLocation(); // Get the current location
 
   // Fetch category data from the API and set it to state
   useEffect(() => {
@@ -128,7 +131,9 @@ const Header = ({ setBodyLocation }) => {
       }
 
       // Add or remove 'showBg' class based on scroll position
-      if (window.scrollY > 0) {
+      if (window.scrollY > 0 || location.pathname !== "/") {
+        bgRef.current.classList.add("showBg");
+      } else if (window.scrollY === 0 && isSidebarOpen === "true") {
         bgRef.current.classList.add("showBg");
       } else {
         bgRef.current.classList.remove("showBg");
@@ -161,10 +166,13 @@ const Header = ({ setBodyLocation }) => {
   /* Handle mouse leave from the navigation bar */
   const handleMouseLeaveNav = () => {
     if (isMobile) return;
+
+    if (location.pathname === "/") {
+      timeoutRef.current = setTimeout(() => {
+        bgRef.current.classList.remove("showBg");
+      }, 500);
+    }
     // Set a timeout to remove the 'showBg' class after 500ms
-    timeoutRef.current = setTimeout(() => {
-      bgRef.current.classList.remove("showBg");
-    }, 500);
   };
 
   /* 
@@ -191,12 +199,20 @@ const Header = ({ setBodyLocation }) => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
     setIsPromotionVisible(isSidebarOpen);
-    if (isSidebarOpen) {
+    if (isSidebarOpen && window.scrollY === 0) {
       bgRef.current.classList.add("showBg");
     } else {
       bgRef.current.classList.remove("showBg");
     }
   };
+
+  useEffect(() => {
+    if (location.pathname !== "/" && window.scrollY === 0) {
+      bgRef.current.classList.add("showBg");
+    } else {
+      bgRef.current.classList.remove("showBg");
+    }
+  }, [location.pathname]);
 
   return (
     <HeaderContainer position={headerPosition}>

@@ -54,7 +54,7 @@ const Home = () => {
   }, []);
 
   return (
-    <HomeContainer>
+    <HomeContainer id="home">
       <aside className="heroText">
         <div className="logo">AllStar</div>
         <h1 className="heroSubText">Stay Active, Stay Timed</h1>

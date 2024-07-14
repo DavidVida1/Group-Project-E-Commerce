@@ -126,154 +126,139 @@ const Cart = ({ userId, setOrderId }) => {
   };
 
   return (
-    <>
-      <Wrapper>
-        {state.length === 0 ? (
-          <h1>Cart is empty.</h1>
-        ) : (
+    <CartContainer className="container">
+      {state.length === 0 ? (
+        <h2>Cart is empty.</h2>
+      ) : (
+        <>
+          <h2>Cart </h2>
           <>
-            <h1>Cart: </h1>
-            <UList>
-              {state.map((item, ind) => {
-                return (
-                  <li key={item.itemId}>
-                    <p>{item.name}</p>
-                    <QuantityWrapper>
-                      <span>QTY:</span>
-                      <QuantityBtns
-                        handleQuantityChange={handleQuantityChange}
-                        itemQuantity={state[ind].numToBuy}
-                        disabled={isFetching}
-                        itemId={item.itemId}
-                      />
-                    </QuantityWrapper>
-                    <PriceWrapper>
-                      <span>Price: {item.price}</span>
-                      <span>
-                        Total: $
-                        {(
-                          Number(item.price.slice(1)) * state[ind].numToBuy
-                        ).toFixed(2)}
-                      </span>
-                    </PriceWrapper>
-                    <RemoveBtn onClick={() => handleRemove(item.itemId)}>
-                      Remove
-                    </RemoveBtn>
-                  </li>
-                );
-              })}
-            </UList>
-            <div>
-              <p>Total:</p>
-              <p>
-                $
-                {state
-                  .reduce(
-                    (acc, item) =>
-                      acc + Number(item.price.slice(1)) * item.numToBuy,
-                    0
-                  )
-                  .toFixed(2)}
-              </p>
-            </div>
-            <ButtonToBuy onClick={handleBuy} disabled={isFetching}>
-              Buy
-            </ButtonToBuy>
+            {state.map((item, ind) => {
+              return (
+                <div className="cartWrapper" key={item.itemId}>
+                  <div className="cartItemImg" />
+
+                  <p>{item.name}</p>
+
+                  <div className="quantityWrapper">
+                    <span>QTY:</span>
+                    <QuantityBtns
+                      handleQuantityChange={handleQuantityChange}
+                      itemQuantity={state[ind].numToBuy}
+                      disabled={isFetching}
+                      itemId={item.itemId}
+                    />
+                  </div>
+
+                  <div className="priceWrapper">
+                    <span>Price: {item.price}</span>
+                    <span>
+                      Total: $
+                      {(
+                        Number(item.price.slice(1)) * state[ind].numToBuy
+                      ).toFixed(2)}
+                    </span>
+                  </div>
+
+                  <div
+                    className="removeBtn"
+                    onClick={() => handleRemove(item.itemId)}
+                  >
+                    Remove
+                  </div>
+                </div>
+              );
+            })}
           </>
-        )}
-      </Wrapper>
-    </>
+
+          <div>
+            <p>Total:</p>
+            <p>
+              $
+              {state
+                .reduce(
+                  (acc, item) =>
+                    acc + Number(item.price.slice(1)) * item.numToBuy,
+                  0
+                )
+                .toFixed(2)}
+            </p>
+          </div>
+          <div className="buyBtn" onClick={handleBuy} disabled={isFetching}>
+            Buy
+          </div>
+        </>
+      )}
+    </CartContainer>
   );
 };
 
-const Wrapper = styled.div`
+const CartContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: left;
-  margin: 50px auto;
-  font-weight: bold;
-  row-gap: 30px;
-  width: 900px;
-  height: 600px;
-  color: var(--color-blackfont-text);
+  margin-top: 100px;
+  width: 100%;
+  height: 100dvh;
+  color: var(--color);
   font-family: var(--font-text);
-  font-size: 1.3rem;
 
-  h1 {
-    font-size: 40px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid;
-    color: var(--color-blackfont-titles);
-    font-family: var(--Font-heading-title);
-  }
-  li {
+  & .cartWrapper {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    p {
-      width: 40%;
+    flex-direction: column;
+
+    & .cartItemImg {
+      height: 164px;
+      width: 164px;
+      background-color: grey;
+    }
+
+    & .quantityWrapper {
+      width: 20%;
+      padding-left: 40px;
+      display: flex;
+      font-weight: bold;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    & .priceWrapper {
+      width: 20%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    & .removeBtn {
+      width: 10%;
+      cursor: pointer;
+      font-weight: bold;
+      border-width: 1px;
+      font-size: 17px;
+      font-family: var(--Font-heading-title);
+      border-style: solid;
+      transition: 0.5s ease-in-out;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      &:hover {
+        color: rgb(71, 103, 161);
+        transform: translateY(2px);
+      }
     }
   }
-  & > div {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 50px;
-    border-top: 2px solid;
-    font-size: 1.5rem;
-  }
-`;
 
-const UList = styled.ul`
-  p {
-    padding-right: 20px;
-  }
-`;
-
-const QuantityWrapper = styled.div`
-  width: 20%;
-  padding-left: 40px;
-
-  display: flex;
-  font-weight: bold;
-  flex-direction: column;
-  align-items: center;
-`;
-const PriceWrapper = styled.div`
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-`;
-const RemoveBtn = styled.button`
-  width: 10%;
-  cursor: pointer;
-  font-weight: bold;
-  border-width: 1px;
-  font-size: 17px;
-  font-family: var(--Font-heading-title);
-  border-style: solid;
-  transition: 0.5s ease-in-out;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  &:hover {
-    color: rgb(71, 103, 161);
-    transform: translateY(2px);
-  }
-`;
-
-const ButtonToBuy = styled.button`
-  width: 100%;
-  height: 5%;
-  font-family: var(--Font-heading-title);
-  font-weight: bold;
-  font-size: 20px;
-  cursor: pointer;
-  border-width: 1px;
-  border-style: solid;
-  transition: 0.5s ease-in-out;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  &:hover {
-    color: rgb(71, 103, 161);
-    transform: translateY(2px);
+  & .buyBtn {
+    width: 100%;
+    height: 5%;
+    font-family: var(--Font-heading-title);
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    transition: 0.5s ease-in-out;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    &:hover {
+      color: rgb(71, 103, 161);
+      transform: translateY(2px);
+    }
   }
 `;
 

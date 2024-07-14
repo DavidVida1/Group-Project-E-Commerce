@@ -150,7 +150,6 @@ const Item = ({ userId }) => {
 
   return (
     <ItemContainer className="container">
-      <div className="test"></div>
       {itemData ? (
         <>
           <div className="itemWrapper">
@@ -265,12 +264,6 @@ const ItemContainer = styled.section`
   min-height: 100dvh;
   background-color: var(--bg-white);
 
-  & .test {
-    background-color: black;
-    height: 140px;
-    width: 100%;
-  }
-
   & .companyData {
     display: flex;
     flex-direction: row;
@@ -296,7 +289,7 @@ const ItemContainer = styled.section`
     justify-items: center;
     height: 100%;
     width: 100%;
-    margin: 50px 0px;
+    margin: 150px 0px;
     background-color: var(--bg-white);
 
     & .itemImg {
@@ -396,6 +389,10 @@ const ItemContainer = styled.section`
             transition: background-color 0.3s linear;
             cursor: pointer;
 
+            &:active {
+              transform: translateY(2px);
+            }
+
             &:hover {
               border: 2px solid var(--white);
               background-color: var(--btn-black);
@@ -418,7 +415,7 @@ const ItemContainer = styled.section`
       align-items: center;
       padding: 50px 0px 50px 0px;
       color: var(--font-grey);
-      font-size: var(--font-size-40);
+      font-size: var(--font-size-35);
       font-family: var(--Font-heading-title);
     }
 
@@ -447,8 +444,8 @@ const ItemContainer = styled.section`
           justify-content: space-around;
           background-color: var(--bg-card);
           border-radius: var(--radius-card);
-          width: 450px;
-          height: 650px;
+          width: 350px;
+          height: 450px;
           transition: 0.5s ease-in-out;
           box-shadow: var(--sdw-black-card2);
 
@@ -480,7 +477,7 @@ const ItemContainer = styled.section`
         }
 
         & .featuredItemName {
-          width: 450px;
+          width: 350px;
           text-align: center;
           padding: 15px 0px;
           font-size: var(--font-size-18);

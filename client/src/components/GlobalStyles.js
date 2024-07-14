@@ -155,7 +155,7 @@ video {
 --font-size-25:2.5rem;
 /*header Icone*/ 
 --font-size-30:3rem;
-/*single item name*/ 
+/*single item name, item slider categorie*/ 
 --font-size-35:3.5rem;
 /*categoryText,subHeader*/ 
 --font-size-40:4rem;
