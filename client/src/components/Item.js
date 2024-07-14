@@ -5,8 +5,17 @@ import QuantityBtns from "./QuantityBtns";
 import { CartContext } from "./CartContext";
 import { useNavigate } from "react-router-dom";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+// import required modules
+import { Pagination, Navigation } from "swiper/modules";
+
 const Item = ({ userId }) => {
   const { itemId } = useParams();
+  const [itemsArr, setItemsArr] = useState([]);
   const [itemData, setItemData] = useState(null);
   const [companyData, setCompanyData] = useState(null);
   const [itemQuantity, setItemQuantity] = useState(1);
@@ -80,7 +89,7 @@ const Item = ({ userId }) => {
       });
   };
 
-  const handleQuantityChange = (e, action) => {
+  /* const handleQuantityChange = (e, action) => {
     if (action === "plus") {
       setItemQuantity(itemQuantity + 1);
     } else if (action === "minus") {
@@ -94,11 +103,50 @@ const Item = ({ userId }) => {
         setItemQuantity(1);
       }
     }
-  };
+  };*/
 
   const handleCompanyClick = (e) => {
     navigate(`/company-profile/${companyData._id}`);
   };
+
+  /*This UseEffect chatGpt*/
+  useEffect(() => {
+    if (itemData) {
+      fetch(`/api/get-items`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === 200) {
+            const filteredItems = data.data.filter(
+              (item) => item.category === itemData.category
+            );
+
+            let randomIndexArray = [];
+            while (
+              randomIndexArray.length < 10 &&
+              randomIndexArray.length < filteredItems.length
+            ) {
+              const randomIndex = Math.floor(
+                Math.random() * filteredItems.length
+              );
+              if (!randomIndexArray.includes(randomIndex)) {
+                randomIndexArray.push(randomIndex);
+              }
+            }
+            setItemsArr(
+              randomIndexArray.map((randomIndex) => {
+                return filteredItems[randomIndex];
+              })
+            );
+          } else {
+            window.alert(data.message);
+            throw new Error(data.message);
+          }
+        })
+        .catch((error) => {
+          window.alert(error);
+        });
+    }
+  }, [itemData]);
 
   return (
     <ItemContainer className="container">
@@ -106,8 +154,25 @@ const Item = ({ userId }) => {
       {itemData ? (
         <>
           <div className="itemWrapper">
-            <div className="itemImg">
-              <img src={itemData.imageSrc} alt={itemData.name} />
+            <div>
+              <div className="itemImg">
+                <img src={itemData.imageSrc} alt={itemData.name} />
+              </div>
+
+              {companyData ? (
+                <div className="companyData">
+                  <p className="companyCountry">{companyData.country}</p>
+                  <a
+                    className="companyUrl"
+                    href={companyData.url}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {companyData.url}
+                  </a>
+                </div>
+              ) : (
+                <h2>Loading...</h2>
+              )}
             </div>
 
             <div className="itemData">
@@ -124,28 +189,8 @@ const Item = ({ userId }) => {
               </div>
 
               <div className="bottomItemData">
-                {companyData ? (
-                  <div className="companyData">
-                    <p className="companyCountry">{companyData.country}</p>
-                    <a
-                      className="companyUrl"
-                      href={companyData.url}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      {companyData.url}
-                    </a>
-                  </div>
-                ) : (
-                  <h2>Loading...</h2>
-                )}
-
                 {itemData.numInStock > 0 ? (
                   <div className="cartWrapper">
-                    <QuantityBtns
-                      handleQuantityChange={handleQuantityChange}
-                      itemQuantity={itemQuantity}
-                    />
-
                     <div
                       className="cartButton"
                       onClick={handleAddToCart}
@@ -164,6 +209,51 @@ const Item = ({ userId }) => {
       ) : (
         <h2>Loading...</h2>
       )}
+
+      <div className="sliderSection">
+        <h2 className="featureHeader">You might also like </h2>
+        <Swiper
+          slidesPerView={3}
+          spaceBetween={15}
+          navigation={true}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 15,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 15,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 15,
+            },
+          }}
+          modules={[Navigation]}
+          className="mySwiper"
+        >
+          {itemsArr ? (
+            itemsArr.map((randomItem) => {
+              return (
+                <SwiperSlide>
+                  <a
+                    className="featuredItemCards"
+                    href={`/item/${randomItem._id}`}
+                    key={randomItem._id}
+                  >
+                    <img src={randomItem.imageSrc} />
+                  </a>
+                  <p className="featuredItemName">{randomItem.name}</p>
+                  <p className="featuredItemPrice">{randomItem.price}</p>
+                </SwiperSlide>
+              );
+            })
+          ) : (
+            <h2 className="loading">Loading ...</h2>
+          )}
+        </Swiper>
+      </div>
     </ItemContainer>
   );
 };
@@ -181,6 +271,23 @@ const ItemContainer = styled.section`
     width: 100%;
   }
 
+  & .companyData {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px;
+    font-weight: var(--font-weight-500);
+    font-size: var(--font-size-18);
+
+    & .companyCountry {
+      margin: 0px 0px;
+    }
+
+    & .companyUrl {
+      margin: 0px 0px;
+    }
+  }
+
   & .itemWrapper {
     display: grid;
     grid-template-columns: 60% 35%;
@@ -189,7 +296,7 @@ const ItemContainer = styled.section`
     justify-items: center;
     height: 100%;
     width: 100%;
-    margin: 100px 0px;
+    margin: 50px 0px;
     background-color: var(--bg-white);
 
     & .itemImg {
@@ -202,9 +309,9 @@ const ItemContainer = styled.section`
       width: 800px;
       height: 650px;
       transition: 0.5s ease-in-out;
-      box-shadow: var(--sdw-black-card);
+      box-shadow: var(--sdw-black-card2);
 
-      &:after {
+      /*   &:after {
         content: "";
         border-radius: var(--radius-card);
         display: block;
@@ -217,11 +324,11 @@ const ItemContainer = styled.section`
         transition: 1s all;
         opacity: 1;
         background: var(--bg-overlay2);
-      }
+      }*/
 
       & img {
-        height: 200px;
-        width: 200px;
+        height: 300px;
+        width: 300px;
       }
     }
 
@@ -251,7 +358,7 @@ const ItemContainer = styled.section`
         }
 
         & .itemName {
-          font-size: 4rem;
+          font-size: 3.5rem;
           width: 100%;
           color: var(--black);
           margin: 0px 0px;
@@ -268,23 +375,6 @@ const ItemContainer = styled.section`
         flex-direction: column;
         width: 100%;
         gap: 20px;
-
-        & .companyData {
-          display: flex;
-          flex-direction: column;
-          font-weight: var(--font-weight-500);
-          gap: 10px;
-
-          & .companyCountry {
-            margin: 0px 0px;
-            font-size: var(--font-size-25);
-          }
-
-          & .companyUrl {
-            margin: 0px 0px;
-            font-size: var(--font-size-25);
-          }
-        }
 
         & .cartWrapper {
           display: flex;
@@ -304,12 +394,101 @@ const ItemContainer = styled.section`
             border: 2px solid var(--purple);
             box-shadow: 0 0 10px var(--font-sdw);
             transition: background-color 0.3s linear;
+            cursor: pointer;
 
             &:hover {
               border: 2px solid var(--white);
               background-color: var(--btn-black);
             }
           }
+        }
+      }
+    }
+  }
+
+  & .sliderSection {
+    height: 90dvh;
+    width: 100%;
+    padding: 0px 0px 50px 0px;
+
+    & .featureHeader {
+      display: flex;
+      flex-direction: row;
+      align-self: flex-start;
+      align-items: center;
+      padding: 50px 0px 50px 0px;
+      color: var(--font-grey);
+      font-size: var(--font-size-40);
+      font-family: var(--Font-heading-title);
+    }
+
+    & .swiper {
+      height: 75%;
+      width: 100%;
+
+      & .swiper-button-next,
+      .swiper-button-prev {
+        color: var(--purple);
+      }
+
+      & .swiper-slide {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+        & .featuredItemCards {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          background-color: var(--bg-card);
+          border-radius: var(--radius-card);
+          width: 450px;
+          height: 650px;
+          transition: 0.5s ease-in-out;
+          box-shadow: var(--sdw-black-card2);
+
+          &:hover {
+            transform: translateY(10px);
+          }
+          /* &:after {
+            content: "";
+            border-radius: var(--radius-card);
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            transition: 1s all;
+            opacity: 0;
+            background: var(--bg-overlay2);
+          }
+
+          &:hover:after {
+            opacity: 1;
+          }*/
+          img {
+            height: 200px;
+            width: 200px;
+          }
+        }
+
+        & .featuredItemName {
+          width: 450px;
+          text-align: center;
+          padding: 15px 0px;
+          font-size: var(--font-size-18);
+          font-weight: var(--font-weight-500);
+        }
+        & .featuredItemPrice {
+          font-size: var(--font-size-15);
+          color: var(--font-purple);
         }
       }
     }

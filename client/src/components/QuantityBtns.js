@@ -7,32 +7,34 @@ const QuantityBtns = ({
   itemId,
 }) => {
   return (
-    <Wrapper>
-      <ButtonDiv>
-        <Button
+    <QuantityBtnsContainer>
+      <div className="buttonDiv">
+        <button
           disabled={disabled}
           onClick={(e) => handleQuantityChange(e, "minus", itemId)}
         >
           -
-        </Button>
+        </button>
+
         <Number
           disabled={disabled}
           type="number"
           value={itemQuantity}
           onChange={(e) => handleQuantityChange(e, "input", itemId)}
         />
-        <Button
+
+        <button
           disabled={disabled}
           onClick={(e) => handleQuantityChange(e, "plus", itemId)}
         >
           +
-        </Button>
-      </ButtonDiv>
-    </Wrapper>
+        </button>
+      </div>
+    </QuantityBtnsContainer>
   );
 };
 
-const Wrapper = styled.div`
+const QuantityBtnsContainer = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,10 +43,34 @@ const Wrapper = styled.div`
   width: 27vh;
   border-radius: 5px;
   background-color: var(--color-background);
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-width: 1px;
-  border-style: solid;
+
+  & .buttonDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: var(--color-background);
+
+    & button {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-size: var(--font-size-30);
+      font-weight: bold;
+      border-style: none;
+      background-color: transparent;
+      padding: 0px 15px;
+      border: 1px solid red;
+      border-radius: 40px;
+
+      & :hover {
+        background-color: #bfbfbf;
+        border-radius: 5px;
+      }
+    }
+  }
 `;
+
 const Number = styled.input`
   font-size: 20px;
   border-left: 2px solid #f5f5f5;
@@ -53,27 +79,6 @@ const Number = styled.input`
   padding: 0px 8px;
   width: 12vh;
   text-align: center;
-`;
-const ButtonDiv = styled.div`
-  display: flex;
-  align-content: center;
-  min-height: 10px;
-  gap: 5px;
-  justify-content: center;
-  background-color: var(--color-background);
-`;
-const Button = styled.button`
-  width: 100%;
-  text-align: center;
-  font-size: 30px;
-  font-weight: bold;
-  border-style: none;
-  background-color: transparent;
-  padding: 0px 15px;
-  :hover {
-    background-color: #bfbfbf;
-    border-radius: 5px;
-  }
 `;
 
 export default QuantityBtns;

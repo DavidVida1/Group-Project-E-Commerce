@@ -124,8 +124,7 @@ video {
 --bg-home:linear-gradient(0deg, #F6F6F6 32%, rgba(0, 0, 0, 0.9) 48%);
 --bg-footer-sdw:rgba(0, 0, 0, 0.45) 0px -25px 20px -20px;
 --bg-overlay:linear-gradient(to bottom, rgba(0, 204, 255, 0.1), rgba(191, 128, 64, 0.3));
---bg-overlay2:linear-gradient(to top, rgba(0, 204, 255, 0.1), rgba(71, 63, 244, 0.01));
-
+--bg-overlay2:linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(71, 63, 244, 0.1));
 
 --btn-black: rgba(0,0,0,1);
 --btn-purple:rgba(71,63,244,1);
@@ -134,6 +133,8 @@ video {
 --sdw-black-card:  rgba(0, 0, 0, 0.4) 0px 2px 4px,
   rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
   rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+--sdw-black-card2: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+
 
 /***************Border-radius***************/
 --radius-card:15px;
@@ -154,6 +155,8 @@ video {
 --font-size-25:2.5rem;
 /*header Icone*/ 
 --font-size-30:3rem;
+/*single item name*/ 
+--font-size-35:3.5rem;
 /*categoryText,subHeader*/ 
 --font-size-40:4rem;
 /*logo*/ 

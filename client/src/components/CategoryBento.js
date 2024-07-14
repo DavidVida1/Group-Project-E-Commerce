@@ -76,7 +76,7 @@ const CategoryBentoContainer = styled.section`
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
-      box-shadow: var(--sdw-black-card);
+      box-shadow: var(--sdw-black-card2);
       -webkit-filter: grayscale(30%);
       filter: grayscale(30%);
       transition: all 0.5s ease;

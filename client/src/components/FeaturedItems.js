@@ -134,11 +134,12 @@ const FeaturedItemsContainer = styled.section`
         width: 450px;
         height: 650px;
         transition: 0.5s ease-in-out;
-        box-shadow: var(--sdw-black-card);
+        box-shadow: var(--sdw-black-card2);
 
         &:hover {
           transform: translateY(10px);
         }
+        /*
         &:after {
           content: "";
           border-radius: var(--radius-card);
@@ -156,7 +157,8 @@ const FeaturedItemsContainer = styled.section`
 
         &:hover:after {
           opacity: 1;
-        }
+        }*/
+
         img {
           height: 200px;
           width: 200px;
@@ -164,6 +166,7 @@ const FeaturedItemsContainer = styled.section`
       }
 
       & .featuredItemName {
+        width: 450px;
         text-align: center;
         padding: 15px 0px;
         font-size: var(--font-size-18);

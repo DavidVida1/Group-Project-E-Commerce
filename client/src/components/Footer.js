@@ -185,7 +185,7 @@ const FooterContainer = styled.footer`
   & .footerBottom {
     width: 100%;
     height: 100%;
-    padding-top: 5dvh;
+    padding-top: 20px;
     box-shadow: var(--bg-footer-sdw);
     background-color: var(--bg-black);
 
@@ -256,9 +256,8 @@ const FooterContainer = styled.footer`
       text-align: center;
       font-size: var(--font-size-15);
       width: 100%;
-      height: 40px;
+      height: 30px;
       bottom: 0;
-
       color: var(--font-white);
 
       &:before {

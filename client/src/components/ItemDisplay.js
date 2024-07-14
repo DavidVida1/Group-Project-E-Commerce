@@ -126,7 +126,7 @@ const ItemDisplayContainer = styled.section`
     height: 100%;
     width: 100%;
     border-radius: var(--radius-display);
-    box-shadow: var(--sdw-black-card);
+    box-shadow: var(--sdw-black-card2);
 
     & .swiper-pagination-bullet {
       background-color: var(--purple);
