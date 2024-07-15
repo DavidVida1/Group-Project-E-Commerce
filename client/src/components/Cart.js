@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import QuantityBtns from "./QuantityBtns";
 import { CartContext } from "./CartContext";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const Cart = ({ userId, setOrderId }) => {
   // disable btns and input while fetching
@@ -164,7 +165,7 @@ const Cart = ({ userId, setOrderId }) => {
                     className="removeBtn"
                     onClick={() => handleRemove(item.itemId)}
                   >
-                    Remove
+                    <FaRegTrashAlt />
                   </div>
                 </div>
               );
@@ -228,15 +229,9 @@ const CartContainer = styled.div`
       align-items: flex-end;
     }
     & .removeBtn {
-      width: 10%;
       cursor: pointer;
-      font-weight: bold;
-      border-width: 1px;
-      font-size: 17px;
-      font-family: var(--Font-heading-title);
-      border-style: solid;
+      font-size: 18px;
       transition: 0.5s ease-in-out;
-      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
       &:hover {
         color: rgb(71, 103, 161);
         transform: translateY(2px);

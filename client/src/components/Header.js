@@ -401,6 +401,7 @@ const HeaderContainer = styled.section`
           display: grid;
           grid-template-columns: 1fr 1fr 1fr 1fr;
           grid-template-rows: 1fr;
+          align-items: center;
           font-size: var(--font-size-30);
 
           @media screen and (max-width: 1280px) {
