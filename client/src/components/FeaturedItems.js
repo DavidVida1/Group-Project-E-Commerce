@@ -97,6 +97,7 @@ const FeaturedItems = () => {
 const FeaturedItemsContainer = styled.section`
   width: 100dvw;
   height: 100dvh;
+  padding-bottom: 50px;
 
   & .featureHeader {
     text-align: start;

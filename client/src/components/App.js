@@ -14,7 +14,7 @@ import Confirmation from "./Confirmation";
 import Category from "./Category";
 import FeaturedItemsItem from "./FeaturedItems";
 import ItemDisplay from "./ItemDisplay";
-import CategoryBento from "./CategoryBento";
+import ExploreCategory from "./ExploreCategory";
 import FindUs from "./FindUs";
 
 function App() {
@@ -55,7 +55,7 @@ function App() {
             element={
               <>
                 <Home /> <ItemDisplay />
-                <CategoryBento />
+                <ExploreCategory />
                 <FeaturedItemsItem />
                 <FindUs />
               </>

@@ -20,7 +20,7 @@ import "swiper/css/navigation";
 // import required modules
 import { Pagination, Navigation } from "swiper/modules";
 
-const CategoryBento = () => {
+const ExploreCategory = () => {
   const [itemsCategory, setItemsCategory] = useState(null);
   const categoryImages = {
     entertainment: entertainmentImg,
@@ -50,7 +50,7 @@ const CategoryBento = () => {
   }, []);
 
   return (
-    <CategoryBentoContainer className="container">
+    <ExploreCategoryContainer className="container">
       <h2 className="subHeader">Explore</h2>
       <Swiper
         slidesPerView={3}
@@ -99,17 +99,17 @@ const CategoryBento = () => {
           <h2 className="loading">Loading categories...</h2>
         )}
       </Swiper>
-    </CategoryBentoContainer>
+    </ExploreCategoryContainer>
   );
 };
 
-export default CategoryBento;
+export default ExploreCategory;
 
-const CategoryBentoContainer = styled.section`
+const ExploreCategoryContainer = styled.section`
   display: flex;
   flex-direction: column;
   width: 100dvw;
-  height: 100%;
+  height: 100dvh;
 
   & .subHeader {
     text-align: start;
