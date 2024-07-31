@@ -20,18 +20,17 @@ import "swiper/css/navigation";
 // import required modules
 import { Pagination, Navigation } from "swiper/modules";
 
-const categoryImages = {
-  entertainment: entertainmentImg,
-  fitness: fitnessImg,
-  gaming: gamingImg,
-  industrial: industrialImg,
-  lifestyle: lifestyleImg,
-  medical: medicalImg,
-  "pets-and-animals": petsImg,
-};
-
 const CategoryBento = () => {
   const [itemsCategory, setItemsCategory] = useState(null);
+  const categoryImages = {
+    entertainment: entertainmentImg,
+    fitness: fitnessImg,
+    gaming: gamingImg,
+    industrial: industrialImg,
+    lifestyle: lifestyleImg,
+    medical: medicalImg,
+    "pets-and-animals": petsImg,
+  };
 
   useEffect(() => {
     fetch(`/api/get-categories`)
@@ -80,9 +79,6 @@ const CategoryBento = () => {
               .toLowerCase()
               .replace(/ /g, "-");
             const backgroundImage = categoryImages[normalizedCategory];
-            console.log(
-              `Category: ${category}, Normalized: ${normalizedCategory}, Image: ${backgroundImage}`
-            );
 
             return (
               <SwiperSlide key={category}>
