@@ -99,10 +99,7 @@ const FeaturedItemsContainer = styled.section`
   height: 100dvh;
 
   & .featureHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+    text-align: start;
     color: var(--font-grey);
     font-size: var(--font-size-40);
     font-family: var(--Font-heading-title);
@@ -135,32 +132,13 @@ const FeaturedItemsContainer = styled.section`
         background-color: var(--bg-card);
         border-radius: var(--radius-card);
         width: 450px;
-        height: 650px;
+        height: 665px;
         transition: 0.5s ease-in-out;
         box-shadow: var(--sdw-black-card2);
 
         &:hover {
           transform: translateY(10px);
         }
-        /*
-        &:after {
-          content: "";
-          border-radius: var(--radius-card);
-          display: block;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          z-index: 2;
-          transition: 1s all;
-          opacity: 0;
-          background: var(--bg-overlay);
-        }
-
-        &:hover:after {
-          opacity: 1;
-        }*/
 
         img {
           height: 200px;

@@ -55,20 +55,20 @@ const CategoryBento = () => {
       <h2 className="subHeader">Explore</h2>
       <Swiper
         slidesPerView={3}
-        spaceBetween={15}
+        spaceBetween={40}
         navigation={true}
         breakpoints={{
           640: {
             slidesPerView: 1,
-            spaceBetween: 15,
+            spaceBetween: 30,
           },
           768: {
             slidesPerView: 2,
-            spaceBetween: 15,
+            spaceBetween: 30,
           },
           1024: {
             slidesPerView: 3,
-            spaceBetween: 15,
+            spaceBetween: 30,
           },
         }}
         modules={[Navigation]}
@@ -93,6 +93,7 @@ const CategoryBento = () => {
                   }}
                 >
                   <p>{category}</p>
+                  <a className="button">Explore</a>
                 </CategoryCard>
               </SwiperSlide>
             );
@@ -110,12 +111,11 @@ export default CategoryBento;
 const CategoryBentoContainer = styled.section`
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100dvw;
   height: 100%;
 
   & .subHeader {
-    text-align: center;
+    text-align: start;
     color: var(--font-grey);
   }
 
@@ -126,8 +126,10 @@ const CategoryBentoContainer = styled.section`
 
 const CategoryCard = styled.a`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
   border-radius: var(--radius-card);
   background-repeat: no-repeat;
   background-position: center;
@@ -142,6 +144,19 @@ const CategoryCard = styled.a`
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%);
     filter: saturate(2);
+  }
+
+  & .button {
+    color: var(--btn-black);
+    background-color: var(--btn-white);
+    padding: 15px 25px;
+    border: 2px solid var(--btn-white);
+    box-shadow: 0 0 10px var(--font-sdw);
+
+    &:hover {
+      color: var(--btn-white);
+      background-color: var(--btn-black);
+    }
   }
 
   & p {
