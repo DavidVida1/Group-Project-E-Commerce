@@ -247,13 +247,13 @@ const Header = ({ setBodyLocation }) => {
               <li>
                 <a>
                   <GiWatch />
-                  <p>Collection</p>
+                  {/*<p>Collection</p>*/}
                 </a>
               </li>
               <li>
                 <a>
                   <CiLocationOn />
-                  <p>Location</p>
+                  {/*<p>Location</p>*/}
                 </a>
               </li>
               <li>
@@ -262,7 +262,7 @@ const Header = ({ setBodyLocation }) => {
               <li>
                 <a href={"/cart"}>
                   <AiOutlineShoppingCart />
-                  <p>Cart</p>
+                  {/*<p>Cart</p>*/}
                 </a>
               </li>
             </ul>

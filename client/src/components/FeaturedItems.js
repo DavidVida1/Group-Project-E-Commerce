@@ -52,7 +52,7 @@ const FeaturedItems = () => {
         navigation={true}
         breakpoints={{
           640: {
-            slidesPerView: 2,
+            slidesPerView: 1,
             spaceBetween: 15,
           },
           768: {
@@ -103,7 +103,6 @@ const FeaturedItemsContainer = styled.section`
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    padding: 50px 0px 50px 0px;
     color: var(--font-grey);
     font-size: var(--font-size-40);
     font-family: var(--Font-heading-title);

@@ -252,6 +252,8 @@ table {
   font-weight: 500;
   text-shadow: 0 0 2px var(--color-black);
   margin: 20px 0px;
+  padding: 50px 0px 50px 0px;
+
 }
 
 /* Loading*/
