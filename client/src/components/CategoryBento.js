@@ -83,13 +83,14 @@ const CategoryBento = () => {
             return (
               <SwiperSlide key={category}>
                 <CategoryCard
-                  href={`/category/${category}`}
                   style={{
                     backgroundImage: `url(${backgroundImage})`,
                   }}
                 >
                   <p>{category}</p>
-                  <a className="button">Explore</a>
+                  <a href={`/category/${category}`} className="button">
+                    Explore
+                  </a>
                 </CategoryCard>
               </SwiperSlide>
             );
@@ -117,10 +118,25 @@ const CategoryBentoContainer = styled.section`
 
   & .mySwiper {
     width: 100%;
+
+    & .swiper-button-next,
+    .swiper-button-prev {
+      height: 30px;
+      width: 30px;
+      border-radius: var(--radius-button);
+      padding: 10px;
+      color: #333;
+      background-color: hsla(0, 0%, 100%, 0.75);
+
+      &::after {
+        font-size: 30px;
+        font-weight: 800;
+      }
+    }
   }
 `;
 
-const CategoryCard = styled.a`
+const CategoryCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -135,6 +151,7 @@ const CategoryCard = styled.a`
   filter: grayscale(30%);
   transition: all 0.5s ease;
   height: 665px;
+  width: 546px;
 
   &:hover {
     -webkit-filter: grayscale(0%);
@@ -157,7 +174,7 @@ const CategoryCard = styled.a`
 
   & p {
     color: var(--font-white);
-    font-size: var(--font-size-40);
+    font-size: var(--font-size-logo);
     font-weight: var(--font-weight-500);
     text-shadow: 0 0 10px var(--font-sdw);
     padding: 5px;

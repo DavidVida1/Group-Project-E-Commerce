@@ -48,20 +48,20 @@ const FeaturedItems = () => {
       <h2 className="featureHeader">Featured </h2>
       <Swiper
         slidesPerView={3}
-        spaceBetween={15}
+        spaceBetween={40}
         navigation={true}
         breakpoints={{
           640: {
             slidesPerView: 1,
-            spaceBetween: 15,
+            spaceBetween: 30,
           },
           768: {
             slidesPerView: 2,
-            spaceBetween: 15,
+            spaceBetween: 30,
           },
           1024: {
             slidesPerView: 3,
-            spaceBetween: 15,
+            spaceBetween: 30,
           },
         }}
         modules={[Navigation]}
@@ -106,12 +106,21 @@ const FeaturedItemsContainer = styled.section`
   }
 
   & .swiper {
-    height: 75%;
     width: 100%;
 
     & .swiper-button-next,
     .swiper-button-prev {
-      color: var(--purple);
+      height: 30px;
+      width: 30px;
+      border-radius: var(--radius-button);
+      padding: 10px;
+      color: #333;
+      background-color: hsla(0, 0%, 100%, 0.75);
+
+      &::after {
+        font-size: 30px;
+        font-weight: 800;
+      }
     }
 
     & .swiper-slide {
@@ -131,7 +140,7 @@ const FeaturedItemsContainer = styled.section`
         justify-content: space-around;
         background-color: var(--bg-card);
         border-radius: var(--radius-card);
-        width: 450px;
+        width: 546px;
         height: 665px;
         transition: 0.5s ease-in-out;
         box-shadow: var(--sdw-black-card2);
@@ -149,16 +158,18 @@ const FeaturedItemsContainer = styled.section`
       & .itemInfo {
         display: flex;
         flex-direction: column;
+        gap: 15px;
+        padding: 15px 0px;
         justify-content: flex-start;
         align-items: flex-start;
 
         & .featuredItemName {
-          width: 450px;
-          height: 100%;
-          padding: 15px 0px;
+          width: 500px;
+          text-align: start;
           font-size: var(--font-size-18);
           font-weight: var(--font-weight-500);
         }
+
         & .featuredItemPrice {
           font-size: var(--font-size-15);
           font-weight: 300;
