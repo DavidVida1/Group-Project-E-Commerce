@@ -87,7 +87,7 @@ const FeaturedItems = () => {
             );
           })
         ) : (
-          <h2 className="loading">Loading ...</h2>
+          <h2 className="loading">Loading items...</h2>
         )}
       </Swiper>
     </FeaturedItemsContainer>
@@ -131,6 +131,7 @@ const FeaturedItemsContainer = styled.section`
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      border-radius: var(--radius-card);
       overflow: hidden;
 
       & .featuredItemCards {

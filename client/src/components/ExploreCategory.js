@@ -82,7 +82,8 @@ const ExploreCategory = () => {
 
             return (
               <SwiperSlide key={category}>
-                <CategoryCard
+                <div
+                  className="featuredItemCards"
                   style={{
                     backgroundImage: `url(${backgroundImage})`,
                   }}
@@ -91,7 +92,7 @@ const ExploreCategory = () => {
                   <a href={`/category/${category}`} className="button">
                     Explore
                   </a>
-                </CategoryCard>
+                </div>
               </SwiperSlide>
             );
           })
@@ -106,14 +107,15 @@ const ExploreCategory = () => {
 export default ExploreCategory;
 
 const ExploreCategoryContainer = styled.section`
-  display: flex;
-  flex-direction: column;
   width: 100dvw;
   height: 100dvh;
+  padding-bottom: 50px;
 
   & .subHeader {
     text-align: start;
     color: var(--font-grey);
+    font-size: var(--font-size-40);
+    font-family: var(--Font-heading-title);
   }
 
   & .mySwiper {
@@ -133,50 +135,63 @@ const ExploreCategoryContainer = styled.section`
         font-weight: 800;
       }
     }
-  }
-`;
 
-const CategoryCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  border-radius: var(--radius-card);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  box-shadow: var(--sdw-black-card2);
-  -webkit-filter: grayscale(30%);
-  filter: grayscale(30%);
-  transition: all 0.5s ease;
-  height: 665px;
-  width: 546px;
+    & .swiper-slide {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-radius: var(--radius-card);
+      align-items: center;
 
-  &:hover {
-    -webkit-filter: grayscale(0%);
-    filter: grayscale(0%);
-    filter: saturate(2);
-  }
+      overflow: hidden;
 
-  & .button {
-    color: var(--btn-black);
-    background-color: var(--btn-white);
-    padding: 15px 25px;
-    border: 2px solid var(--btn-white);
-    box-shadow: 0 0 10px var(--font-sdw);
+      & .featuredItemCards {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        border-radius: var(--radius-card);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        box-shadow: var(--sdw-black-card2);
+        -webkit-filter: grayscale(30%);
+        filter: grayscale(30%);
+        transition: all 0.5s ease;
+        height: 665px;
+        width: 546px;
+        overflow: hidden;
 
-    &:hover {
-      color: var(--btn-white);
-      background-color: var(--btn-black);
+        &:hover {
+          -webkit-filter: grayscale(0%);
+          filter: grayscale(0%);
+          filter: saturate(2);
+        }
+
+        & .button {
+          color: var(--btn-black);
+          background-color: var(--btn-white);
+          padding: 15px 25px;
+          border: 2px solid var(--btn-white);
+          box-shadow: 0 0 10px var(--font-sdw);
+
+          &:hover {
+            color: var(--btn-white);
+            background-color: var(--btn-black);
+          }
+        }
+
+        & p {
+          color: var(--font-white);
+          font-size: var(--font-size-logo);
+          font-weight: var(--font-weight-500);
+          text-shadow: 0 0 10px var(--font-sdw);
+          padding: 5px;
+        }
+      }
     }
-  }
-
-  & p {
-    color: var(--font-white);
-    font-size: var(--font-size-logo);
-    font-weight: var(--font-weight-500);
-    text-shadow: 0 0 10px var(--font-sdw);
-    padding: 5px;
   }
 `;
