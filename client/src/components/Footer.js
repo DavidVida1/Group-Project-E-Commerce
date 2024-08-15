@@ -239,7 +239,7 @@ const FooterContainer = styled.footer`
             font-weight: var(--font-weight-500);
 
             &:hover {
-              color: var(--font-purple);
+              color: var(--bg-grey);
               filter: drop-shadow(0 0 10px var(--black));
               text-shadow: 0 0 5px var(--black);
               cursor: pointer;
@@ -265,7 +265,7 @@ const FooterContainer = styled.footer`
         height: 10px;
         align-self: center;
         width: 90%;
-        border-top: 1px solid var(--purple);
+        border-top: 1px solid var(--bg-grey);
         padding-bottom: 5px;
       }
     }
@@ -292,7 +292,7 @@ const FooterContainer = styled.footer`
 `;
 
 const FooterTop = styled.div`
-  box-shadow: var(--bg-footer-sdw);
+  /* box-shadow: var(--bg-footer-sdw);*/
   background-color: var(--bg-grey);
   width: 100%;
   height: 100%;
