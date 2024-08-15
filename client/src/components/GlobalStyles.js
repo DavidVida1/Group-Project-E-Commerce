@@ -324,7 +324,7 @@ padding-right: 0.5rem;
 }
 
 .headerContainer {
-    max-width: 97%;
+    max-width: 96%;
   }
 
 /*3xl*/
